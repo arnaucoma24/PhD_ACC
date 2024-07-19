@@ -3,7 +3,7 @@
 
 % Modify the following line to match your school
 % Available options include `Harvard`, `Princeton`, and `NYU`.
-\documentclass[School=Harvard]{Dissertate}
+\documentclass[School=Princeton]{Dissertate}
 
 \begin{document}
 
@@ -14,22 +14,20 @@
 \abstractpage
 \tableofcontents
 %\authorlist
-\listoffigures
+% \listoffigures
 \dedicationpage
 \acknowledgments
 
 \doublespacing
 
 % include each chapter...
-\setcounter{chapter}{-1}  % start chapter numbering at 0
-\include{chapters/introduction}
-\include{chapters/chapter1}
-\include{chapters/chapter2}
-\include{chapters/chapter3}
-\include{chapters/conclusion}
-\begin{appendices}
-    \include{chapters/appendixA}
-\end{appendices}
+\setcounter{chapter}{0}  % start chapter numbering at 0
+\include{chapters/Introduction}
+\include{chapters/Chapters}
+% \include{chapters/Conclusions}
+% \begin{appendices}
+%     \include{chapters/appendixA}
+% \end{appendices}
 
 \singlespacing
 
