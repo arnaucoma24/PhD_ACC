@@ -70,7 +70,7 @@
 
 \renewcommand\bibname{References}
 \renewcommand\listfigurename{Listing of figures}
-\RaggedRight
+% \RaggedRight
 
 \parindent 12pt
 \RequirePackage{mathspec}
@@ -85,7 +85,7 @@
 \newfontfamily{\smallcaps}[RawFeature={+c2sc,+scmp}]{EB Garamond}
 \setromanfont[Numbers=OldStyle, Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
 \setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}
-\setmonofont[Scale=MatchLowercase]{Noto Mono} % Font substitution for Source Code Pro
+% \setmonofont[Scale=MatchLowercase]{Noto Mono} % Font substitution for Source Code Pro
 
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
 								textfont={sf,footnotesize,singlespacing},
@@ -130,3 +130,9 @@
       {\@latex@warning{Empty `thebibliography' environment}}
      \endlist}
 \makeatother
+
+
+% Add extra packages
+\usepackage{afterpage}
+% \usepackage{noto}
+% \usepackage{fontspec}
