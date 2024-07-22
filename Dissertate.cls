@@ -47,7 +47,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{amssymb}
 \RequirePackage{lettrine}
-\RequirePackage[super,comma,numbers]{natbib}
+\RequirePackage[super,sort&compress,numbers]{natbib}
 \renewcommand{\bibnumfmt}[1]{[#1]}
 \RequirePackage[width=5.75in, letterpaper]{geometry}
 \RequirePackage{fancyhdr}
@@ -72,7 +72,9 @@
 \renewcommand\listfigurename{Listing of figures}
 % \RaggedRight
 
-\parindent 12pt
+% \parindent 12pt
+\parindent 0pt  % New paragraph indentation
+\parskip 1em  % Space new paragraph
 \RequirePackage{mathspec}
 
 \setmathsfont(Digits,Latin,Greek)[Numbers={Proportional},SizeFeatures={{Size=-8, OpticalSize=8},{Size= 8-, OpticalSize=12}},]{EB Garamond}
