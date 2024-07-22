@@ -43,21 +43,21 @@
 \include{sections/Introduction}
 \include{sections/Objectives}
 \include{sections/Chapters}
-% \include{chapters/Conclusions}
-% \begin{appendices}
-%     \include{chapters/appendixA}
-% \end{appendices}
+\include{sections/Discussion}
+\include{sections/Conclusions}
 
 \singlespacing
 
 % the back matter
 \clearpage
+\renewcommand*{\bibfont}{\tiny}
 % Si es ralla, posar aquesta linia just despres de being document
 \bibliography{references}
 \addcontentsline{toc}{chapter}{References}
 
 
-
-% \include{endmatter/colophon}
+\begin{appendices}
+    \include{sections/Appendix}
+\end{appendices}
 
 \end{document}
