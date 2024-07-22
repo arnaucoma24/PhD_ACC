@@ -5,11 +5,13 @@
 % Available options include `Harvard`, `Princeton`, and `NYU`.
 \documentclass[School=Harvard]{Dissertate}
 
-\bibliographystyle{plain}
-
 \begin{document}
 \sloppy
 \setstretch{1.2}
+
+% BIBLIOGRAPHY
+% It's important to specify the style before calling the references file
+\bibliographystyle{plain}
 
 % Redefine section to suppress numbering and make it bigger and bold
 \titleformat{\section}[block]
@@ -52,7 +54,7 @@
 % the back matter
 \clearpage
 \bibliography{references}
-\addcontentsline{toc}{chapter}{References}
+% \addcontentsline{toc}{chapter}{References}
 
 
 
