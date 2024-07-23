@@ -139,3 +139,8 @@
 \usepackage{afterpage}
 % \usepackage{noto}
 % \usepackage{fontspec}
+\usepackage{csvsimple}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{tabularx}  % For adjustable-width columns
