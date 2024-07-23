@@ -67,6 +67,7 @@
 \renewcommand{\cftchapfont}{\normalsize \scshape}
 % \usepackage{fixltx2e}
 \usepackage{ragged2e}
+\usepackage{chngcntr}
 
 \renewcommand\bibname{References}
 \renewcommand\listfigurename{Listing of figures}

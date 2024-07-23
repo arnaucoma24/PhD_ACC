@@ -23,6 +23,9 @@
   {\normalfont\Large\bfseries}{\thesubsection}{1em}{}
 \titlespacing*{\subsection}{0pt}{*3}{*3}
 
+% Set caption justification to justified
+\captionsetup{justification=justified}
+
 % the front matter
 \input{frontmatter/personalize}
 \maketitle
@@ -51,7 +54,7 @@
 % the back matter
 \clearpage
 \renewcommand*{\bibfont}{\tiny}
-% Si es ralla, posar aquesta linia just despres de being document
+% Si es ralla, posar aquesta linia just despres de begin document
 \bibliography{references}
 \addcontentsline{toc}{chapter}{References}
 
