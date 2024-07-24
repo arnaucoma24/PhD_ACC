@@ -102,7 +102,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{figures/PocketVec/Supplementary/ProSPECCTs_metrics_evolution.png}
+  \includegraphics[width=\linewidth]{figures/PocketVec/Supplementary/FigS10_v2.png}
   \caption{
   For each ProSPECCTs dataset, evolution (y-axis) of the Sensitivity (blue), Specificity (orange), Precision (green), Accuracy (red), MCC (purple) and F1 Score (brown) at different distance threshold values (x-axis, cosine distance). The vertical gray thin line represents the cosine distance maximizing the MCC in each ProSPECCTs dataset. The vertical dashed black line represents the cosine distance maximizing the MCC in ProSPECCTs P1 (0.17), which corresponds to the general guideline for classifying a pocket pair of interest as either similar or dissimilar.
   }
@@ -129,19 +129,28 @@
 
 \newpage
 
-% Define a new column type for tabularx that allows line breaks
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% Define a new column type for tabularx that allows line breaks and centers the text
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 
 % Importing and displaying the CSV file as a table
 \csvreader[
-    longtable=|L{1.8cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|L{1.25cm}|,  % Adjust the widths as needed
-    table head=\caption{Bla bla bla}\label{TableS1} \\\toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endfirsthead
+    longtable=|C{1.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{1.2cm}|,  % Adjust the widths as needed
+    table head=\caption{
+    Performances (AUROCs) of existing strategies (Deeplytough\cite{simonovsky_deeplytough_2020}, FuzCav\cite{weill_alignment-free_2010}, SiteAlign\cite{schalon_simple_2008}, KRIPO\cite{wood_pharmacophore_2012}, TIFP\cite{desaphy_encoding_2013}, BindSiteS-CNN\cite{scott_classification_2022}. File format is specified if needed) to compare pockets based on pocket descriptors/fingerprints among ProSPECCTs datasets. TOP-3 rows include the number of pairs within each dataset together with the best performing method. Median and Average performances have been calculated without considering PocketVec results (colored).
+    }\label{TableS1} \\\toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endfirsthead
     \toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endhead
     \bottomrule\endfoot,
     before reading={\catcode`\#=12}, % Handle special characters
-    late after line=\\\midrule
+    late after line=\\\midrule,
 ]{figures/PocketVec/Supplementary/TableS1.csv}{} % Path to your CSV file
-{\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv & \csvcolvi & \csvcolvii & \csvcolviii & \csvcolix & \csvcolx & \csvcolxi}
+{%
+    \ifthenelse{\equal{\csvcoli}{Best Method(s)}}%
+    {\small \csvcoli & \tiny \csvcolii & \tiny \csvcoliii & \tiny \csvcoliv & \tiny \csvcolv & \tiny \csvcolvi & \tiny \csvcolvii & \tiny \csvcolviii & \tiny \csvcolix & \tiny \csvcolx & \tiny \csvcolxi}%
+    {\ifthenelse{\equal{\csvcoli}{PocketVec}}%
+        {\small \textcolor{SchoolColor}{\csvcoli} & \textcolor{SchoolColor}{\csvcolii} & \textcolor{SchoolColor}{\csvcoliii} & \textcolor{SchoolColor}{\csvcoliv} & \textcolor{SchoolColor}{\csvcolv} & \textcolor{SchoolColor}{\csvcolvi} & \textcolor{SchoolColor}{\csvcolvii} & \textcolor{SchoolColor}{\csvcolviii} & \textcolor{SchoolColor}{\csvcolix} & \textcolor{SchoolColor}{\csvcolx} & \textcolor{SchoolColor}{\csvcolxi}}%
+        {\small \csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv & \csvcolvi & \csvcolvii & \csvcolviii & \csvcolix & \csvcolx & \csvcolxi}%
+    }%
+}
 
 
 

@@ -144,3 +144,5 @@
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{tabularx}  % For adjustable-width columns
+\usepackage{etoolbox} % For conditional commands
+\usepackage{colortbl} % For row coloring
