@@ -13,7 +13,7 @@ possible druggable pockets and we then use computational docking strategies to a
 potential binding of the small molecules. The resulting docking scores are then translated into
 rankings, which are finally stored in a vector-type format. In this way, each bit of the vector
 represents the ranking of a predefined molecule, illustrating how good it binds with the pocket of
-interest compared to all other molecules (Fig \ref{Fig1}). While the idea is conceptually pretty
+interest compared to all other molecules (Fig \ref{Fig1}a). While the idea is conceptually pretty
 straightforward, its implementation requires a thorough assessment of the set of used
 molecules, the docking methodology and the benchmark strategy. The following sections
 describe our effort to evaluate and optimize each step of the procedure.
@@ -22,20 +22,6 @@ describe our effort to evaluate and optimize each step of the procedure.
 %%% FIGURE 1 %%%
 %%%%%%%%%%%%%%%%
 
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig1.png}
-%   \caption{
-%   Main title: PocketVec methodological pipeline and benchmark results. 
-%   \begin{description}
-%       \item[a] A
-%       \item[b] A
-%       \item[c] A
-%       \item[d] A
-%   \end{description}
-%   }
-%   \label{Fig1}
-% \end{figure}
 
 \begin{figure}[htbp]
   \centering
@@ -49,3 +35,19 @@ describe our effort to evaluate and optimize each step of the procedure.
   }
   \label{Fig1}
 \end{figure}
+
+
+\subsubsection{Selection of the methodological pipeline}
+
+To find the optimal set of compounds to develop our binding pocket descriptors, we tested two different types of molecules. On the one hand, we used the Glide chemically diverse collection of fragments\cite{friesner_glide_2004, halgren_glide_2004}, containing 667 compounds with molecular weights in the 50-200 g·mol\textsuperscript{-1} range (Fig \ref{FigS2}). Additionally, we also selected 1,000 lead-like molecules (LLM) from the MOE v2019.01 dataset (Chemical Computing Group, Montreal, Canada), exhibiting molecular weights in the 200-450 g·mol\textsuperscript{-1} range (Fig \ref{FigS2}).
+
+We also assessed the performance of two well-established small molecule docking strategies. More specifically, we used rDock\cite{ruiz-carmona_rdock_2014} and SMINA\cite{koes_lessons_2013} to run rigid and flexible docking calculations, respectively, under the default parameters.
+
+Finally, to determine the best combination of small molecules and docking methods we relied on ProSPECCTs, a collection of datasets aimed at evaluating the performance of pocket comparison approaches (including pocket descriptors) in a wide range of distinct scenarios\cite{ehrt_benchmark_2018}. In brief, ProSPECCTs comprises 10 datasets consisting of protein-ligand binding site pairs classified as either similar or dissimilar according to various criteria, including pairs of different structures of the same proteins, proteins harboring artificial mutations in their binding pockets or pairs of unrelated proteins that are able to bind chemically similar ligands (Fig \ref{FigS3}).
+
+Please, see the \hyperref[PocketVec_Methods]{Methods} section for a more detailed description of the methodological pipeline.
+
+
+\subsubsection{PocketVec parameter selection and benchmark}
+
+For each ProSPECCTs dataset, we generated PocketVec descriptors for all ligand-defined protein binding sites, and evaluated pocket similarity on the basis of pairwise cosine distances between PocketVec descriptors: the lower the PocketVec distance, the higher the pocket similarity. 
