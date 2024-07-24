@@ -29,3 +29,133 @@ Detailed plots for all ProSPECCTs datasets including ROC Curves, PR Curves and d
 \label{PocketVec_ResultsAndDiscussion_Comparison_with_existing_strategies}
 
 Next, we compared the performance of PocketVec descriptors with state-of-the-art methodologies, as reported in several studies\cite{simonovsky_deeplytough_2020, scott_classification_2022, ehrt_benchmark_2018}, where the authors benchmarked many pocket comparison tools against the ProSPECCTs datasets, including six strategies based on pocket descriptors (Fig \ref{PocketVec_Fig1}d and Fig \ref{PocketVec_FigS11}). We used the AUROC as the standard performance measure to be able to compare our results with other available methodologies. However, for PocketVec descriptors, we also provide specific values of precision, accuracy, sensitivity, specificity, Matthew´s correlation coefficient and F1 score in each ProSPECCTs dataset (Fig \ref{PocketVec_FigS13}). Overall, PocketVec is the second-best ranked strategy in terms of the weighted average among datasets (0.89) and, indeed, it surpasses the median and the average performance in all ProSPECCTs datasets, apart from P3 (Table \ref{PocketVec_TableS1}). The top-scoring method is SiteAlign\cite{schalon_simple_2008}, which is alignment-dependent and based on the projection of residue descriptors into a triangle-discretized sphere that quantifies binding site similarity by minimizing distances between systematically generated cavity fingerprints obtained by moving one binding site with respect to the other. Thus, being specifically developed to compare pockets, it does not provide a unique descriptor for each binding site, which hampers the exploration of the pocket space in the same way molecular fingerprints do for the chemical space of small molecules. \hl{START} Other strategies are indeed alignment-free and provide unique representations for binding sites but, in addition to showing worse performances than PocketVec descriptors among ProSPECCTs datasets, also present several intrinsic limitations. For instance, KRIPO\cite{wood_pharmacophore_2012} and TIFP\cite{desaphy_encoding_2013} characterize protein-ligand binding interactions between receptors and bound ligands, which enables the identification of shared interaction patterns between pockets but limits their applicability domain to \textit{holo} structures. Additionally, FuzCav\cite{weill_alignment-free_2010} fingerprints count for specific pharmacophoric triplets of pocket-lining Cα, which enables the use of \textit{apo} structures but imply a simplistic representation of pockets. On a different note, Deeplytough\cite{simonovsky_deeplytough_2020} and BindSiteS-CNN\cite{scott_classification_2022} generate pocket descriptors by means of deep learning strategies, which makes them strongly dependent on training data and provide pocket embeddings that are difficult to interpret. \hl{END} Thus, overall, PocketVec represents a fast strategy to generate accurate pocket descriptors that overcome the aforementioned limitations, and it shows a higher performance at assessing pocket similarities than most current strategies (Fig \ref{PocketVec_FigS14}).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Comprehensive characterization of druggable pockets in the human proteome
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Comprehensive characterization of druggable pockets in the human proteome}
+\label{PocketVec_ResultsAndDiscussion_Comprehensive_characterization}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Robustness in the detection of druggable pockets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Robustness in the detection of druggable pockets}
+\label{PocketVec_ResultsAndDiscussion_Robustness_Detection}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Systematic generation of PocketVec descriptors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Systematic generation of PocketVec descriptors}
+\label{PocketVec_ResultsAndDiscussion_Systematic_generation_of_PocketVec_descriptors}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Influence of protein flexibility on PocketVec descriptors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Influence of protein flexibility on PocketVec descriptors}
+\label{PocketVec_ResultsAndDiscussion_Influence_of_protein_flexibility}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% All-vs-all comparison of human druggable pockets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{All-vs-all comparison of human druggable pockets}
+\label{PocketVec_ResultsAndDiscussion_All_vs_All_comparison_human_druggable_pockets}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Relationship between PocketVec similarity and experimentally determined compound-target pairs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Relationship between PocketVec similarity and experimentally determined compound-target pairs}
+\label{PocketVec_ResultsAndDiscussion_Relationship_PocketVecSimilarity_CPD-TARGET_pairs}
+
+
+Bla bla bla
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Identifying kinases with similar inhibition profiles through PocketVec descriptors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Identifying kinases with similar inhibition profiles through PocketVec descriptors}
+\label{PocketVec_ResultsAndDiscussion_Identifying_Kinases}
+
+
+Bla bla bla
+
+
