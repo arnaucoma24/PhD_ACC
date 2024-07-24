@@ -27,6 +27,23 @@
 \captionsetup{justification=justified}
 \captionsetup{skip=15pt}
 
+% Customize TOC entry font sizes
+\setcounter{tocdepth}{3}
+\renewcommand{\cftsecfont}{\normalsize}        % Section font size
+\renewcommand{\cftsecpagefont}{\normalsize}    % Section page number font size
+\renewcommand{\cftsubsecfont}{\small}          % Subsection font size
+\renewcommand{\cftsubsecpagefont}{\small}      % Subsection page number font size
+\renewcommand{\cftsubsubsecfont}{\scriptsize} % Subsubsection font size
+\renewcommand{\cftsubsubsecpagefont}{\scriptsize} % Subsubsection page number font size
+
+\setlength{\cftsecindent}{0.5em}                 % Section indent
+\setlength{\cftsubsecindent}{1em}            % Subsection indent
+\setlength{\cftsubsubsecindent}{4.25em}           % Subsubsection indent
+
+\setlength{\cftbeforesecskip}{1.5em}           % Space before section
+\setlength{\cftbeforesubsecskip}{0.2em}        % Space before subsection
+\setlength{\cftbeforesubsubsecskip}{0.2em}     % Space before subsubsection
+
 % the front matter
 \input{frontmatter/personalize}
 \maketitle

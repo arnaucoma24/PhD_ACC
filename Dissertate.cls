@@ -10,7 +10,7 @@
 % --------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Dissertate}[2014/01/24 v1.0 Dissertate Class]
+\ProvidesClass{Dissertate}[2024/09/30 v1.0 Dissertate Class]
 % \LoadClass[12pt, oneside, letterpaper]{book} % CHANGE HERE THE FORMAT! A4, B5, ETC
 \LoadClass[12pt, oneside, b5paper]{book} % CHANGE HERE THE FORMAT! A4, B5, ETC
 
@@ -147,3 +147,4 @@
 \usepackage{tabularx}  % For adjustable-width columns
 \usepackage{etoolbox} % For conditional commands
 \usepackage{colortbl} % For row coloring
+\usepackage{soul}

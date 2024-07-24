@@ -20,7 +20,7 @@
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Supplementary/FigS1.png}
   \caption{Similar proteins bind similar active compounds. For each protein family (e.g. Cytochrome P450, GPCR, etc.) we compared all active compounds between protein pairs from the same family (Same) and from different families (Different). Compounds were compared on the basis of their Tanimoto Similarities (y-axis, ECFP4 with 2048 bits using RDKit – https://rdkit.org) and only the TOP-N (x-axis: 10, 50, 100, 250, 1000) highest similarities were considered per each family. All distributions of Same and Different categories are significantly different (Mann-Whitney U test, pvalue <0.05, alternative greater using SciPy\cite{virtanen_scipy_2020}) except Miscellaneous (10, 50, 100, 250, 1000) and Other Enzymes (10, 50, 100, 250, 1000). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values. The number of proteins within each family is specified in the title in parenthesis. Data was downloaded from \href{http://dude.docking.org}{http://dude.docking.org} in January 2023.}
-  \label{FigS1}
+  \label{PocketVec_FigS1}
 \end{figure}
 
 
@@ -30,7 +30,7 @@
   \caption{
   Histograms of molecular weights (x-axis) from fragments (667, orange) and lead-like molecules (1,000, blue).
   }
-  \label{FigS2}
+  \label{PocketVec_FigS2}
 \end{figure}
 
 
@@ -40,7 +40,7 @@
   \caption{
   ProSPECCTs overview. Each bar represents a ProSPECCT dataset (x-axis) and indicates the number of protein-ligand binding site pairs (y-axis) together with the proportion of similar pocket pairs within each dataset (color tone). Please, see the Online Methods section for a detailed description of each dataset.
   }
-  \label{FigS3}
+  \label{PocketVec_FigS3}
 \end{figure}
 
 
@@ -50,7 +50,7 @@
   \caption{
   Performances (AUROC, y-axis) among ProSPECCTs datasets (x-axis). Each colored dot represents the individual performance of our strategies with all possible combinations of docking approaches (rDock and SMINA) and compound collections (1,000 LLM and 667 fragments). Av. values represent the average performance among ProSPECCTs datasets for each individual strategy and W. Av. values weight the average value according to the number of pairs within each dataset.
   }
-  \label{FigS4}
+  \label{PocketVec_FigS4}
 \end{figure}
 
 
@@ -60,7 +60,7 @@
   \caption{
   Proportion of outlier molecules. Colored bars represent the proportion of outlier molecules (y-axis) within each ProSPECCTs dataset (x-axis) for each combination of docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments). Colors indicate the number of outlier molecules assigned to each structure. The number of structures per dataset is specified in parenthesis (x labels).
   }
-  \label{FigS5}
+  \label{PocketVec_FigS5}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -69,7 +69,7 @@
   \caption{
   Ranking diversity differences. For each docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments) ProSPECCTs pockets were considered all at once (3,335 pockets) and the standard deviation (in terms of rankings) was calculated for each tested compound. For both docking strategies standard deviation distributions between LLM and fragments are statistically different (Mann-Whitney U test, p<10-70 in both cases). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values.
   }
-  \label{FigS6}
+  \label{PocketVec_FigS6}
 \end{figure}
 
 
@@ -79,7 +79,7 @@
   \caption{
   Performances (AUROC, y-axis) of our descriptors among ProSPECCTs datasets (color, P6 and P6.2 not included. For further details, please see Online Methods) generated with a varying number of predefined compounds (x-axis, from 1 to complete sets, sorted by entropy). Colored points indicate the performance at 10, 128 and 1,000/667 molecules. Colored areas represent the best and worst performances obtained with randomly (x100) selected compounds (not sorted by entropy values). Each subplot corresponds to a combination of docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments).   
   }
-  \label{FigS7}
+  \label{PocketVec_FigS7}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -88,7 +88,7 @@
   \caption{
   Standard 128 lead-like molecules used to generate PocketVec descriptors, including their commercial names and InChiKeys.
   }
-  \label{FigS8_v2}
+  \label{PocketVec_FigS8_v2}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -97,7 +97,7 @@
   \caption{
   Correlation between the AUROC (y-axis) and the number of artificial mutations (x-axis) in pocket-lining residues leading to changes in physicochemical properties (ProSPECCTs P3) and both physicochemical and shape properties (ProSPECCTs P4). Each subplot corresponds to a specific ProSPECCTs dataset (P3, P4) and collection of compounds (128 LLM and 128 fragments). Dot color and marker indicate the used docking method (rDock for rigid docking and SMINA for flexible docking). In the legend, the corresponding Pearson’s Correlation Coefficients are reported. 
   }
-  \label{FigS9}
+  \label{PocketVec_FigS9}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -106,7 +106,7 @@
   \caption{
   For each ProSPECCTs dataset, evolution (y-axis) of the Sensitivity (blue), Specificity (orange), Precision (green), Accuracy (red), MCC (purple) and F1 Score (brown) at different distance threshold values (x-axis, cosine distance). The vertical gray thin line represents the cosine distance maximizing the MCC in each ProSPECCTs dataset. The vertical dashed black line represents the cosine distance maximizing the MCC in ProSPECCTs P1 (0.17), which corresponds to the general guideline for classifying a pocket pair of interest as either similar or dissimilar.
   }
-  \label{ProSPECCTs_metrics_evolution}
+  \label{PocketVec_FigS10}
 \end{figure}
 
 
@@ -141,7 +141,7 @@
 \csvreader[
     longtable=|C{1.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|,  % Adjust the widths as needed
     table head=\caption{Performances (AUROCs) of existing strategies (Deeplytough\cite{simonovsky_deeplytough_2020}, FuzCav\cite{weill_alignment-free_2010}, SiteAlign\cite{schalon_simple_2008}, KRIPO\cite{wood_pharmacophore_2012}, TIFP\cite{desaphy_encoding_2013}, BindSiteS-CNN\cite{scott_classification_2022}. File format is specified if needed) to compare pockets based on pocket descriptors/fingerprints among ProSPECCTs datasets. TOP-3 rows include the number of pairs within each dataset together with the best performing method. Median and Average performances have been calculated without considering PocketVec results (colored).
-    }\label{TableS1} \\\toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endfirsthead
+    }\label{PocketVec_TableS1} \\\toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endfirsthead
     \toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endhead
     \bottomrule\endfoot,
     before reading={\catcode`\#=12}, % Handle special characters
