@@ -11,7 +11,8 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Dissertate}[2014/01/24 v1.0 Dissertate Class]
-\LoadClass[12pt, oneside, letterpaper]{book}
+% \LoadClass[12pt, oneside, letterpaper]{book} % CHANGE HERE THE FORMAT! A4, B5, ETC
+\LoadClass[12pt, oneside, b5paper]{book} % CHANGE HERE THE FORMAT! A4, B5, ETC
 
 % some definitions
 \def\degreeyear#1{\gdef\@degreeyear{#1}}

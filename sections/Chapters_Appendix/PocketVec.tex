@@ -129,14 +129,18 @@
 
 \newpage
 
+\renewcommand{\thetable}{A.\arabic{section}.\arabic{table}}
+\counterwithin{table}{section}
+\setcounter{section}{4}
+\setcounter{table}{0}
+
 % Define a new column type for tabularx that allows line breaks and centers the text
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 
 % Importing and displaying the CSV file as a table
 \csvreader[
-    longtable=|C{1.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{1.2cm}|,  % Adjust the widths as needed
-    table head=\caption{
-    Performances (AUROCs) of existing strategies (Deeplytough\cite{simonovsky_deeplytough_2020}, FuzCav\cite{weill_alignment-free_2010}, SiteAlign\cite{schalon_simple_2008}, KRIPO\cite{wood_pharmacophore_2012}, TIFP\cite{desaphy_encoding_2013}, BindSiteS-CNN\cite{scott_classification_2022}. File format is specified if needed) to compare pockets based on pocket descriptors/fingerprints among ProSPECCTs datasets. TOP-3 rows include the number of pairs within each dataset together with the best performing method. Median and Average performances have been calculated without considering PocketVec results (colored).
+    longtable=|C{1.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|,  % Adjust the widths as needed
+    table head=\caption{Performances (AUROCs) of existing strategies (Deeplytough\cite{simonovsky_deeplytough_2020}, FuzCav\cite{weill_alignment-free_2010}, SiteAlign\cite{schalon_simple_2008}, KRIPO\cite{wood_pharmacophore_2012}, TIFP\cite{desaphy_encoding_2013}, BindSiteS-CNN\cite{scott_classification_2022}. File format is specified if needed) to compare pockets based on pocket descriptors/fingerprints among ProSPECCTs datasets. TOP-3 rows include the number of pairs within each dataset together with the best performing method. Median and Average performances have been calculated without considering PocketVec results (colored).
     }\label{TableS1} \\\toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endfirsthead
     \toprule & \textbf{D1} & \textbf{D1.2} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D5.2} & \textbf{D7} & \textbf{Av} & \textbf{W. Av.} \\\midrule\endhead
     \bottomrule\endfoot,
