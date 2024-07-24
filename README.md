@@ -1,19 +1,46 @@
-# Dissertate: a LaTeX dissertation template [![Build Status](https://travis-ci.org/suchow/Dissertate.svg?branch=master)](https://travis-ci.org/suchow/Dissertate)
+# PhD Thesis Repository
 
+## Overview
 
-This package provides all the files needed to support the production and typesetting of a PhD dissertation at Harvard, Princeton, and NYU, though it can easily be adapted to meet the requirements of other schools. The format and styling is based closely on the requirements published by each university's registrar.
+This repository contains the LaTeX source files for the PhD thesis of Arnau Comajuncosa-Creus. The thesis is formatted according to the guidelines of [Your University], specifically using the `Dissertate` class.
 
-## Getting started
-1. Pick your school by editing line 6 of `dissertation.tex` to use the option `Harvard`, `Princeton`, or `NYU`, depending on your school.
-4. Personalize the document by filling out your name and all the other info in `frontmatter/personalize.md`.
-5. Begin writing your thesis using the chapter files in 'chapters/'
+## Structure
 
-## FAQ
+The repository is organized as follows:
 
-### How do I make the text justified instead of ragged right?
-Remove or comment out the line `\RaggedRight` from the .cls file.
+- **`dissertation.tex`**: The main LaTeX file for the thesis.
+- **`Dissertate.cls`**: The LaTeX class file that defines the formatting rules.
+- **`references.bib`**: The bibliography file containing references.
+- **`sections/`**: A directory containing individual chapter and section files.
+  - **`Introduction.tex`**
+  - **`Objectives.tex`**
+  - **`Chapters.tex`**
+  - **`Discussion.tex`**
+  - **`Conclusions.tex`**
+  - **`Appendix.tex`**
+  - Subfolders for additional sections like **`Chapters_PocketVec`**, **`Chapters_Stereoisomers`**, etc.
+- **`frontmatter/`**: A directory containing files for the front matter of the thesis.
+  - **`personalize.tex`**
+  - **`thanks.tex`**
+
+## Usage
+
+To compile the thesis, you can use Overleaf. Make sure you have all the required packages included in your Overleaf project.
+
+1. **Upload the repository files to Overleaf**:
+    - Create a new project on Overleaf.
+    - Upload all the files from this repository into the Overleaf project.
+
+2. **Compile the thesis**:
+    - Click on the "Recompile" button in Overleaf.
 
 ## Acknowledgments
-Thanks to Andrew Leifer for many code and README contributions and to Clemens Eppner for the Ubuntu instructions.
 
-## Note: This template has been preloaded into Overleaf (www.overleaf.com) to make it possible to get started without needing to install anything, and this README file has been updated to reflect this. To use this template on a local machine, please see the original source at https://github.com/suchow/Dissertate
+I would like to thank my advisor, colleagues, and family for their support during my PhD journey.
+
+For any questions or issues, please contact Arnau Comajuncosa-Creus at [your_email@example.com].
+
+## License
+
+This repository is licensed under the [Your License] license. See the `LICENSE` file for more details.
+
