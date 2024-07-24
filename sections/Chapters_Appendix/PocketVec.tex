@@ -38,7 +38,7 @@
   \centering
   \includegraphics[width=0.75\linewidth]{figures/PocketVec/Supplementary/FigS3.png}
   \caption{
-  ProSPECCTs overview. Each bar represents a ProSPECCT dataset (x-axis) and indicates the number of protein-ligand binding site pairs (y-axis) together with the proportion of similar pocket pairs within each dataset (color tone). Please, see the Online Methods section for a detailed description of each dataset.
+  ProSPECCTs overview. Each bar represents a ProSPECCT dataset (x-axis) and indicates the number of protein-ligand binding site pairs (y-axis) together with the proportion of similar pocket pairs within each dataset (color tone). Please, see the \hyperref[PocketVec_Methods]{Methods}) section for a detailed description of each dataset.
   }
   \label{PocketVec_FigS3}
 \end{figure}
@@ -67,7 +67,7 @@
   \centering
   \includegraphics[width=0.55\linewidth]{figures/PocketVec/Supplementary/FigS6.png}
   \caption{
-  Ranking diversity differences. For each docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments) ProSPECCTs pockets were considered all at once (3,335 pockets) and the standard deviation (in terms of rankings) was calculated for each tested compound. For both docking strategies standard deviation distributions between LLM and fragments are statistically different (Mann-Whitney U test, p<10-70 in both cases). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values.
+  Ranking diversity differences. For each docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments) ProSPECCTs pockets were considered all at once (3,335 pockets) and the standard deviation (in terms of rankings) was calculated for each tested compound. For both docking strategies standard deviation distributions between LLM and fragments are statistically different (Mann-Whitney U test, p<10\textsuperscript{-70} in both cases). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values.
   }
   \label{PocketVec_FigS6}
 \end{figure}
@@ -77,7 +77,7 @@
   \centering
   \includegraphics[width=1\linewidth]{figures/PocketVec/Supplementary/FigS7.png}
   \caption{
-  Performances (AUROC, y-axis) of our descriptors among ProSPECCTs datasets (color, P6 and P6.2 not included. For further details, please see Online Methods) generated with a varying number of predefined compounds (x-axis, from 1 to complete sets, sorted by entropy). Colored points indicate the performance at 10, 128 and 1,000/667 molecules. Colored areas represent the best and worst performances obtained with randomly (x100) selected compounds (not sorted by entropy values). Each subplot corresponds to a combination of docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments).   
+  Performances (AUROC, y-axis) of our descriptors among ProSPECCTs datasets (color, P6 and P6.2 not included. For further details, please see \hyperref[PocketVec_Methods]{Methods}) generated with a varying number of predefined compounds (x-axis, from 1 to complete sets, sorted by entropy). Colored points indicate the performance at 10, 128 and 1,000/667 molecules. Colored areas represent the best and worst performances obtained with randomly (x100) selected compounds (not sorted by entropy values). Each subplot corresponds to a combination of docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments).   
   }
   \label{PocketVec_FigS7}
 \end{figure}
@@ -93,7 +93,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/PocketVec/Supplementary/FigS9.png}
+  \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS9.png}
   \caption{
   Correlation between the AUROC (y-axis) and the number of artificial mutations (x-axis) in pocket-lining residues leading to changes in physicochemical properties (ProSPECCTs P3) and both physicochemical and shape properties (ProSPECCTs P4). Each subplot corresponds to a specific ProSPECCTs dataset (P3, P4) and collection of compounds (128 LLM and 128 fragments). Dot color and marker indicate the used docking method (rDock for rigid docking and SMINA for flexible docking). In the legend, the corresponding Pearson’s Correlation Coefficients are reported. 
   }
@@ -108,6 +108,79 @@
   }
   \label{PocketVec_FigS10}
 \end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS11.png}
+  \caption{
+  Performances (AUROC, y-axis) of distinct approaches to compare binding sites among ProSPECCTs datasets (x-axis). Gray dots represent the individual performances of existing strategies to compare pockets (not only those based on pocket descriptors). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Colored dots represent the individual performances of our strategies with all possible combinations of docking approaches (rDock and SMINA) and reduced sets of compound collections (128 LLM and 128 fragments). Av. values represent the average performance among ProSPECCTs datasets for each individual method and W. Av. values weight the average value according to the number of pairs within each dataset.
+  }
+  \label{PocketVec_FigS11}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/PocketVec/Supplementary/FigS12.png}
+  \caption{
+  Analysis of the impact of the number of LLMs (\textbf{a}) and Fragments (\textbf{b}) and the selection criteria in the performance of PocketVec descriptors. PocketVec distances between similar and dissimilar pockets in various scenarios: considering a varying number of compounds (ranging from 32 to full libraries by powers of 2), different approaches to select such compounds (high entropy, low entropy and random x10), and compounds being chemically distinct. Boxplots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers).
+  }
+  \label{PocketVec_FigS12}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/PocketVec/Supplementary/FigS13.png}
+  \caption{
+  Quantitative measures of Precision, Accuracy, Sensitivity, Specificity, Matthew’s Correlation Coefficient (MCC) and F1 Score of PocketVec descriptors among ProSPECCTs datasets. The used distance cut-off to classify pocket pairs as similar or dissimilar was 0.17, as originally defined in \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark}. Blue lines represent the expected performance of a random similar/dissimilar classification. 
+  }
+  \label{PocketVec_FigS13}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS14.png}
+  \caption{
+  Exhaustive comparison of different methods used to assess pocket similarity among ProSPECCTs datasets. Left plots represent the performances of strategies based on the generation of pocket fingerprints or descriptors. The superior plot indicates the individual performance (y-axis, AUROC) of each method (x-axis) within each dataset (dot color, dot size is proportional to dataset size -number of pocket pairs). The plot below indicates the average and weighted average performance (according to the number of pairs within each dataset) of each method. Methods are sorted by W.Av values. Right plots represent the same information as mentioned before but for those existing strategies not based on pocket fingerprinting.  
+  }
+  \label{PocketVec_FigS14}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Supplementary/FigS15.png} 
+  \caption{
+    \textbf{a)} Number of domains per protein. Each bar corresponds to the number of human proteins (y-axis) having the specified number of domains (x-axis).
+    \textbf{b)} Number of domain occurrences (y-axis) per Pfam domain (x-axis).
+  }
+  \label{PocketVec_FigS15}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{figures/PocketVec/Supplementary/FigS16.png}
+  \caption{
+  Number of ligands per domain. Each bar corresponds to the number of human protein domains (y-axis) having the specified number of ligands (x-axis) fulfilling our criteria (see \hyperref[PocketVec_Methods]{Methods}).   
+  }
+  \label{PocketVec_FigS16}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS17.png} 
+  \caption{
+    \textbf{Evaluating pocket detection consistency in PDB and AF2 structures.}
+    First, we randomly selected 1,000 domains from the PDB-PD set. We only considered those domains having more than one PDB structure (786) and selected a single structure as the reference one.  Then, the remaining PDB structure(s) and the corresponding AF2 model were superposed against the reference structure using TM-align
+    \textbf{a)} Pockets (top-2) were detected in original and aligned PDB and AF2 structures. Original pocket centroids were superposed against aligned pocket centroids using the corresponding translation and rotation matrices. Minimum Euclidean distances between aligned and original pockets were calculated and are shown in a histogram representation (left), distinguishing between PDB and AF2 structures. For those pocket pairs that were consistently detected (distance ≤6.14Å between aligned and original structures, see \hyperref[PocketVec_Methods]{Methods}), the correlation between their original and aligned scoring is shown on the right plot, together with the corresponding Pearson’s correlation coefficients.
+    \textbf{b)} Pockets (top-2) were detected in aligned PDB and AF2 structures (including the reference one). Minimum Euclidean distances between aligned (PDB and AF2) and reference pockets were calculated and are shown in a histogram representation (left), distinguishing between PDB and AF2 structures. For those pocket pairs that were consistently detected (distance ≤6.14Å between aligned and original structures, see \hyperref[PocketVec_Methods]{Methods}), the correlation between their aligned (PDB and AF2) and reference scoring is shown on the right plot, together with the corresponding Pearson’s Correlation Coefficients.
+  }
+  \label{PocketVec_FigS17}
+\end{figure}
+
 
 
 
@@ -127,7 +200,8 @@
 %%%%  TABLES  %%%%%%
 %%%%%%%%%%%%%%%%%%%%
 
-\newpage
+\clearpage
+\pagebreak
 
 \renewcommand{\thetable}{A.\arabic{section}.\arabic{table}}
 \counterwithin{table}{section}
