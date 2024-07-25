@@ -37,19 +37,33 @@ Next, we compared the performance of PocketVec descriptors with state-of-the-art
 %%% Comprehensive characterization of druggable pockets in the human proteome
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Comprehensive characterization of druggable pockets in the human proteome}
 \label{PocketVec_ResultsAndDiscussion_Comprehensive_characterization}
 
+PocketVec descriptors constitute an optimal framework to comprehensively characterize large and diverse sets of small molecule binding sites (\textit{apo}/\textit{holo} structures), enabling the navigation across the pocket space of complete proteomes. In view of this, we designed a computational pipeline to generate PocketVec descriptors for all pockets included within human protein domains (Fig \ref{PocketVec_Fig2}a). Please, see \hyperref[PocketVec_Methods]{Methods} for a detailed description of the strategy.
 
-Bla bla bla
-
-
-
-
-
+%%%%%%%%%%%%%%%%
+%%% FIGURE 2 %%%
+%%%%%%%%%%%%%%%%
 
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig2.png} 
+  \caption{
+    \textbf{Generating PocketVec descriptors for all druggable pockets within human protein domains.} 
+    \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
+    \textbf{b)} Benchmark of 3 distinct pocket detection strategies: Fpocket (black), P2rank (brown) and the combination of Fpocket and Prank (green). First, we removed bound ligands from reference PDB structures (PDB-LIG) and we then assessed the performance of the mentioned strategies to detect pockets in ligand-free structures. The plots below represent the evolution of Coverage (proportion of real pockets that are actually detected) and Precision (proportion of detected pockets that are actually real -have a crystallized ligand on PDB-LIG) in terms of the number of best-scoring detected pockets per domain that are considered (1, 2, 3, 5 and 10).
+    \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).
+  }
+  \label{PocketVec_Fig2}
+\end{figure}
+
+
+In brief, we first retrieved all 20,386 human proteins in UniProt\cite{the_uniprot_consortium_uniprot_2023}. To avoid working with unstructured or very flexible regions, difficult to model and unlikely to contain druggable pockets, we only kept those protein sequences within autonomous structural units (i.e. domains), as defined in Pfam\cite{mistry_pfam_2021}. Overall, we kept 28,044 domains (2,704 unique Pfam domains) in 11,242 human proteins (Fig \ref{PocketVec_FigS15}). The next step was to structurally annotate these domains, for which we used two different strategies. On the one hand, we looked for experimentally determined structures searching the PDB\cite{goodsell_rcsb_2020}, identifying at least one PDB structure for 7,774 domains (1,839 unique Pfam domains in 4,726 proteins). Additionally, we downloaded all human predicted protein structures from AlphaFold DB, obtaining structural models for 25,589 domains (2,671 unique Pfam domains in 11,022 proteins). There is an ongoing debate on the use of AF2 models for docking experiments, and whether such models should be refined using e.g. molecular dynamics simulations. However, most studies suggest that the accuracy of AF2 models in docking experiments is comparable to experimentally determined \textit{apo} structures (i.e. without a ligand bound)\cite{zhang_benchmarking_2023, holcomb_evaluation_2023, scardino_how_2023}. Indeed, it has been recently shown that the experimental validation rates of small molecule docking are indistinguishable when PDB structures or AF2 models are used\cite{lyu_alphafold2_2023}.
+
+Next, for each domain, we identified the potentially druggable pockets, also using two different strategies. In the first one, that we termed \textit{ligand-based} pocket definition, we searched for small molecules co-crystallized together with the protein domain, and defined druggable pockets as those having bound compounds (HET PDB codes) fulfilling the following criteria: i) being annotated as such in PDBSUM data, ii) not being one of the 20 naturally occurring amino acids, iii) having more than 6 carbon atoms, to filter out solvent molecules and crystallography-related species and iv) having solvent accessibility ≤0.4 or buriedness ≥15 (\hyperref[PocketVec_Methods]{Methods}). In total, we found at least one PDB structure containing small molecules for 1,279 domains (363 unique Pfam domains in 1,205 proteins). For 503 of these, we only found a single ligand fulfilling our criteria, whereas for 254 of them we could find 10 or more ligands (Fig \ref{PocketVec_FigS16}). Then, to compile the list of unique ligand-defined pockets, we chose a reference PDB structure for each protein domain, and superimposed all domain structures with the corresponding bound ligands onto the reference. We then used a single-linkage clustering strategy to merge into a single pocket all those ligands whose centroids were at a distance ≤5Å while maintaining the maximum distance between the global centroid of the cluster and the centroids of the individual compounds ≤18Å. We considered the final global cluster centroids as the pocket centroids. Overall, we found 1,604 ligand-defined pockets in 1,279 protein domains (363 unique Pfam domains in 1,205 proteins). We named this set of pockets \textbf{PDB-LIG}. To apply the same criteria to those structures modeled with AF2, for each domain, we superimposed the reference PDB structure onto the AF2 model, and transferred the location of the identified PDB-LIG pockets accordingly. We only considered those pockets having a pLDDT value >70 for all residues at a distance ≤8Å from the pocket centroid. In total, we identified 1,405 pockets in 1,131 domains (339 unique Pfam domains in 1,074 proteins), and named this set \textbf{AF2-LIG}. As a complementary strategy, and to increase the overall coverage of the human pocketome, we attempted a de novo identification of druggable pockets. To find the most accurate strategy to predict druggable pockets, we assessed the accuracy of different methods at identifying the PDB-LIG pockets defined above. In brief, we first removed bound ligands from reference \textit{holo} structures and used Fpocket\cite{le_guilloux_fpocket_2009} and P2rank\cite{krivak_p2rank_2018}, to detect pockets in ligand-free domain structures (\hyperref[PocketVec_Methods]{Methods}). Our benchmark showed that the best strategy to detect binding sites in ligand-free structures was the combination of Fpocket, for pocket detection, and Prank to score them. Using this combination, and considering the top-2 best scored pockets for each domain, we were able to detect 72\% of the real pockets while 47\% of detected pockets were indeed real (Fig \ref{PocketVec_Fig2}b, coverage and precision, respectively). Thus, for each domain, we ran Fpocket on the PDB reference structure to identify potential pockets, we ranked them by means of Prank, and we kept the top-2 ranked pockets per domain. Overall, this accounted for a total of 14,413 predicted pockets in 7,403 domains (1,806 unique Pfam domains in 4,643 proteins). We named this set \textbf{PDB-PD}. We then used the same strategy and criteria as before to detect pockets onto the predicted AF2 domain models, annotating a total of 32,202 pockets in 19,211 domains (2,409 unique Pfam domains in 10,314 proteins). We named this set \textbf{AF2-PD}.
 
 
 
@@ -57,15 +71,40 @@ Bla bla bla
 %%% Robustness in the detection of druggable pockets
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Robustness in the detection of druggable pockets}
 \label{PocketVec_ResultsAndDiscussion_Robustness_Detection}
 
+Globally, using the different strategies to structurally annotate human protein domains and to identify validated and potential druggable pockets, we compiled 1,604 PDB-LIG, 1,405 AF2-LIG, 14,413 PDB-PD and 32,202 AF2-PD druggable pockets, in 20,067 domains (Fig \ref{PocketVec_Fig2}a and Fig \ref{PocketVec_Fig2}c). The significant added value of \textit{de novo} methodologies is very apparent. Indeed, for 18,788 domains (93.6\%), all pockets were identified only with pocket detection strategies and, among these, 12,663 domains (63.1\%) exclusively featured pockets on AF2 models (Fig \ref{PocketVec_Fig2}c).
 
-Bla bla bla
+Interestingly, when we assessed the methodological robustness of pocket predictions using a subset of 1,000 PDB-PD domains, we observed that results slightly differed after translating and rotating structures. This effect was observed for both PDB and AF2 structures in a consistent manner: only \textasciitilde85\% and \textasciitilde86\% of detected pockets were evenly identified after rotation and translation, respectively (top-2 pockets, Fig \ref{PocketVec_FigS17}a). However, in the pockets identified regardless of variations in the initial structures, the scoring was very consistent both in PDB structures and AF2 models (Pearson CC \textasciitilde0.98). We also evaluated the coherence between pockets detected in PDB and AF2 structures, finding that only \textasciitilde59\% and \textasciitilde49\% of detected pockets were evenly identified in PDB and AF2 structures with respect to a reference PDB structure. However, as when comparing discrepancies due to different initial orientations, in the pockets identified both in PDB and AF2 structures the scoring was quite robust, with Pearson CC of \textasciitilde0.88 and \textasciitilde0.62 for PDB and AF2 models, respectively (Fig \ref{PocketVec_FigS17}b). 
+
+Additionally, we also explored potential differences in the physicochemical properties between the real (ligand-defined) and predicted (detected) pockets, comparing their volumes and buriedness values (see \hyperref[PocketVec_Methods]{Methods}). In this case, as the only remarkable difference, we found that real pockets identified from bound ligands tended to be smaller than those predicted in the PD framework, with average volumes of \textasciitilde3,000 Å3 and \textasciitilde3,800 Å3 for LIG and PD pockets, respectively (Fig \ref{PocketVec_Fig3}a). As expected, we reached the same conclusion with buriedness values (Fig \ref{PocketVec_FigS18}), since pocket volume and buriedness were indeed negatively correlated (Fig \ref{PocketVec_FigS19}).
+
+Altogether, these results underscore some limitations in the pocket detection strategy, revealing slight variations due to the orientation of the initial structures, a stronger dependence on structural variability and the production of predicted pockets whose physicochemical properties (e.g. volume) diverge from known pockets. 
 
 
+%%%%%%%%%%%%%%%%
+%%% FIGURE 3 %%%
+%%%%%%%%%%%%%%%%
 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig3.png} 
+  \caption{
+    \textbf{Characterization of human druggable pockets using PocketVec descriptors.} 
+    \textbf{a)} Distribution of volumes (x-axis, x10³ A³) for each pocket set: PDB-LIG (1,604 pockets, red), PDB-PD (14,413 pockets, orange), AF2-LIG (1,405 pockets, purple) and AF2-PD (32,302 pockets, blue). All distributions are normalized (density, y-axis). The average volumes are 2992.88 A³, 3764.1 A³, 2940.47 A³ and 3972.66 A³, respectively. Pocket volumes were directly calculated using the rDock\cite{ruiz-carmona_rdock_2014} CAVITY functionality. 
+    % \textbf{b)} Correlation between average docking rankings among all pocket sets. For each pocket set, a 128-length array containing the average docking ranking for each lead-like molecule was calculated, and these arrays were compared among pocket sets by means of the Pearson’s Correlation Coefficient. All p-values (10) are <10\textsuperscript{-25}. 
+    % \textbf{c)} For each pocket set, proportion of PocketVec descriptors (\%, y-axis) having less than N (x-axis) outlier molecules (i.e. molecules with positive docking scores, please see \hyperref[PocketVec_Methods]{Methods}).
+    % \textbf{d)} Proportion of originally dissimilar pocket pairs (y-axis, distances >threshold) classified as similar (distances <threshold) due to the artificial insertion of a growing number of outlier values (x-axis) at different distance thresholds. To run the analysis, 100,000 PocketVec distances were randomly sampled (x10 times) from PDB-LIG. Solid lines represent average results and shadowed areas correspond to minimum and maximum proportions among samples. Results did not change among pocket sets (Fig \ref{PocketVec_FigS23}).
+    % \textbf{e)} tSNE (t-distributed Stochastic Neighbor Embedding) representation of all PocketVec descriptors within each pocket set (PDB-LIG, PDB-PD, AF2-LIG, AF2-PD). Each pocket is represented by a single point, which is colored and sized by 2D density within the pocket set. Gray dots correspond to the background space: all PocketVec descriptors are considered at once, and are also colored and sized by 2D density.
+    % \textbf{f)} Distributions (density, y-axis) of maximum Tanimoto Similarity among bound ligands (x-axis, bin width: 0.02) grouped by PocketVec distance ranges (0-0.10, 0.10-0.17 and 0.17-0.4). The number of pocket pairs per PocketVec distance range is specified in parenthesis.
+    % \textbf{g)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the maximum Tanimoto Similarity among bound ligands (0-0.5, 0.5-0.8, 0.8-1 and 1). The number of pocket pairs per maximum Tanimoto Similarity range is specified in parenthesis.
+    % \textbf{h)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared ligands between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared ligands is specified in parenthesis.
+  }
+  \label{PocketVec_Fig3}
+\end{figure}
 
 
 
@@ -78,7 +117,7 @@ Bla bla bla
 %%% Systematic generation of PocketVec descriptors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Systematic generation of PocketVec descriptors}
 \label{PocketVec_ResultsAndDiscussion_Systematic_generation_of_PocketVec_descriptors}
 
@@ -95,7 +134,7 @@ Bla bla bla
 %%% Influence of protein flexibility on PocketVec descriptors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Influence of protein flexibility on PocketVec descriptors}
 \label{PocketVec_ResultsAndDiscussion_Influence_of_protein_flexibility}
 
@@ -115,7 +154,7 @@ Bla bla bla
 %%% All-vs-all comparison of human druggable pockets
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{All-vs-all comparison of human druggable pockets}
 \label{PocketVec_ResultsAndDiscussion_All_vs_All_comparison_human_druggable_pockets}
 
@@ -132,7 +171,7 @@ Bla bla bla
 %%% Relationship between PocketVec similarity and experimentally determined compound-target pairs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Relationship between PocketVec similarity and experimentally determined compound-target pairs}
 \label{PocketVec_ResultsAndDiscussion_Relationship_PocketVecSimilarity_CPD-TARGET_pairs}
 
@@ -151,7 +190,7 @@ Bla bla bla
 %%% Identifying kinases with similar inhibition profiles through PocketVec descriptors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\phantomsection
 \subsubsection{Identifying kinases with similar inhibition profiles through PocketVec descriptors}
 \label{PocketVec_ResultsAndDiscussion_Identifying_Kinases}
 

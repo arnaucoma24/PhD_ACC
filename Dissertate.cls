@@ -148,3 +148,4 @@
 \usepackage{etoolbox} % For conditional commands
 \usepackage{colortbl} % For row coloring
 \usepackage{soul}
+\usepackage{float}  % Add this package
