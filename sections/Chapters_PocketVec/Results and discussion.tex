@@ -88,29 +88,22 @@ Altogether, these results underscore some limitations in the pocket detection st
 %%% FIGURE 3 %%%
 %%%%%%%%%%%%%%%%
 
-
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig3.png} 
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig3.png}
   \caption{
     \textbf{Characterization of human druggable pockets using PocketVec descriptors.} 
     \textbf{a)} Distribution of volumes (x-axis, x10³ A³) for each pocket set: PDB-LIG (1,604 pockets, red), PDB-PD (14,413 pockets, orange), AF2-LIG (1,405 pockets, purple) and AF2-PD (32,302 pockets, blue). All distributions are normalized (density, y-axis). The average volumes are 2992.88 A³, 3764.1 A³, 2940.47 A³ and 3972.66 A³, respectively. Pocket volumes were directly calculated using the rDock\cite{ruiz-carmona_rdock_2014} CAVITY functionality. 
-    % \textbf{b)} Correlation between average docking rankings among all pocket sets. For each pocket set, a 128-length array containing the average docking ranking for each lead-like molecule was calculated, and these arrays were compared among pocket sets by means of the Pearson’s Correlation Coefficient. All p-values (10) are <10\textsuperscript{-25}. 
-    % \textbf{c)} For each pocket set, proportion of PocketVec descriptors (\%, y-axis) having less than N (x-axis) outlier molecules (i.e. molecules with positive docking scores, please see \hyperref[PocketVec_Methods]{Methods}).
-    % \textbf{d)} Proportion of originally dissimilar pocket pairs (y-axis, distances >threshold) classified as similar (distances <threshold) due to the artificial insertion of a growing number of outlier values (x-axis) at different distance thresholds. To run the analysis, 100,000 PocketVec distances were randomly sampled (x10 times) from PDB-LIG. Solid lines represent average results and shadowed areas correspond to minimum and maximum proportions among samples. Results did not change among pocket sets (Fig \ref{PocketVec_FigS23}).
-    % \textbf{e)} tSNE (t-distributed Stochastic Neighbor Embedding) representation of all PocketVec descriptors within each pocket set (PDB-LIG, PDB-PD, AF2-LIG, AF2-PD). Each pocket is represented by a single point, which is colored and sized by 2D density within the pocket set. Gray dots correspond to the background space: all PocketVec descriptors are considered at once, and are also colored and sized by 2D density.
-    % \textbf{f)} Distributions (density, y-axis) of maximum Tanimoto Similarity among bound ligands (x-axis, bin width: 0.02) grouped by PocketVec distance ranges (0-0.10, 0.10-0.17 and 0.17-0.4). The number of pocket pairs per PocketVec distance range is specified in parenthesis.
-    % \textbf{g)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the maximum Tanimoto Similarity among bound ligands (0-0.5, 0.5-0.8, 0.8-1 and 1). The number of pocket pairs per maximum Tanimoto Similarity range is specified in parenthesis.
-    % \textbf{h)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared ligands between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared ligands is specified in parenthesis.
+    \textbf{b)} Correlation between average docking rankings among all pocket sets. For each pocket set, a 128-length array containing the average docking ranking for each lead-like molecule was calculated, and these arrays were compared among pocket sets by means of the Pearson’s Correlation Coefficient. All p-values (10) are <10\textsuperscript{-25}. 
+    \textbf{c)} For each pocket set, proportion of PocketVec descriptors (\%, y-axis) having less than N (x-axis) outlier molecules (i.e. molecules with positive docking scores, please see \hyperref[PocketVec_Methods]{Methods}).
+    \textbf{d)} Proportion of originally dissimilar pocket pairs (y-axis, distances >threshold) classified as similar (distances <threshold) due to the artificial insertion of a growing number of outlier values (x-axis) at different distance thresholds. To run the analysis, 100,000 PocketVec distances were randomly sampled (x10 times) from PDB-LIG. Solid lines represent average results and shadowed areas correspond to minimum and maximum proportions among samples. Results did not change among pocket sets (Fig \ref{PocketVec_FigS23}).
+    \textbf{e)} tSNE (t-distributed Stochastic Neighbor Embedding) representation of all PocketVec descriptors within each pocket set (PDB-LIG, PDB-PD, AF2-LIG, AF2-PD). Each pocket is represented by a single point, which is colored and sized by 2D density within the pocket set. Gray dots correspond to the background space: all PocketVec descriptors are considered at once, and are also colored and sized by 2D density.
+    \textbf{f)} Distributions (density, y-axis) of maximum Tanimoto Similarity among bound ligands (x-axis, bin width: 0.02) grouped by PocketVec distance ranges (0-0.10, 0.10-0.17 and 0.17-0.4). The number of pocket pairs per PocketVec distance range is specified in parenthesis.
+    \textbf{g)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the maximum Tanimoto Similarity among bound ligands (0-0.5, 0.5-0.8, 0.8-1 and 1). The number of pocket pairs per maximum Tanimoto Similarity range is specified in parenthesis.
+    \textbf{h)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared ligands between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared ligands is specified in parenthesis.
   }
   \label{PocketVec_Fig3}
 \end{figure}
-
-
-
-
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -122,7 +115,7 @@ Altogether, these results underscore some limitations in the pocket detection st
 \label{PocketVec_ResultsAndDiscussion_Systematic_generation_of_PocketVec_descriptors}
 
 
-Bla bla bla
+Once we had identified human druggable pockets with four different approaches, we systematically generated PocketVec descriptors for all of them, using the strategy described above (Fig \ref{PocketVec_Fig1}a). The high number of pockets explored enabled an exhaustive analysis of potential dependencies between the lead-like molecules used to build the descriptors and the characterization of druggable pockets. Reassuringly, we did not find any correlation between docking rankings and molecular properties of docked compounds (e.g. molecular weight or number of heavy atoms, Fig \ref{PocketVec_FigS20} and Fig \ref{PocketVec_FigS21}, respectively). On the contrary, we observed that most molecules exhibited a complete range of rankings (from 1 to 128), although the ranking distributions showed that some molecules tended to bind with good scores in many pockets while others were mostly downranked (Fig \ref{PocketVec_FigS22}). Indeed, this tendency was observed in all pocket definition strategies, and we found significant correlations between the average docking rankings for docked lead-like molecules among different pocket sets (Fig \ref{PocketVec_Fig3}b). Such correlations showed a perfect agreement between PocketVec descriptors generated through PDB and AF2 structures, but exposed slight differences between LIG and PD results (Fig \ref{PocketVec_Fig3}b, Pearson’s CC <0.88). In line with this, we found that 88.0\% and 86.8\% of the PocketVec descriptors generated for PDB-LIG and AF2-LIG, respectively, showed no lead-like molecules with positive docking scores (i.e. outlier molecules not fitting in the pocket, see \hyperref[PocketVec_Methods]{Methods}), while the fraction was considerably higher in PDB-PD and AF2-PD sets, with 97.0\% and 98.1\% of the descriptors, respectively (Fig \ref{PocketVec_Fig3}c). This result was consistent with the differences observed in pocket volumes (Fig \ref{PocketVec_Fig3}a). Reassuringly, we found that smaller pockets (<3,000Å³) tended to be more prone to exhibit outlier molecules than bigger pockets (Fisher exact test, OR >70 and p-value <10\textsuperscript{-45} for all pocket sets).
 
 
 
