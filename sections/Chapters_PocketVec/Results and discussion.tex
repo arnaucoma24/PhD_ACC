@@ -140,12 +140,25 @@ The presence of metal atoms is often required for many pockets to perform its na
 Overall, these results illustrate the capacity of PocketVec descriptors to capture pocket flexibility and protein conformational changes, revealing their sensitivity to changes in the pocket shapes as well as their feasibility of use with \textit{holo} and \textit{apo} PDB structures (including metal-binding proteins) and AF2 predicted models. 
 
 
+%%%%%%%%%%%%%%%%
+%%% FIGURE 4 %%%
+%%%%%%%%%%%%%%%%
 
 
-
-
-
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig4.png} 
+  \caption{
+    \textbf{Assessment of the effect of protein flexibility.} 
+    \textbf{a)} 2D tSNE representation of 326 PocketVec descriptors representing the conformational ensemble of 12 pockets binding distinct ligands (ProSPECCTs P1). Black arrows indicate the Poly-ADP polymerase tankyrase-2 (Q9H2K2) structures.
+    \textbf{b)} Structural superimposition of 4BUY\_A (white) against 3UA9\_B (teal) performed with TM-align\cite{zhang_tm-align_2005}.
+    \textbf{c)} PocketVec descriptors’ variability caused by protein flexibility and conformational changes. Each boxplot indicates the distribution of PocketVec distances of the same pocket in i) holo PDB structures (LIG-LIG), ii) holo and apo PDB structures (LIG-PD), iii) holo PDB and AF2 structures (LIG-AF2), iv) apo PDB structures (PD-PD), v) apo PDB and AF2 structures (PD-AF2) and holo (LIG), apo (PD) and AF2 structures (AF2) against each of the 4 sets of PocketVec descriptors from our study (i.e. PDB-LIG, PDB-PD, AF2-LIG, AF2-PD). Boxplots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers).
+    \textbf{d)} PocketVec descriptors’ variability caused by protein flexibility and conformational changes among MD-derived structures. POCKET-MD represents the distances between same-pocket MD-derived PocketVec descriptors and all the other boxplots represent the distances between such MD-derived descriptors and each of the 4 sets already precomputed (i.e. PDB-LIG, PDB-PD, AF2-LIG, AF2-PD).
+    \textbf{e)} Correlation between PocketVec cosine distance (x-axis) and all-atom (excluding hydrogens) RMSD for the full PDB structure and
+    \textbf{f)} pocket residues only. The study involved 192 pockets (8 from PDB-LIG and 184 from PDB-PD) with MD-simulation data (3 frames per replica, 3 replicas). Both plots are colored by density (the redder the higher).
+  }
+  \label{PocketVec_Fig4}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,11 +169,31 @@ Overall, these results illustrate the capacity of PocketVec descriptors to captu
 \subsubsection{All-vs-all comparison of human druggable pockets}
 \label{PocketVec_ResultsAndDiscussion_All_vs_All_comparison_human_druggable_pockets}
 
+The vector-like nature of PocketVec descriptors makes them perfectly suited for extremely fast comparisons by computing simple cosine distances, enabling comprehensive proteome-wide similarity searches. We first generated a t-distributed Stochastic Neighbor Embedding (t-SNE) representation for all PocketVec descriptors to facilitate a qualitative visualization of the characterized pocket space (Fig \ref{PocketVec_Fig3}e). This visualization underlined several interesting points, some of which have already been discussed in previous sections: (i) pockets defined by bound ligands (PDB-LIG and AF2-LIG) predominantly occupy well defined regions of the pocket space, (ii) pocket detection strategies (PDB-PD and AF2-PD) significantly contribute to expand the overall coverage of the human druggable pocket space, (iii) the use of AF2 models particularly bolsters this expansion. Perhaps more interestingly, the PDB-PD and AF2-PD maps highlight dense areas of the human pocket space for which we do not yet have any experimental structure with a bound chemical compound.
 
-Bla bla bla
+Then, we systematically evaluated the validity of the chemogenomic hypothesis behind the generation of PocketVec descriptors (i.e. similar pockets bind similar ligands). We compared all PDB-LIG pockets having PocketVec descriptors (1,594 pockets, \textasciitilde1.27M comparisons) on the basis of the maximum Tanimoto similarity among their bound ligands using ECFPs (2,048 bits and radius 2), and we grouped pocket pairs according to their cosine PocketVec distance (Fig \ref{PocketVec_Fig3}f). We found that, indeed, pocket pairs with small PocketVec distances (<0.10) typically showed higher maximum Tanimoto similarities (>0.85) among their ligands than pocket pairs with high PocketVec distance (>0.17, Fisher’s exact test OR >90 and p-value <10\textsuperscript{-300}), thus supporting our underlying hypothesis. However, the fact that similar pockets bind similar ligands does not necessarily imply that similar ligands bind similar pockets. Indeed, we observed that, in general, PocketVec distances did not decrease substantially when increasing the maximum Tanimoto similarity among bound ligands (Fig \ref{PocketVec_Fig3}g). The only exception was for almost identical ligands (Tanimoto similarities=1), which showed a very subtle deviation towards smaller PocketVec distances (AUROC 0.59, true positives having Max. Tanimoto Similarity=1, true negatives having Max. Tanimoto Similarity in the [0, 0.5) range), in line with the behavior observed in ProSPECCTs P5 (AUROC=0.64) and P5.2 (AUROC=0.62). While this may seem somewhat counterintuitive, it serves as evidence to decipher the quantification of pocket similarity using PocketVec descriptors. 
 
+The fact that a single compound is consistently upranked for two pockets may indeed be a first evidence of pocket similarity but falls short to provide similar PocketVec descriptors if no other compound is ranked in a systematic manner. In practical terms, this translates into pockets that share a growing number of ligands being more likely to be similar from a PocketVec perspective, as highlighted by Shoichet and co-workers when they presented their similarity ensemble approach (SEA) to unveil protein remote relationships\cite{keiser_relating_2007}. Reassuringly, we found that pockets that shared ligands in the PDB-LIG set tended to be more similar (i.e. smaller PocketVec distances) than pockets sharing no ligands (Fig \ref{PocketVec_Fig3}h). However, the deviation towards smaller distances for pockets sharing a single ligand was subtle (AUROC = 0.58, true positives sharing 1 ligand and true negatives sharing no ligands), but when 3 or more ligands were shared between pockets, the effect was already notable (AUROC = 0.75, true positives sharing 3 or more ligands and true negatives sharing no ligands). We also found that only 2.1\% of pocket pairs sharing no ligands in the PDB-LIG set showed PocketVec distances <0.17, while this fraction increased to 26.1\% when 3 or more ligands were shared between pockets. However, it is obvious that the lack of shared co-crystallized compounds between two pockets does not necessarily mean that they might not have common ligands. To overcome the limitation of potentially missing ligands, we used a pure computational strategy: we computed docking scores for the 128 standard lead-like molecules (see \hyperref[PocketVec_MethDevAndImp]{Methodological development and implementation}) against all PDB-LIG defined pockets and labeled them as active (the top 1\% of docking scores) or inactive (Fig \ref{PocketVec_FigS26}a). We observed that the vast majority of the lead-like molecules (127 out of 128) were cataloged as active in, at least, one pocket (Fig \ref{PocketVec_FigS26}b), and almost 20,000 of the potential \textasciitilde1,29M PDB-LIG pocket pairs shared, at least, one active lead-like molecule (Fig \ref{PocketVec_FigS26}c). With this alternative approach, we confirmed the tendency observed using experimental data: the more shared ligands between pockets, the smaller their PocketVec distance (AUROC = 0.87 when comparing pockets sharing no ligands and those sharing 3 or more ligands; Fig \ref{PocketVec_FigS26}d).
 
+Next, we explored the complementarity and added value of PocketVec descriptors with respect to more established strategies to compare protein families and druggable pockets, such as sequence and structure similarity. First, we sought to investigate the correlation between sequence, structure and PocketVec similarity (defined as 1-PocketVec distance) among pockets located in the same Pfam domains in the more comprehensive set of AF2-PD pockets (see \hyperref[PocketVec_Methods]{Methods}). As expected, we found that the higher the sequential and structural similarity between compared pockets (assessed by sequence identity and C$\alpha$ RMSD, respectively), the more similar they were according to PocketVec descriptors (Pearson CC of 0.55 and -0.35, respectively, p-value<10\textsuperscript{-100} in both cases; Fig \ref{PocketVec_Fig5}a). Reassuringly, the observed correlations were also found when computed on AF2-LIG pockets (Pearson CC of 0.57 and -0.35 for sequence identity and C$\alpha$ RMSD, respectively Fig \ref{PocketVec_FigS27}). However, there were indeed cases where the results did not align perfectly, underscoring the distinctive and complementary insights that PocketVec descriptors can provide beyond traditional sequential and structural analyses.
 
+Additionally, we also ran an all-against-all pocket comparison within and across pocket sets (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD), computing over 1.2 billion pocket comparisons. Interestingly, we found more than 3.5 million similar pockets in domains having low sequential and structural similarities (PocketVec distance <0.17; TM-score <0.35; Sequence identity <30\%). For instance, we found similar pockets (PocketVec distance: 0.14, both pockets in the PDB-LIG set) in the CPSase\_L\_D2 ATP-binding domain (PF02786) of the Carbamoyl-phosphate synthase (P31327, positions 1088-1291) and in the NDK domain of the Nucleoside diphosphate kinase 3 (Q13232, positions 22-156), although they shared a sequence identity of only 28\% and a poor structural similarity (TM-score=0.31, RMSD=4.3Å). Reassuringly, crystal structures confirmed that both pockets can bind ADP (PDB IDs: 5DOU and 1ZS6, respectively), which strengthened our observation that these pockets were indeed similar (Fig \ref{PocketVec_Fig5}b). The inventory of all similar pockets (PocketVec distance <0.17) together with structural and sequential comparisons at domain level are reported in our \hl{GitLab}. On the other hand, our analyses also revealed more than 29k pocket pairs (out of a subsample of 11.1 million pairs having PocketVec distance >0.20) that, despite being similar in terms of sequence and structure, showed quite dissimilar pockets (PocketVec distance >0.20; TM-score >0.50; Sequence identity >40\%). As an illustrative example, we identified different druggable pockets (PocketVec distance: 0.21, both pockets in the AF2-PD set) in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245), although these domains had a sequence identity of 93\% and also a very high level of structural similarity (Fig \ref{PocketVec_Fig5}c, TM-score=0.98 and RMSD=0.4Å).
+
+%%%%%%%%%%%%%%%%
+%%% FIGURE 5 %%%
+%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig5.png} 
+  \caption{
+    \textbf{Using PocketVec descriptors to assess proteome-wide pocket similarity: achieving otherwise unattainable insights.} 
+    \textbf{a)} Correlation between PocketVec similarity (x-axis, defined as 1-PocketVec distance), structural similarity (y-axis, C$\alpha$ RMSD) and sequence identity (color) among pockets located at the same Pfam domains (max. 10) in the AF2-PD pocket set. Pearson CC between PocketVec similarity and sequence identity: 0.55 (p-value\textasciitilde0). Pearson CC between PocketVec similarity and RMSD: -0.35 (p-value\textasciitilde0).
+    \textbf{b)} Similar pockets found in dissimilar domains. Pockets were found in the CPSase\_L\_D2 ATP-binding domain (PF02786, top structure, wheat color) of the Carbamoyl-phosphate synthase (P31327, positions 1088-1291. PDB ID: 5DOU) and in the NDK domain (PF00334, bottom structure, pale green color) of the Nucleoside diphosphate kinase 3 (Q13232, positions 22-156. PDB ID: 1ZS6). Pockets (both in the PDB-LIG set) have a PocketVec distance of 0.14 (below the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains share a sequence identity of only 28\% and a poor structural similarity (TM-score=0.31, RMSD=4.3Å).
+    \textbf{c)} Dissimilar pockets found in similar domains. Pockets were found in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245, AF2 model, pink residues) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245, AF2 model, green residues). The former is used as the reference structure (gray cartoon). Pockets (both in the AF2-PD set) have a PocketVec distance of 0.21 (above the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains have a sequence identity of 93\% and also a very high level of structural similarity (TM-score=0.98 and RMSD=0.4Å).
+  }
+  \label{PocketVec_Fig5}
+\end{figure}
 
 
 
@@ -173,16 +206,31 @@ Bla bla bla
 \subsubsection{Relationship between PocketVec similarity and experimentally determined compound-target pairs}
 \label{PocketVec_ResultsAndDiscussion_Relationship_PocketVecSimilarity_CPD-TARGET_pairs}
 
+To further validate the ability of PocketVec descriptors to identify similar protein binding pockets, we explored the relationship between pocket similarity and experimentally determined compound-target pairs by assessing the number of shared compounds between proteins with different degrees of pocket similarity. We processed data on 836,654 compounds bound to 6,933 protein targets from ChEMBL\cite{zdrazil_chembl_2024} and BindingDB\cite{gilson_bindingdb_2016}, and we also collected all PocketVec descriptors from our study (i.e. PDB-LIG, PDB-PD; AF2-LIG and AF2-PD) and kept only those protein pairs for which there was, at least, one reported bound small molecule per protein (\hyperref[PocketVec_Methods]{Methods}). Overall, we evaluated 2,055,378 protein pairs on the bases of the number of shared compounds and the cosine distances between their PocketVec descriptors. Note that, since the experimental data reported compound-target pairs, without information on specific pockets, we always took the minimal PocketVec distance between each pair of proteins (i.e. the most similar pockets). 
 
-Bla bla bla
+We first calculated the number of protein pairs within each range of PocketVec distances in an all-vs-all comparison of PocketVec descriptors, regardless of their set of origin (e.g. PDB-LIG, AF2-PD, etc) (Fig \ref{PocketVec_Fig6}a). Then, we checked the distribution of shared compounds between each protein pair plotted against their minimal PocketVec distance. We observed that, the lower the minimal PocketVec distance between two proteins, the higher the number of compounds binding them both and, for PocketVec distances ≥0.2, there were almost no shared compounds for any protein pair (Fig \ref{PocketVec_Fig6}b). Further, we calculated the odds ratio considering a varying number of shared compounds for PocketVec distances ≤0.17, ≤0.10 and ≤0.05. We found that, indeed, there was a clear enrichment of protein pairs sharing compounds among protein pairs with similar pockets. (Fig \ref{PocketVec_Fig6}c). For instance, we found \textasciitilde2, \textasciitilde50 and \textasciitilde200 fold enrichments of protein pairs sharing ≥5 compounds in protein pairs with minimal PocketVec cosine distances below 0.17, 0.10 and 0.05, respectively. And these enrichments went up to \textasciitilde5, \textasciitilde300 and \textasciitilde700 if we considered protein pairs sharing ≥20 compounds. Finally, to overcome potential biases due to the comparison of PocketVec descriptors from the same origin (e.g. PDB-LIG, AF2-PD, etc), we repeated the analysis considering only comparisons between the PDB-LIG set (i.e. derived from experimental structures with co-crystallized compounds) and the other sets, observing a very similar result (Fig \ref{PocketVec_FigS28}a, b, c).
+
+Additionally, we checked the robustness of our results on a novel dataset where Winter and co-workers comprehensively tested the potential binding of 407 fragment compounds on 5,951 proteins. After applying the filtering criteria to the raw data defined by the authors, we analyzed 301 fragment compounds and 525 proteins for which we had PocketVec descriptors (\hyperref[PocketVec_Methods]{Methods}). We repeated the analyses described above finding that, despite the much lower number of instances (from \textasciitilde2.1M protein pairs to \textasciitilde140k), protein pairs with similar pockets tended to share more fragments (Fig \ref{PocketVec_Fig6}d, e), which also translated in significant enrichments (Fig \ref{PocketVec_Fig6}f). In this case, we found no enrichment of common compounds for PocketVec distances ≤0.17, which was expected due to the smaller nature of the fragments (translating in lower specificity). However, we observed enrichments of protein pairs sharing ≥3 compounds of \textasciitilde8 and \textasciitilde30 fold for PocketVec distances ≤0.10 and ≤0.05, respectively. For completeness, we also ran the same analyses considering only comparisons between the PDB-LIG and the other PocketVec descriptor sets (Fig \ref{PocketVec_FigS28}d, e, f). However, although we still observed a similar trend, the counts were too low to extract any significant conclusion.
+
+Overall, these new results show that, indeed, there is a clear relationship between pocket similarities, as defined by low PocketVec distances, and the probability of those proteins to experimentally bind the same compounds, further validating our approach.
 
 
+%%%%%%%%%%%%%%%%
+%%% FIGURE 6 %%%
+%%%%%%%%%%%%%%%%
 
-
-
-
-
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig6.png} 
+  \caption{
+    \textbf{Relationship between PocketVec similarity and experimentally determined compound-target pairs.}
+    All vs All (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD) comparison between PocketVec distance and number of shared compounds among proteins having experimental binding data in ChEMBL and BindingDB (a, b, c) and Offensperger et al.\cite{offensperger_large-scale_2024} (d, e, f).
+    \textbf{a, d)} Number of protein pairs (y-axis) at each PocketVec distance range (x-axis).
+    \textbf{b, e)} Number of shared compounds for all pairs having a PocketVec distance in the specified distance range. Orange dots indicate the average value while green dots indicate the lower bound for the top 5\% of the pairs. Boxplots indicate median (middle line), 25th, 75th percentile (box), and maximum and minimum values (whiskers). 
+    \textbf{c, f)} Evolution of Fisher test Odds Ratio (y-axis) for an increasing number of shared compounds (x-axis) using an increasing value of PocketVec distance cut-off (0.05, 0.10 and 0.17). Colored dots indicate pvalue <0.001, gray dots indicate pvalue <0.05 and white dots indicate pvalue >0.05.
+  }
+  \label{PocketVec_Fig6}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Identifying kinases with similar inhibition profiles through PocketVec descriptors
