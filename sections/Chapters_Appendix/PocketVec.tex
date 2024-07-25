@@ -184,6 +184,99 @@
 
 
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\linewidth]{figures/PocketVec/Supplementary/FigS18.png}
+  \caption{
+  Distribution of buriedness values (x-axis, buriedness is defined as the number of protein residues having a distance below 8Å to the pocket centroid) for each pocket set: PDB-LIG (1,604 pockets, red), PDB-PD (14,413 pockets, orange), AF2-LIG (1,405 pockets, purple) and AF2-PD (32,302 pockets, blue). All distributions are normalized (density, y-axis). The average buriedness values are 18.5, 16.0, 18.6 and 14.7, respectively.    
+  }
+  \label{PocketVec_FigS18}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/PocketVec/Supplementary/FigS19.png}
+  \caption{
+  Correlation between pocket volume and buriedness (buriedness is defined as the number of protein residues having a distance below 8Å to the pocket centroid). For each pocket set (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD) every point represents a pocket in terms of its volume (x-axis) and buriedness value (y-axis). Points are colored by density, and Pearson’s Correlation Coefficients are reported in the title.     
+  }
+  \label{PocketVec_FigS19}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS20.png}
+  \caption{
+  Correlation between docking ranking and molecular weight. For each pocket set (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD), each point represents a lead-like molecule in terms of its average docking ranking (x-axis) within the set and its molecular weight (y-axis). Pearson’s Correlation Coefficients (and p-values) are included in the legend.     
+  }
+  \label{PocketVec_FigS20}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS21.png}
+  \caption{
+  Correlation between docking ranking and number of heavy atoms. For each pocket set (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD), each point represents a lead-like molecule in terms of its average docking ranking within the set (x-axis) and its number of heavy atoms (y-axis). Pearson’s Correlation Coefficients are included in the legend.      
+  }
+  \label{PocketVec_FigS21}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/PocketVec/Supplementary/FigS22.png}
+  \caption{
+  For each pocket set (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD), docking rankings for each lead-like molecule (x-axis. Molecules are sorted in a predefined order) are represented as a box plot (y-axis). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers) and are colored according to median ranking values, from higher (red) to lower (blue) values.      
+  }
+  \label{PocketVec_FigS22}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS23.png}
+  \caption{
+  For each pocket set (PDB-LIG, PDB-PD, AF2-LIG and AF2-PD), proportion of originally dissimilar pocket pairs (y-axis, distances >threshold) classified as similar (distances <threshold) due to the artificial insertion of a growing number of outlier values (x-axis) at different distance thresholds. To run the analysis, 100,000 PocketVec distances were randomly sampled (x10 times) from each pocket set. Solid lines represent average results and shadowed areas correspond to minimum and maximum proportions among samples.
+  }
+  \label{PocketVec_FigS23}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/PocketVec/Supplementary/FigS24.png}
+  \caption{
+  Distribution of PocketVec distances between pocket pairs: i) identical pockets binding chemically distinct ligands (green, \textit{holo} structures, 13,430 pairs, corresponding to ProSPECCTs P1 --similar), ii) identical pockets represented by \textit{holo} and \textit{apo} structures in the PDB-LIG and the PDB-PD pocket sets, respectively (blue, 322 pairs), iii) identical pockets represented by \textit{holo} PDB and AF2 predicted structures in the PDB-LIG and the AF2-LIG pocket sets, respectively (orange, 1,405 pairs), and iv) distinct pockets (red, 92,846 pairs, corresponding to ProSPECCTs P1 --dissimilar). 
+  }
+  \label{PocketVec_FigS24}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS25.png}
+  \caption{
+  Distribution of distances between identical protein structures with and without the presence of metal atoms. 244 (PDB-LIG, blue, left) and 785 (PDB-PD, orange, right) pockets were found to have at least 1 PDB chain with a metal atom located in the pocket. For the sake of complementarity, metal-based PocketVec descriptors are compared to the full pool of precomputed descriptors (background distribution, red). Mann-Whitney p-value <10\textsuperscript{-100} in both cases, Kolmogorov-Smirnov p-value <10\textsuperscript{-100} in both cases.
+  }
+  \label{PocketVec_FigS25}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS25.png}
+  \caption{
+  Distribution of distances between identical protein structures with and without the presence of metal atoms. 244 (PDB-LIG, blue, left) and 785 (PDB-PD, orange, right) pockets were found to have at least 1 PDB chain with a metal atom located in the pocket. For the sake of complementarity, metal-based PocketVec descriptors are compared to the full pool of precomputed descriptors (background distribution, red). Mann-Whitney p-value <10\textsuperscript{-100} in both cases, Kolmogorov-Smirnov p-value <10\textsuperscript{-100} in both cases.
+  }
+  \label{PocketVec_FigS25}
+\end{figure}
+
+
+
+
+
 % \begin{figure}[htbp]
 %   \centering
 %   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig1.png}
