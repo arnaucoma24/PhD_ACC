@@ -174,7 +174,7 @@
   \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS17.png} 
   \caption{
     \textbf{Evaluating pocket detection consistency in PDB and AF2 structures.}
-    First, we randomly selected 1,000 domains from the PDB-PD set. We only considered those domains having more than one PDB structure (786) and selected a single structure as the reference one.  Then, the remaining PDB structure(s) and the corresponding AF2 model were superposed against the reference structure using TM-align
+    First, we randomly selected 1,000 domains from the PDB-PD set. We only considered those domains having more than one PDB structure (786) and selected a single structure as the reference one.  Then, the remaining PDB structure(s) and the corresponding AF2 model were superposed against the reference structure using TM-align\cite{zhang_tm-align_2005}.
     \textbf{a)} Pockets (top-2) were detected in original and aligned PDB and AF2 structures. Original pocket centroids were superposed against aligned pocket centroids using the corresponding translation and rotation matrices. Minimum Euclidean distances between aligned and original pockets were calculated and are shown in a histogram representation (left), distinguishing between PDB and AF2 structures. For those pocket pairs that were consistently detected (distance ≤6.14Å between aligned and original structures, see \hyperref[PocketVec_Methods]{Methods}), the correlation between their original and aligned scoring is shown on the right plot, together with the corresponding Pearson’s correlation coefficients.
     \textbf{b)} Pockets (top-2) were detected in aligned PDB and AF2 structures (including the reference one). Minimum Euclidean distances between aligned (PDB and AF2) and reference pockets were calculated and are shown in a histogram representation (left), distinguishing between PDB and AF2 structures. For those pocket pairs that were consistently detected (distance ≤6.14Å between aligned and original structures, see \hyperref[PocketVec_Methods]{Methods}), the correlation between their aligned (PDB and AF2) and reference scoring is shown on the right plot, together with the corresponding Pearson’s Correlation Coefficients.
   }
@@ -266,12 +266,71 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS25.png}
+  \includegraphics[width=1\linewidth]{figures/PocketVec/Supplementary/FigS26.png} 
   \caption{
-  Distribution of distances between identical protein structures with and without the presence of metal atoms. 244 (PDB-LIG, blue, left) and 785 (PDB-PD, orange, right) pockets were found to have at least 1 PDB chain with a metal atom located in the pocket. For the sake of complementarity, metal-based PocketVec descriptors are compared to the full pool of precomputed descriptors (background distribution, red). Mann-Whitney p-value <10\textsuperscript{-100} in both cases, Kolmogorov-Smirnov p-value <10\textsuperscript{-100} in both cases.
+  \textbf{Computational evaluation of the hypothesis that pockets sharing ligands have lower PocketVec distances.}
+  \textbf{a)} Distribution (y-axis) of rDock\cite{ruiz-carmona_rdock_2014} docking scores (x-axis) from the standard set of 128 lead-like molecules (see \hyperref[PocketVec_MethDevAndImp]{Methodological development and implementation}) against 1,604 PDB-LIG pockets. The highlighted cut-off score (-21.94) corresponds to the 1\textsuperscript{st} percentile of the distribution and was used to label all pocket-compound pairs as active (<-21.94) or inactive (>-21.94).
+  \textbf{b)} Number of PDB-LIG pockets (y-axis) for which each lead-like molecule (x-axis, from molecule \#1 to molecule \#128 sorted in a predefined order) was labeled as active.
+  \textbf{c)} Number of pocket pairs (y-axis) per number of shared lead-like molecules (x-axis).
+  \textbf{d)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared lead-like molecules between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared lead-like molecules is specified in parenthesis. 
   }
-  \label{PocketVec_FigS25}
+  \label{PocketVec_FigS26}
 \end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/PocketVec/Supplementary/FigS27.png}
+  \caption{
+  Correlation between PocketVec similarity (x-axis, defined as 1-PocketVec distance), structural similarity (y-axis, C$\alpha$ RMSD) and sequence identity (color) among pockets located at the same Pfam domain (max. 10) in the AF2-LIG pocket set. Pearson CC between PocketVec similarity and sequence identity: 0.57 (p-value <10\textsuperscript{-100}). Pearson CC between PocketVec similarity and RMSD: -0.35 (p-value <10\textsuperscript{-35}). 
+  }
+  \label{PocketVec_FigS27}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\linewidth]{figures/PocketVec/Supplementary/FigS28.png} 
+  \caption{
+  Relationship between PocketVec similarity and experimentally determined compound-target pairs. PDB-LIG vs PDB-PD, AF2-LIG and AF2-PD comparison between PocketVec distance and number of shared compounds among proteins having experimental binding data in ChEMBL and BindingDB (a, b, c) and Offensperger et al.\cite{offensperger_large-scale_2024} (d, e, f).
+  \textbf{a, d)} Number of protein pairs (y-axis) at each PocketVec distance range (x-axis).
+  \textbf{b, e)} Number of shared compounds for all pairs having a PocketVec distance in the specified distance range. Orange dots indicaαte the average value while green dots indicate the lower bound for the top 5\% of the pairs. Boxplots indicate median (middle line), 25th, 75th percentile (box), and maximum and minimum values (whiskers).
+  \textbf{c, f)} Evolution of Fisher test Odds Ratio (y-axis) for an increasing number of shared compounds (x-axis) using an increasing value of PocketVec distance cut-off (0.05, 0.10 and 0.17). Colored dots indicate pvalue <0.001, gray dots indicate pvalue <0.05 and white dots indicate pvalue >0.05.
+  }
+  \label{PocketVec_FigS28}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/PocketVec/Supplementary/FigS29.png}
+  \caption{
+  Number of inhibitors per kinase obtained from Kleager et al. (2017 set)\cite{klaeger_target_2017} and Reinecke et al. (2023 set)\cite{reinecke_chemical_2023} binarized at 30 nM. Each bar corresponds to the number of kinases (y-axis) having the specified number of inhibitors (x-axis). 
+  }
+  \label{PocketVec_FigS29}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS30.png}
+  \caption{
+  Histogram representing the number of occurrences in PDB-LIG pockets (y-axis) of every specified compound (x-axis, RCSB PDB 3-letter code). Only the TOP-20 most occurring ligands are included in the plot. 
+  }
+  \label{PocketVec_FigS30}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/PocketVec/Supplementary/FigS31.png}
+  \caption{
+  Distribution (y-axis) of distances (x-axis) between clustered ligand centroids. In the PDB-LIG set, a total number of 1,604 pockets are identified, encompassing 27,884 ligand centroids. Out of \textasciitilde1.6M pairwise distances among clustered ligand centroids, only 5\% of them are >6.14Å.
+  }
+  \label{PocketVec_FigS31}
+\end{figure}
+
 
 
 
