@@ -76,7 +76,6 @@ First, for each pair of pockets within the AF2-PD and AF2-LIG sets that were loc
 
 Additionally, we also ran an all-against-all comparison of pockets in the human pocketome (e.g. PDB-LIG, PDB-PD, AF2-LIG and AF2-PD). Global domain structures were compared using TM-align\cite{zhang_tm-align_2005} (Cα RMSD, TM-score), while domain sequence identities were calculated using global pairwise alignments in BioPython\cite{cock_biopython_2009} (Needleman-Wunsch algorithm, BLOSUM62, gap opening = −10, gap extension = −0.5). 
 
-
 \phantomsection
 \subsubsection{Relationship between PocketVec similarity and experimentally determined compound-target pairs}
 
@@ -89,3 +88,7 @@ We also performed a similar analysis on the fragment-protein binding pairs recen
 
 \phantomsection
 \subsubsection{Comparison of kinase inhibition profiles with PocketVec descriptors, sequence and structure similarity measurements}
+
+We collected experimentally determined binding affinities from Klaeger et al.\cite{klaeger_target_2017} and Reinecke et al.\cite{reinecke_chemical_2023} (Table \ref{PocketVec_TableS2}). We considered undefined measures as inactive, and low-confidence and high-confidence measures were binarized at 30 nM (as recommended in Pharos\cite{nguyen_pharos_2017}). We then removed all compounds that did not inhibit any kinase and all protein kinases that did not have any inhibitor or any PocketVec descriptor in the Protein Kinase Domain (Pfam PF00069). In this way, we eventually defined a binary inhibition matrix between 111 protein kinases and 94 small molecule kinase inhibitors for Klaeger et al. (Fig \ref{PocketVec_Fig7}a and Table \ref{PocketVec_TableS2}a) and between 73 kinases and 164 inhibitors for Reinecke et al. (Fig \ref{PocketVec_Fig7}b and Table \ref{PocketVec_TableS2}b).
+
+We pairwise compared protein kinases on the basis of their binarized inhibition profiles (Jaccard similarity) and their PocketVec descriptors (employing the minimum distance among all PocketVec descriptors within their Protein Kinase Domains PF00069). Additionally, we also performed sequential and structural comparisons between kinases at domain level following the same strategy as in previous sections. In brief, domain structures were compared using TM-align\cite{zhang_tm-align_2005} (Cα RMSD, TM-score) and domain sequence identities were calculated using global pairwise alignments in BioPython\cite{cock_biopython_2009} (Needleman-Wunsch algorithm, BLOSUM62, gap opening = −10, gap extension = −0.5). Only the highest TM-score and sequence identity values among domains were considered for each pair of kinases.
