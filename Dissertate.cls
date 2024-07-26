@@ -150,3 +150,4 @@
 \usepackage{soul}
 \usepackage{float}  % Add this package
 \usepackage{graphicx}
+\usepackage{placeins}
