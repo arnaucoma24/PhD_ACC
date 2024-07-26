@@ -92,12 +92,12 @@
 % \setmonofont[Scale=MatchLowercase]{Noto Mono} % Font substitution for Source Code Pro
 
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
-								textfont={sf,footnotesize,singlespacing},
-								justification={justified,RaggedRight},
-								singlelinecheck=false,
-								margin=0pt,
-								figurewithin=chapter,
-								tablewithin=chapter]{caption}
+                textfont={sf,footnotesize,singlespacing},
+                justification={justified,RaggedRight},
+                singlelinecheck=false,
+                margin=0pt,
+                figurewithin=chapter,
+                tablewithin=chapter]{caption}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
@@ -151,3 +151,4 @@
 \usepackage{float}  % Add this package
 \usepackage{graphicx}
 \usepackage{placeins}
+\usepackage[all]{hypcap}

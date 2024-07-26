@@ -50,12 +50,13 @@ PocketVec descriptors constitute an optimal framework to comprehensively charact
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.1\linewidth]{figures/PocketVec/Main/Fig2.png} 
+  \includegraphics[width=1\linewidth]{figures/PocketVec/Main/Fig2.png} 
   \caption{
     \textbf{Generating PocketVec descriptors for all druggable pockets within human protein domains.} 
     \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
     \textbf{b)} Benchmark of 3 distinct pocket detection strategies: Fpocket (black), P2rank (brown) and the combination of Fpocket and Prank (green). First, we removed bound ligands from reference PDB structures (PDB-LIG) and we then assessed the performance of the mentioned strategies to detect pockets in ligand-free structures. The plots below represent the evolution of Coverage (proportion of real pockets that are actually detected) and Precision (proportion of detected pockets that are actually real -have a crystallized ligand on PDB-LIG) in terms of the number of best-scoring detected pockets per domain that are considered (1, 2, 3, 5 and 10).
-    \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).
+    \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).\\
+    \rule[1ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig2}
 \end{figure}
@@ -263,13 +264,6 @@ We first collected kinase-inhibitor pairs identified through systematic chemical
 %     \label{PocketVec_Fig7}
 %   }
 % \end{figurehere}
-
-\makeatletter
-\newenvironment{figurehere}
-{\def\@captype{figure}}
-{}
-\makeatletter
-
 
 \begin{figurehere}
  \begin{center}
