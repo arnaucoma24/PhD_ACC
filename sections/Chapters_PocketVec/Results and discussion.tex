@@ -50,7 +50,7 @@ PocketVec descriptors constitute an optimal framework to comprehensively charact
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig2.png} 
+  \includegraphics[width=0.1\linewidth]{figures/PocketVec/Main/Fig2.png} 
   \caption{
     \textbf{Generating PocketVec descriptors for all druggable pockets within human protein domains.} 
     \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
@@ -263,6 +263,13 @@ We first collected kinase-inhibitor pairs identified through systematic chemical
 %     \label{PocketVec_Fig7}
 %   }
 % \end{figurehere}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\makeatletter
+
 
 \begin{figurehere}
  \begin{center}
