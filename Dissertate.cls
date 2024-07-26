@@ -149,3 +149,4 @@
 \usepackage{colortbl} % For row coloring
 \usepackage{soul}
 \usepackage{float}  % Add this package
+\usepackage{graphicx}

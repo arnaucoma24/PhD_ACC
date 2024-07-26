@@ -9,6 +9,14 @@
 % It's important to specify the style before calling the references file
 \bibliographystyle{unsrt}
 
+
+% Complete.....
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\makeatletter
+
 \begin{document}
 \sloppy
 \setstretch{1.2}
@@ -18,7 +26,7 @@
   {\normalfont\LARGE\bfseries}{}{0em}{}
 \titlespacing*{\section}{0pt}{*3}{*4}
 
-% % Redefine subsection to suppress numbering
+% % Redefine subsection has been heavily commented and lightly modified by Andr to suppress numbering
 \titleformat{\subsection}[block]
   {\normalfont\Large\bfseries}{\thesubsection}{1em}{}
 \titlespacing*{\subsection}{0pt}{*3}{*3}
