@@ -56,7 +56,7 @@ PocketVec descriptors constitute an optimal framework to comprehensively charact
     \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
     \textbf{b)} Benchmark of 3 distinct pocket detection strategies: Fpocket (black), P2rank (brown) and the combination of Fpocket and Prank (green). First, we removed bound ligands from reference PDB structures (PDB-LIG) and we then assessed the performance of the mentioned strategies to detect pockets in ligand-free structures. The plots below represent the evolution of Coverage (proportion of real pockets that are actually detected) and Precision (proportion of detected pockets that are actually real -have a crystallized ligand on PDB-LIG) in terms of the number of best-scoring detected pockets per domain that are considered (1, 2, 3, 5 and 10).
     \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).\\
-    \rule[1ex]{\textwidth}{0.5pt}
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig2}
 \end{figure}
@@ -220,7 +220,7 @@ Overall, these new results show that, indeed, there is a clear relationship betw
 %%% FIGURE 6 %%%
 %%%%%%%%%%%%%%%%
 
-\begin{figure}[htbp]
+\begin{figure}[t!]
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig6.png} 
   \caption{
@@ -229,6 +229,7 @@ Overall, these new results show that, indeed, there is a clear relationship betw
     \textbf{a, d)} Number of protein pairs (y-axis) at each PocketVec distance range (x-axis).
     \textbf{b, e)} Number of shared compounds for all pairs having a PocketVec distance in the specified distance range. Orange dots indicate the average value while green dots indicate the lower bound for the top 5\% of the pairs. Boxplots indicate median (middle line), 25th, 75th percentile (box), and maximum and minimum values (whiskers). 
     \textbf{c, f)} Evolution of Fisher test Odds Ratio (y-axis) for an increasing number of shared compounds (x-axis) using an increasing value of PocketVec distance cut-off (0.05, 0.10 and 0.17). Colored dots indicate pvalue <0.001, gray dots indicate pvalue <0.05 and white dots indicate pvalue >0.05.
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig6}
 \end{figure}
@@ -265,9 +266,9 @@ We first collected kinase-inhibitor pairs identified through systematic chemical
 %   }
 % \end{figurehere}
 
-\begin{figurehere}
+\begin{Figure_modified}
  \begin{center}
-  \includegraphics[width=0.7\textwidth]{figures/PocketVec/Main/Fig7.png}
+  \includegraphics[width=1\textwidth]{figures/PocketVec/Main/Fig7.png}
   \caption{Correlation between inhibition profiles and PocketVec descriptors. All the analyses have been performed on the data obtained from Kleager et al.\cite{klaeger_target_2017} (right panels) and Reinecke et al.\cite{reinecke_chemical_2023} (left panels).
     \textbf{a, g)} Inhibition matrix between protein kinases, and small molecule kinase inhibitors binarized at 30 nM. Both kinases and inhibitors are sorted by the number of active inhibition events. Orange dots indicate inhibition and white dots indicate no inhibition.
     \textbf{b, h)} Distributions of PocketVec distances grouped by the number of shared inhibitors between kinases (0, 1-3 and 4 or more). The number of kinase pairs per number of shared inhibitors is specified in parenthesis.
@@ -275,10 +276,11 @@ We first collected kinase-inhibitor pairs identified through systematic chemical
     \textbf{d, j)} Pairwise kinase comparisons. Rows and columns correspond to alphabetically sorted kinases (by Uniprot ID). Upper triangular matrices: kinases are compared on the basis of their experimentally determined inhibition profiles. Each square represents the Jaccard similarity between the inhibition profiles of two targets: the higher the Jaccard similarity, the more similar the corresponding inhibition profiles. Lower triangular matrices: kinases are compared on the basis of their PocketVec descriptors (employing the minimum distance among all PocketVec descriptors in the Protein Kinase Domains). The color of each square indicates the minimum PocketVec distance between two targets: the lower the PocketVec distance (red), the more similar the kinases are at pocket level according to our descriptors.
     \textbf{e, k)} Relationship between structural similarity (x-axis, Max. TM-score) and PocketVec distances (y-axis) between pairs of protein kinases. Each point represents a kinase pair and is colored and sized in terms of the similarity between experimentally determined inhibition profiles.
     \textbf{f, l)} Relationship between sequence similarity (x-axis, Max. Seq. Id.) and PocketVec distances (y-axis) between pairs of protein kinases. Each point represents a kinase pair and is colored and sized in terms of the similarity between experimentally determined inhibition profiles.
+    \rule[0ex]{\textwidth}{0.25pt}
  }
  \label{PocketVec_Fig7}
  \end{center}
-\end{figurehere}
+\end{Figure_modified}
   
 
 Next, we parsed the general inhibition matrices to derive inhibition profiles for each kinase (i.e. a vector describing whether it does or does not interact with every tested inhibitor), and we assessed the coherence between PocketVec distances and the similarity between experimentally determined inhibition profiles. Indeed, kinase pairs with low PocketVec distances (<0.17) showed a significant enrichment for similar inhibition profiles (Fisher’s exact test, OR = 3.2, p-value <0.0003 in the 2017 set, and OR = 4.1, p-value <0.003 in the 2023 set for a Jaccard similarity >0.5). These enrichments were even more pronounced when we applied more stringent distance thresholds (PocketVec distance <0.10) with OR >118 and OR >125 (p-values <10\textsuperscript{-10}) for the 2017 and 2023 sets, respectively (Fig \ref{PocketVec_Fig7}c, i).

@@ -91,11 +91,13 @@
 \setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}
 % \setmonofont[Scale=MatchLowercase]{Noto Mono} % Font substitution for Source Code Pro
 
+% Updated caption package settings
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
                 textfont={sf,footnotesize,singlespacing},
-                justification={justified,RaggedRight},
+                justification=justified,
                 singlelinecheck=false,
                 margin=0pt,
+                format=plain,
                 figurewithin=chapter,
                 tablewithin=chapter]{caption}
 
@@ -135,13 +137,11 @@
      \endlist}
 \makeatother
 
-
 % Add extra packages
 \usepackage{afterpage}
 % \usepackage{noto}
 % \usepackage{fontspec}
 \usepackage{csvsimple}
-\usepackage{caption}
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{tabularx}  % For adjustable-width columns
@@ -153,4 +153,3 @@
 \usepackage{placeins}
 \usepackage[all]{hypcap}
 \usepackage{capt-of}
-\usepackage{caption}
