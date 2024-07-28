@@ -36,7 +36,7 @@
 \usepackage{hyperref}
 \RequirePackage[tiny, md, sc]{titlesec}
 \setlength{\headheight}{15pt}
-\pagestyle{plain}
+% \pagestyle{plain}
 \RequirePackage{titling}
 \RequirePackage[palatino]{quotchap}
 
@@ -134,6 +134,7 @@
       {\@latex@warning{Empty `thebibliography' environment}}
      \endlist}
 \makeatother
+
 
 
 % Add extra packages
