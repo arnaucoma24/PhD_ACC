@@ -56,7 +56,7 @@ PocketVec descriptors constitute an optimal framework to comprehensively charact
     \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
     \textbf{b)} Benchmark of 3 distinct pocket detection strategies: Fpocket (black), P2rank (brown) and the combination of Fpocket and Prank (green). First, we removed bound ligands from reference PDB structures (PDB-LIG) and we then assessed the performance of the mentioned strategies to detect pockets in ligand-free structures. The plots below represent the evolution of Coverage (proportion of real pockets that are actually detected) and Precision (proportion of detected pockets that are actually real -have a crystallized ligand on PDB-LIG) in terms of the number of best-scoring detected pockets per domain that are considered (1, 2, 3, 5 and 10).
     \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).\\
-    % \rule[0ex]{\textwidth}{0.5pt}
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig2}
 \end{figure}
@@ -80,16 +80,27 @@ Globally, using the different strategies to structurally annotate human protein 
 
 Interestingly, when we assessed the methodological robustness of pocket predictions using a subset of 1,000 PDB-PD domains, we observed that results slightly differed after translating and rotating structures. This effect was observed for both PDB and AF2 structures in a consistent manner: only \textasciitilde85\% and \textasciitilde86\% of detected pockets were evenly identified after rotation and translation, respectively (top-2 pockets, Fig \ref{PocketVec_FigS17}a). However, in the pockets identified regardless of variations in the initial structures, the scoring was very consistent both in PDB structures and AF2 models (Pearson CC \textasciitilde0.98). We also evaluated the coherence between pockets detected in PDB and AF2 structures, finding that only \textasciitilde59\% and \textasciitilde49\% of detected pockets were evenly identified in PDB and AF2 structures with respect to a reference PDB structure. However, as when comparing discrepancies due to different initial orientations, in the pockets identified both in PDB and AF2 structures the scoring was quite robust, with Pearson CC of \textasciitilde0.88 and \textasciitilde0.62 for PDB and AF2 models, respectively (Fig \ref{PocketVec_FigS17}b). 
 
-Additionally, we also explored potential differences in the physicochemical properties between the real (ligand-defined) and predicted (detected) pockets, comparing their volumes and buriedness values (see \hyperref[PocketVec_Methods]{Methods}). In this case, as the only remarkable difference, we found that real pockets identified from bound ligands tended to be smaller than those predicted in the PD framework, with average volumes of \textasciitilde3,000 Å3 and \textasciitilde3,800 Å3 for LIG and PD pockets, respectively (Fig \ref{PocketVec_Fig3}a). As expected, we reached the same conclusion with buriedness values (Fig \ref{PocketVec_FigS18}), since pocket volume and buriedness were indeed negatively correlated (Fig \ref{PocketVec_FigS19}).
+Additionally, we also explored potential differences in the physicochemical properties between the real (ligand-defined) and predicted (detected) pockets, comparing their volumes and buriedness values (see \hyperref[PocketVec_Methods]{Methods}). In this case, as the only remarkable difference, we found that real pockets identified from bound ligands tended to be smaller than those predicted in the PD framework, with average volumes of \textasciitilde3,000 Å³ and \textasciitilde3,800 Å³ for LIG and PD pockets, respectively (Fig \ref{PocketVec_Fig3}a). As expected, we reached the same conclusion with buriedness values (Fig \ref{PocketVec_FigS18}), since pocket volume and buriedness were indeed negatively correlated (Fig \ref{PocketVec_FigS19}).
 
 Altogether, these results underscore some limitations in the pocket detection strategy, revealing slight variations due to the orientation of the initial structures, a stronger dependence on structural variability and the production of predicted pockets whose physicochemical properties (e.g. volume) diverge from known pockets. 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Systematic generation of PocketVec descriptors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\phantomsection
+\subsubsection{Systematic generation of PocketVec descriptors}
+\label{PocketVec_ResultsAndDiscussion_Systematic_generation_of_PocketVec_descriptors}
+
+Once we had identified human druggable pockets with four different approaches, we systematically generated PocketVec descriptors for all of them, using the strategy described above (Fig \ref{PocketVec_Fig1}a). The high number of pockets explored enabled an exhaustive analysis of potential dependencies between the lead-like molecules used to build the descriptors and the characterization of druggable pockets. Reassuringly, we did not find any correlation between docking rankings and molecular properties of docked compounds (e.g. molecular weight or number of heavy atoms, Fig \ref{PocketVec_FigS20} and Fig \ref{PocketVec_FigS21}, respectively). On the contrary, we observed that most molecules exhibited a complete range of rankings (from 1 to 128), although the ranking distributions showed that some molecules tended to bind with good scores in many pockets while others were mostly downranked (Fig \ref{PocketVec_FigS22}). Indeed, this tendency was observed in all pocket definition strategies, and we found significant correlations between the average docking rankings for docked lead-like molecules among different pocket sets (Fig \ref{PocketVec_Fig3}b). Such correlations showed a perfect agreement between PocketVec descriptors generated through PDB and AF2 structures, but exposed slight differences between LIG and PD results (Fig \ref{PocketVec_Fig3}b, Pearson’s CC <0.88). In line with this, we found that 88.0\% and 86.8\% of the PocketVec descriptors generated for PDB-LIG and AF2-LIG, respectively, showed no lead-like molecules with positive docking scores (i.e. outlier molecules not fitting in the pocket, see \hyperref[PocketVec_Methods]{Methods}), while the fraction was considerably higher in PDB-PD and AF2-PD sets, with 97.0\% and 98.1\% of the descriptors, respectively (Fig \ref{PocketVec_Fig3}c). This result was consistent with the differences observed in pocket volumes (Fig \ref{PocketVec_Fig3}a). Reassuringly, we found that smaller pockets (<3,000Å³) tended to be more prone to exhibit outlier molecules than bigger pockets (Fisher exact test, OR >70 and p-value <10\textsuperscript{-45} for all pocket sets).
 
 %%%%%%%%%%%%%%%%
 %%% FIGURE 3 %%%
 %%%%%%%%%%%%%%%%
 
-\begin{figure}[htbp]
+\begin{Figure_modified}
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig3.png}
   \caption{
@@ -102,21 +113,10 @@ Altogether, these results underscore some limitations in the pocket detection st
     \textbf{f)} Distributions (density, y-axis) of maximum Tanimoto Similarity among bound ligands (x-axis, bin width: 0.02) grouped by PocketVec distance ranges (0-0.10, 0.10-0.17 and 0.17-0.4). The number of pocket pairs per PocketVec distance range is specified in parenthesis.
     \textbf{g)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the maximum Tanimoto Similarity among bound ligands (0-0.5, 0.5-0.8, 0.8-1 and 1). The number of pocket pairs per maximum Tanimoto Similarity range is specified in parenthesis.
     \textbf{h)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared ligands between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared ligands is specified in parenthesis.
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig3}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Systematic generation of PocketVec descriptors
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\phantomsection
-\subsubsection{Systematic generation of PocketVec descriptors}
-\label{PocketVec_ResultsAndDiscussion_Systematic_generation_of_PocketVec_descriptors}
-
-
-Once we had identified human druggable pockets with four different approaches, we systematically generated PocketVec descriptors for all of them, using the strategy described above (Fig \ref{PocketVec_Fig1}a). The high number of pockets explored enabled an exhaustive analysis of potential dependencies between the lead-like molecules used to build the descriptors and the characterization of druggable pockets. Reassuringly, we did not find any correlation between docking rankings and molecular properties of docked compounds (e.g. molecular weight or number of heavy atoms, Fig \ref{PocketVec_FigS20} and Fig \ref{PocketVec_FigS21}, respectively). On the contrary, we observed that most molecules exhibited a complete range of rankings (from 1 to 128), although the ranking distributions showed that some molecules tended to bind with good scores in many pockets while others were mostly downranked (Fig \ref{PocketVec_FigS22}). Indeed, this tendency was observed in all pocket definition strategies, and we found significant correlations between the average docking rankings for docked lead-like molecules among different pocket sets (Fig \ref{PocketVec_Fig3}b). Such correlations showed a perfect agreement between PocketVec descriptors generated through PDB and AF2 structures, but exposed slight differences between LIG and PD results (Fig \ref{PocketVec_Fig3}b, Pearson’s CC <0.88). In line with this, we found that 88.0\% and 86.8\% of the PocketVec descriptors generated for PDB-LIG and AF2-LIG, respectively, showed no lead-like molecules with positive docking scores (i.e. outlier molecules not fitting in the pocket, see \hyperref[PocketVec_Methods]{Methods}), while the fraction was considerably higher in PDB-PD and AF2-PD sets, with 97.0\% and 98.1\% of the descriptors, respectively (Fig \ref{PocketVec_Fig3}c). This result was consistent with the differences observed in pocket volumes (Fig \ref{PocketVec_Fig3}a). Reassuringly, we found that smaller pockets (<3,000Å³) tended to be more prone to exhibit outlier molecules than bigger pockets (Fisher exact test, OR >70 and p-value <10\textsuperscript{-45} for all pocket sets).
+\end{Figure_modified}
 
 
 To assess if outlier compounds could have a significant effect in the generation of poor PocketVec descriptors, we randomly inserted outlier values in the descriptors and computed the fraction of originally dissimilar pocket pairs (PocketVec distance >0.17) that were incorrectly labeled as similar (distance <0.17) due to an increasing number of outlier values. We observed that the insertion of up to 80 outlier molecules (out of 128) did not significantly compromise PocketVec descriptors, leading to only \textasciitilde0.039\% of false positives (Fig \ref{PocketVec_Fig3}d and Fig \ref{PocketVec_FigS23}). In front of this strong robustness of the descriptors, in further analyses, we only discarded those very few PocketVec descriptors with more than 80 outlier molecules (10, 45, 15 and 43 descriptors from the PDB-LIG, PDB-PD, AF2-LIG and AF2-PD sets, respectively). 
@@ -146,7 +146,7 @@ Overall, these results illustrate the capacity of PocketVec descriptors to captu
 %%%%%%%%%%%%%%%%
 
 
-\begin{figure}[htbp]
+\begin{Figure_modified}
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig4.png} 
   \caption{
@@ -157,9 +157,10 @@ Overall, these results illustrate the capacity of PocketVec descriptors to captu
     \textbf{d)} PocketVec descriptors’ variability caused by protein flexibility and conformational changes among MD-derived structures. POCKET-MD represents the distances between same-pocket MD-derived PocketVec descriptors and all the other boxplots represent the distances between such MD-derived descriptors and each of the 4 sets already precomputed (i.e. PDB-LIG, PDB-PD, AF2-LIG, AF2-PD).
     \textbf{e)} Correlation between PocketVec cosine distance (x-axis) and all-atom (excluding hydrogens) RMSD for the full PDB structure and
     \textbf{f)} pocket residues only. The study involved 192 pockets (8 from PDB-LIG and 184 from PDB-PD) with MD-simulation data (3 frames per replica, 3 replicas). Both plots are colored by density (the redder the higher).
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig4}
-\end{figure}
+\end{Figure_modified}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -184,17 +185,18 @@ Additionally, we also ran an all-against-all pocket comparison within and across
 %%% FIGURE 5 %%%
 %%%%%%%%%%%%%%%%
 
-\begin{figure}[htbp]
+\begin{Figure_modified}
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig5.png} 
   \caption{
     \textbf{Using PocketVec descriptors to assess proteome-wide pocket similarity: achieving otherwise unattainable insights.} 
     \textbf{a)} Correlation between PocketVec similarity (x-axis, defined as 1-PocketVec distance), structural similarity (y-axis, Cα RMSD) and sequence identity (color) among pockets located at the same Pfam domains (max. 10) in the AF2-PD pocket set. Pearson CC between PocketVec similarity and sequence identity: 0.55 (p-value\textasciitilde0). Pearson CC between PocketVec similarity and RMSD: -0.35 (p-value\textasciitilde0).
     \textbf{b)} Similar pockets found in dissimilar domains. Pockets were found in the CPSase\_L\_D2 ATP-binding domain (PF02786, top structure, wheat color) of the Carbamoyl-phosphate synthase (P31327, positions 1088-1291. PDB ID: 5DOU) and in the NDK domain (PF00334, bottom structure, pale green color) of the Nucleoside diphosphate kinase 3 (Q13232, positions 22-156. PDB ID: 1ZS6). Pockets (both in the PDB-LIG set) have a PocketVec distance of 0.14 (below the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains share a sequence identity of only 28\% and a poor structural similarity (TM-score=0.31, RMSD=4.3Å).
-    \textbf{c)} Dissimilar pockets found in similar domains. Pockets were found in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245, AF2 model, pink residues) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245, AF2 model, green residues). The former is used as the reference structure (gray cartoon). Pockets (both in the AF2-PD set) have a PocketVec distance of 0.21 (above the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains have a sequence identity of 93\% and also a very high level of structural similarity (TM-score=0.98 and RMSD=0.4Å).
+    \textbf{c)} Dissimilar pockets found in similar domains. Pockets were found in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245, AF2 model, pink residues) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245, AF2 model, green residues). The former is used as the reference structure (gray cartoon). Pockets (both in the AF2-PD set) have a PocketVec distance of 0.21 (above the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains have a sequence identity of 93\% and also a very high level of structural similarity (TM-score=0.98 and RMSD=0.4Å). \\
+    \rule[0ex]{\textwidth}{0.5pt}
   }
   \label{PocketVec_Fig5}
-\end{figure}
+\end{Figure_modified}
 
 
 
@@ -245,7 +247,11 @@ Overall, these new results show that, indeed, there is a clear relationship betw
 Protein kinases have long been a cornerstone of drug discovery efforts primarily due to their role as oncogenic targets\cite{attwood_trends_2021}. Since the breakthrough FDA-approval of imatinib in 2001, dozens of small molecules (72 as of November 2022\cite{roskoski_properties_2023}) have been approved as therapeutic kinase inhibitors for clinical use. However, the design of selective inhibitors is a challenging task due to the highly conserved ATP-binding pocket shared among human kinases. Indeed, many kinase inhibitors show high promiscuity (i.e. they bind to many kinases), while others are rather selective\cite{karaman_quantitative_2008, davis_comprehensive_2011}. This same variability is also apparent from the kinase perspective: some bind to many inhibitors while others are extremely selective\cite{hanson_what_2019}. Our characterization of druggable pockets in human proteins showed 1,286 potential binding sites within protein kinase domains. More specifically, we derived PocketVec descriptors for 229, 404, 195 and 458 pockets in the PDB-LIG, PDB-PD, AF2-LIG and AF2-PD sets, respectively. Thus, we set up to explore a potential correlation between the pockets in the different kinases and their experimentally determined small molecule inhibition profiles.
 
 We first collected kinase-inhibitor pairs identified through systematic chemical proteomics approaches by Kuester and collaborators, where they tested interactions between 520 kinases and 243 inhibitors (2017 set)\cite{klaeger_target_2017}, and between 318 kinases and 1,183 inhibitors (2023 set)\cite{reinecke_chemical_2023}. We used a standard activity cutoff of 30nM to define binary kinase-inhibitor matrices, as recommended in Pharos 17 (\hyperlink{http://pharos.nih.gov}{http://pharos.nih.gov}). In the 2017 set, we found interactions involving 111 kinases and 94 inhibitors (Fig \ref{PocketVec_Fig7}a), with 43 kinases being inhibited by a single compound, and 18 of them interacting with 5 or more inhibitors (Fig \ref{PocketVec_FigS29}a). In the 2023 set, we identified interactions comprising 73 kinases and 164 inhibitors, where 19 kinases interacted with 1 inhibitor and 27 with 5 or more (Fig \ref{PocketVec_FigS29}b). We then compared kinases on the basis of their binarized inhibition profiles (Jaccard similarity, Fig \ref{PocketVec_Fig7}d, j, upper triangular matrices), and we observed that a relatively small fraction of kinase pairs shared at least 1 inhibitor (12.3\% and 9.7\% for the 2017 and 2023 sets, respectively). We also compared the kinases using PocketVec descriptors (Fig \ref{PocketVec_Fig7}d, j, lower triangular matrices), finding that the fraction of kinase pairs showing similar druggable pockets (i.e. PocketVec distances <0.17) was 40.5\% and 41.4\%, respectively. As expected, these fractions were significantly higher than the figure obtained when comparing random sets of pocket descriptors (\textasciitilde2\%. Fisher’s exact test, OR >30, p-value \textasciitilde0), since all kinases contain at least one similar ATP-binding pocket. Reassuringly, as observed in the general analysis of human druggable pockets (Fig \ref{PocketVec_Fig3}h), we found that the higher the number of common inhibitors between pairs of kinases, the more similar their pockets were according to PocketVec descriptors (Fig \ref{PocketVec_Fig7}b, h). However, even when no shared inhibitor was found for a pair of kinases, as expected, the similarity between their ATP-binding pockets was quite remarkable, suggesting that the PocketVec distance threshold should be lowered to disentangle drug promiscuity.
+  
 
+Next, we parsed the general inhibition matrices to derive inhibition profiles for each kinase (i.e. a vector describing whether it does or does not interact with every tested inhibitor), and we assessed the coherence between PocketVec distances and the similarity between experimentally determined inhibition profiles. Indeed, kinase pairs with low PocketVec distances (<0.17) showed a significant enrichment for similar inhibition profiles (Fisher’s exact test, OR = 3.2, p-value <0.0003 in the 2017 set, and OR = 4.1, p-value <0.003 in the 2023 set for a Jaccard similarity >0.5). These enrichments were even more pronounced when we applied more stringent distance thresholds (PocketVec distance <0.10) with OR >118 and OR >125 (p-values <10\textsuperscript{-10}) for the 2017 and 2023 sets, respectively (Fig \ref{PocketVec_Fig7}c, i).
+
+We then compared our results using PocketVec descriptors to more classical structure and sequence similarity analyses (see \hyperref[PocketVec_Methods]{Methods}). As expected, we found that structurally similar proteins (Max. TM-score >0.85) were also moderately enriched in similar inhibition profiles (OR = 2.4, p-value <0.05; OR = 1.7, p-value >0.05), as were kinases sharing >35\% sequence identity (OR = 4.8, p-value <10\textsuperscript{-6}; OR = 5.5, p-value <10\textsuperscript{-4}). Finally, we studied the relationship between structure, sequence, PocketVec and inhibition profile similarity between kinase pairs. Consistently with our global analysis of the human druggable pockets (Fig \ref{PocketVec_Fig5}a), higher structure and sequence similarities consistently led to lower PocketVec distances in both the 2017 (Fig \ref{PocketVec_Fig7}e, f) and the 2023 (Fig \ref{PocketVec_Fig7}k, l) sets.
 
 %%%%%%%%%%%%%%%%
 %%% FIGURE 7 %%%
@@ -281,10 +287,5 @@ We first collected kinase-inhibitor pairs identified through systematic chemical
  \label{PocketVec_Fig7}
  \end{center}
 \end{Figure_modified}
-  
-
-Next, we parsed the general inhibition matrices to derive inhibition profiles for each kinase (i.e. a vector describing whether it does or does not interact with every tested inhibitor), and we assessed the coherence between PocketVec distances and the similarity between experimentally determined inhibition profiles. Indeed, kinase pairs with low PocketVec distances (<0.17) showed a significant enrichment for similar inhibition profiles (Fisher’s exact test, OR = 3.2, p-value <0.0003 in the 2017 set, and OR = 4.1, p-value <0.003 in the 2023 set for a Jaccard similarity >0.5). These enrichments were even more pronounced when we applied more stringent distance thresholds (PocketVec distance <0.10) with OR >118 and OR >125 (p-values <10\textsuperscript{-10}) for the 2017 and 2023 sets, respectively (Fig \ref{PocketVec_Fig7}c, i).
-
-We then compared our results using PocketVec descriptors to more classical structure and sequence similarity analyses (see \hyperref[PocketVec_Methods]{Methods}). As expected, we found that structurally similar proteins (Max. TM-score >0.85) were also moderately enriched in similar inhibition profiles (OR = 2.4, p-value <0.05; OR = 1.7, p-value >0.05), as were kinases sharing >35\% sequence identity (OR = 4.8, p-value <10\textsuperscript{-6}; OR = 5.5, p-value <10\textsuperscript{-4}). Finally, we studied the relationship between structure, sequence, PocketVec and inhibition profile similarity between kinase pairs. Consistently with our global analysis of the human druggable pockets (Fig \ref{PocketVec_Fig5}a), higher structure and sequence similarities consistently led to lower PocketVec distances in both the 2017 (Fig \ref{PocketVec_Fig7}e, f) and the 2023 (Fig \ref{PocketVec_Fig7}k, l) sets.
 
 Despite the coherence of the results of the three metrics, interestingly, we found 9 kinase pairs (4 in the 2017 and 5 in the 2023 sets) with clear inhibition profile similarities that only PocketVec descriptors could pick. On the other hand, our analyses also revealed 8 cases (5 in the 2017 and 3 in the 2023 sets) where PocketVec descriptors fell short to detect similarities that could be recovered by sequence or structure comparisons alone. Overall, these results emphasize the coherence and complementarity between strategies, highlighting the potential of PocketVec descriptors to identify otherwise unattainable similarities in experimental inhibition profiles among protein kinases. 

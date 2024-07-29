@@ -19,12 +19,16 @@
 % Redefine section to suppress numbering and make it bigger and bold
 \titleformat{\section}[block]
   {\normalfont\LARGE\bfseries}{}{0em}{}
-\titlespacing*{\section}{0pt}{*3}{*4}
+\titlespacing*{\section}{0pt}{*0}{*1}
 
 % % Redefine subsection has been heavily commented and lightly modified by Andr to suppress numbering
 \titleformat{\subsection}[block]
   {\normalfont\Large\bfseries}{\thesubsection}{1em}{}
-\titlespacing*{\subsection}{0pt}{*3}{*3}
+\titlespacing*{\subsection}{0pt}{*1}{*1}
+
+% Subsubsection
+\titlespacing*{\subsubsection}
+{0pt}{0.25\baselineskip}{0.25\baselineskip}
 
 % Set caption justification to justified and leave some space
 \captionsetup{justification=justified}

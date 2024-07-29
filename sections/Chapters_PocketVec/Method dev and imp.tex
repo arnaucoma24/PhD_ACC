@@ -25,6 +25,25 @@ Finally, to determine the best combination of small molecules and docking method
 
 Please, see the \hyperref[PocketVec_Methods]{Methods} section for a more detailed description of the methodological pipeline.
 
+%%%%%%%%%%%%%%%%
+%%% FIGURE 1 %%%
+%%%%%%%%%%%%%%%%
+
+
+\begin{Figure_modified}
+  \centering
+  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig1.png}
+  \caption{
+    \textbf{PocketVec methodological pipeline and benchmark results.} 
+    \textbf{a)} Given a 3D protein structure, binding site locations are established by the presence of bound ligands or by means of pocket detection algorithms. A predefined set of compounds (128 lead-like molecules in the standard PocketVec pipeline) is docked against the pocket of interest. The corresponding docking scores are then converted into rankings and stored in a vector-type format that serves to characterize the pocket. We refer to those vectors as PocketVec descriptors.
+    \textbf{b)} Bars indicating the performance (AUROC, y-axis) of our descriptors generated with a varying number of predefined molecules among ProSPECCTs datasets (x-axis, P6 and P6.2 not included. For further details, please see Online Methods). Bar color indicates the number of predefined compounds (10, 128 and the complete set of 1,000 lead-like molecules, sorted by entropy). These results correspond to the rigid docking (rDock) and LLM combination. All the other combinations with all possible numbers of predefined compounds (from 1 to complete sets) are shown in Fig \ref{PocketVec_FigS7}.
+    \textbf{c)} Predefined molecules with high and low entropy. The histograms depict the distribution (y-axis) of rankings (x-axis, bin width: 25) for the highest (sky blue) and lowest (dark blue) entropy lead-like molecules in ProSPECCTs P1. Their chemical structures are shown together with the corresponding entropy values.
+    \textbf{d)} Performances (AUROC, y-axis) of distinct pocket descriptors among ProSPECCTs datasets (x-axis, P6 and P6.2 not included). Gray dots represent the individual performances of existing strategies to derive pocket descriptors (see Table \ref{PocketVec_TableS1}). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Blue dots indicate the performance of PocketVec descriptors (128 LLM and rDock rigid docking). Av. values represent the average performance among ProSPECCTs datasets for each individual method and W. Av. values weight the average value according to the number of pairs within each dataset.
+    \rule[0ex]{\textwidth}{0.5pt}
+  }
+  \label{PocketVec_Fig1}
+\end{Figure_modified}
+
 \phantomsection
 \subsubsection{PocketVec parameter selection and benchmark}
 
@@ -36,20 +55,4 @@ Our benchmarks also revealed that some molecules were systematically ranked as v
 
 Overall, and in view of the benchmark results, we established that the use of rigid docking (rDock) and 128 LLM was the standard and optimal methodology to generate PocketVec descriptors. All results presented along the rest of the manuscript were derived following this strategy. The selected LLM are shown in Fig \ref{PocketVec_FigS8_v2} and can also be found in our \hl{GitLab repository} in SMILES and SDF format, together with their commercial names. 
 
-%%%%%%%%%%%%%%%%
-%%% FIGURE 1 %%%
-%%%%%%%%%%%%%%%%
 
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{figures/PocketVec/Main/Fig1.png} 
-  \caption{
-    \textbf{PocketVec methodological pipeline and benchmark results.} 
-    \textbf{a)} Given a 3D protein structure, binding site locations are established by the presence of bound ligands or by means of pocket detection algorithms. A predefined set of compounds (128 lead-like molecules in the standard PocketVec pipeline) is docked against the pocket of interest. The corresponding docking scores are then converted into rankings and stored in a vector-type format that serves to characterize the pocket. We refer to those vectors as PocketVec descriptors.
-    \textbf{b)} Bars indicating the performance (AUROC, y-axis) of our descriptors generated with a varying number of predefined molecules among ProSPECCTs datasets (x-axis, P6 and P6.2 not included. For further details, please see Online Methods). Bar color indicates the number of predefined compounds (10, 128 and the complete set of 1,000 lead-like molecules, sorted by entropy). These results correspond to the rigid docking (rDock) and LLM combination. All the other combinations with all possible numbers of predefined compounds (from 1 to complete sets) are shown in Fig \ref{PocketVec_FigS7}.
-    \textbf{c)} Predefined molecules with high and low entropy. The histograms depict the distribution (y-axis) of rankings (x-axis, bin width: 25) for the highest (sky blue) and lowest (dark blue) entropy lead-like molecules in ProSPECCTs P1. Their chemical structures are shown together with the corresponding entropy values.
-    \textbf{d)} Performances (AUROC, y-axis) of distinct pocket descriptors among ProSPECCTs datasets (x-axis, P6 and P6.2 not included). Gray dots represent the individual performances of existing strategies to derive pocket descriptors (see Table \ref{PocketVec_TableS1}). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Blue dots indicate the performance of PocketVec descriptors (128 LLM and rDock rigid docking). Av. values represent the average performance among ProSPECCTs datasets for each individual method and W. Av. values weight the average value according to the number of pairs within each dataset.
-  }
-  \label{PocketVec_Fig1}
-\end{figure}
