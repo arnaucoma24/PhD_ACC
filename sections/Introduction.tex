@@ -17,10 +17,19 @@
 \makeatother
 
 \makeatletter
-% Define a new Figure environment with top-of-page float placement
 \newenvironment{Figure_modified}{%
 \par\addvspace{12pt plus2pt}%
 \def\@captype{figure}%
+}{%
+\par\addvspace{12pt plus2pt}%
+}%
+
+% Define a new Figure environment with top-of-page float placement
+\newenvironment{Figure_modified2}{%
+\par\addvspace{12pt plus2pt}%
+\def\@captype{figure}%
+\renewcommand{\@dblfloatplacement}{ht}%
+\renewcommand{\@floatplacement}{ht}%
 }{%
 \par\addvspace{12pt plus2pt}%
 }%
