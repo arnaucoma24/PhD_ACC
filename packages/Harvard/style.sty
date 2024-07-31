@@ -64,7 +64,7 @@
 \newcommand{\abstractpage}{
 	\newpage
 	\pagenumbering{roman}
-	\setcounter{page}{3}
+	\setcounter{page}{4}
 	\pagestyle{fancy}
 	\lhead{Thesis advisor: Professor \@advisor} \rhead{\@author}
 	\renewcommand{\headrulewidth}{0.0pt}
@@ -82,7 +82,7 @@
 
 \newcommand{\dedicationpage}{
 	\newpage \thispagestyle{fancy} \vspace*{\fill}
-	\scshape \noindent \input{frontmatter/dedication}
+	\scshape \noindent \input{frontmatter/dedication} \pagenumbering{roman}
 	\vspace*{\fill} \newpage \rm
 }
 
@@ -91,6 +91,16 @@
 	\noindent
 	\input{frontmatter/thanks}
 	\vspace*{\fill} \newpage
-	\setcounter{page}{1}
-	\pagenumbering{arabic}
+	% \setcounter{page}{1}
+	\pagenumbering{roman}
+}
+
+
+\newcommand{\contributors}{
+ 	\setcounter{page}{3}
+	\chapter*{Statement of Contributors}
+	\noindent
+	% \pagenumbering{roman}
+	\input{frontmatter/contributors}
+	\vspace*{\fill} \newpage
 }
