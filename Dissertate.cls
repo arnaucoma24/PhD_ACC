@@ -155,3 +155,21 @@
 \usepackage[all]{hypcap}
 \usepackage{capt-of}
 \usepackage{caption}
+
+
+\usepackage{listings}
+
+% Define Python language settings with subdued colors
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color[rgb]{0.2,0.5,0.5},  % Soft teal for keywords
+    commentstyle=\color[rgb]{0.5,0.5,0.5},  % Gray for comments
+    stringstyle=\color[rgb]{1, 0.4, 0.4},   % Reddish-salmon for strings
+    showstringspaces=false,
+    frame=single,
+    breaklines=true,
+    columns=fullflexible
+}
+
+\lstset{style=pythonstyle}
