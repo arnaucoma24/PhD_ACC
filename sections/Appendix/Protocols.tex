@@ -2,6 +2,7 @@
 \counterwithin{figure}{section}
 \setcounter{section}{2} % Assuming section A.3 corresponds to section 3
 \setcounter{figure}{0}  % Reset figure counter for this section
+\label{Protocols_SupplementaryInformation}
 
 
 \phantomsection
@@ -140,27 +141,47 @@
 \end{figure}
 
 
-
+\clearpage
 \phantomsection
 \subsection{Interpreting the results: diagnosis plots}
 \label{Supplementary_Protocols_Diagnosis}
 
+To assess and monitor data flow at each step of the CC integration pipeline, we have designed several analyses to evaluate the results in a systematic manner. In brief, for each data matrix (compound signatures), a set of diagnosis plots is generated to illustrate the main characteristics of the data. This section includes a comprehensive explanation for each plot.
 
+Examples for diagnosis plots are found in Fig \ref{Protocols_FigS1}, Fig \ref{Protocols_FigS4}, Fig \ref{Protocols_FigS7} and Fig \ref{Protocols_FigS10}. From left to right and from top to bottom:
+\begin{enumerate}
+    \item[\textbullet] Image: heatmap representing the data matrix. Rows are compounds (keys, max. number set to 100), columns are features and colors represent actual values from minimum (blue) to maximum (red).
+    \item[\textbullet] Values distribution: density distribution (y-axis) of data values (x-axis) from minimum (blue) to maximum (red). 
+    \item[\textbullet] 2D projection: tSNE (t-distributed Stochastic Neighbor Embedding) representation of the data, colored by density. The maximum number of subsampled compounds included in the projection is 10 thousand. 
+    \item[\textbullet] Euclidean distribution: density distribution (y-axis) of pairwise Euclidean distances (x-axis). The maximum number of selected compound pairs is set to 10 thousand. 
+    \item[\textbullet] Values by feature: numerical values (y-axis) of each feature (x-axis).
+    \item[\textbullet] Values by key: numerical values (y-axis) of each compound (key, x-axis).
+    \item[\textbullet] Redundancy: for each signature in a non-redundant set of signatures (x-axis), number of compounds (keys, y-axis) having the same exact signature.  
+    \item[\textbullet] Cosine distribution: density distribution (y-axis) of pairwise cosine distances (x-axis). The maximum number of selected compound pairs is set to 10 thousand.
+\end{enumerate}
 
+\hl{REVISAR COMPLETE DIAGNOSIS PLOTS TEXT!!!!!}
 
-
+The full version of the diagnosis plots provided by the CC comprise additional analysis and comparisons to other CC spaces. Examples of the full version are found in Fig \ref{Protocols_FigS2}, Fig \ref{Protocols_FigS5}, Fig \ref{Protocols_FigS8} and Fig \ref{Protocols_FigS11}. The new plots in the full version are described below from left to right, top to bottom:
+\begin{enumerate}
+    \item[\textbullet]Confidence: Density plot of normalized confidence values for the signatures.  Mean values above 0.6 indicate highly reliable signatures.
+    \item[\textbullet]2D projection colored by confidence value: t-SNE representation of the data, colored by their assigned confidence values.
+    \item[\textbullet]CC ranks agreement: Distribution of the agreement between compounds neighbors rankings. The lower the score, the lower the agreement among the compounds neighbors rankings. 
+    \item[\textbullet]2D projection colored by CC ranks agreement:  t-SNE representation of the data, colored by their neighbor rank agreement. 
+    \item[\textbullet]Outliers: It represents the anomaly score for each signature Signatures with scores above 0 are considered outliers.
+    \item[\textbullet]Key Coverage: Proportion of compounds shared across different CC space datasets. Any given compound may be present in all or some CC spaces (1-25, x-axis).
+    \item[\textbullet]2D projection colored by key coverage: t-SNE representation of the data, colored by the compound coverage. Blue indicates higher compound presence across CC spaces. 
+    \item[\textbullet]Cluster sizes: Proportion of keys assigned to each cluster. We obtain the clusters by computing the distances between the signatures and then apply DBScan method to find the neighborhoods. Top 20 clusters are highlighted in the plot
+    \item[\textbullet]Top clusters: 2D representation of the top 20 clusters. 
+    \item[\textbullet]MoA: Recapitulation of the nearest neighbors in the B1 space (MoA) using the current signature. This recapitulation is quantified by AUROC (Area Under the Receiver Operating Characteristic) values, indicated in the figure title. Values around 0.5 indicate random results
+    \item[\textbullet]ATC: Recapitulation of the nearest neighbors in the E1 space (therapeutic areas; ATC) using the current signature. 
+    \item[\textbullet]Keys / Features dimension: Number of compounds and features across all CC spaces for the current signature. The values were normalized using log10.The current CC space dot is highlighted with black border and white background.
+    \item[\textbullet]CC wrt Sign: Number of keys of the current space that overlaps with the keys of all the other spaces colored according to the CC levels color legend. Numbers (ranging from 1 to 5) correspond to each space per level.
+    \item[\textbullet]Sign wrt CC:  Overlap among the keys of all the other spaces and the keys in the target space.
+    \item[\textbullet]ROC across CC: Recapitulation of the nearest neighbors of all CC spaces. area under ROC curve values summarize the performance. The AUC values are sorted in descending order (higher values better recapitulation) and colored according to the CC levels color legend. Numbers (ranging from 1 to 5) correspond to each space per level.
+\end{enumerate}
 
 
 \phantomsection
 \subsection{Supplementary Code}
 
-\phantomsection
-\subsubsection{Main Protocol}
-
-\begin{lstlisting}
-# This is a sample Python code
-def hello_world():
-    print("Hello, World!")
-
-hello_world()
-\end{lstlisting}
