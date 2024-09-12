@@ -65,7 +65,7 @@
 \newcommand{\abstractpage}{
 	\newpage
 	\pagenumbering{roman}
-	\setcounter{page}{4}
+	\setcounter{page}{5}
 	\pagestyle{fancy}
 	\lhead{Thesis advisor: Professor \@advisor} \rhead{\@author}
 	\renewcommand{\headrulewidth}{0.0pt}
@@ -103,5 +103,14 @@
 	\noindent
 	% \pagenumbering{roman}
 	\input{frontmatter/contributors}
+	\vspace*{\fill} \newpage
+}
+
+\newcommand{\abbreviations}{
+ 	\setcounter{page}{4}
+	\chapter*{Abbreviations}
+	\noindent
+	% \pagenumbering{roman}
+	\input{frontmatter/abbreviations}
 	\vspace*{\fill} \newpage
 }

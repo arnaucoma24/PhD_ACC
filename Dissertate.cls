@@ -155,6 +155,7 @@
 \usepackage[all]{hypcap}
 \usepackage{capt-of}
 \usepackage{caption}
+\usepackage{nomencl}
 \titlespacing*{\paragraph}{0pt}{0em}{0em}
 
 

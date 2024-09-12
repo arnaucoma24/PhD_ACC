@@ -1,7 +1,7 @@
 \subsection{Methods}
 \label{Protocols_Methods}
 
-\hl{The implemented pipeline consists of ... distinct steps to process, harmonize and integrate bioactivity data into the CC universe of small molecule signatures. Steps 1-3 are preliminary. Steps 4-X are main.}
+The implemented pipeline consists of 10 distinct steps to process, harmonize and integrate bioactivity data into the CC universe of small molecule signatures. Steps 1-3 are preliminary and identical across all presented tasks. Steps 4-10 are generally common to all tasks but require slight fine-tuning to specify the location of the input data and the name of the new CC bioactivity space.
 
 \paragraph{1. Installing the Chemical Checker} \leavevmode
 
@@ -116,7 +116,7 @@ neig1.clear_all()
 neig1.fit(sign1)
 \end{lstlisting}
 
-\paragraph{7. Generating type II signatures} \leavevmode
+\paragraph{8. Generating type II signatures} \leavevmode
 
 Once we have type I signatures and neighbors calculated for our compound set, we can proceed to the generation of type II signatures. As seen in previous steps, the code is straightforward and follows the same architecture as before. For further information about the generation of type II signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
 
@@ -126,4 +126,62 @@ neig1 = cc_local.get_signature('neig1', 'full', dataset)
 sign2 = cc_local.signature(dataset, 'sign2')
 sign2.clear_all()
 sign2.fit(sign1, neig1, oos_predictor=False)
+\end{lstlisting}
+
+
+\paragraph{9. Generating type III signatures} \leavevmode
+
+The last step in the signaturization process is the calculation of type III signatures. We first collect all type II signatures from the existing CC spaces along with type I and type II signatures for the extended or newly created space. Since the calculation of type III signatures is computationally expensive, we run it on an HPC cluster to enable CPU parallelization. Indeed, users may adapt the function \textit{fit\_hpc} with the specific parameters and configuration of their HPC cluster. Additionally, when creating a new CC space, it is important to check the overlap between the input dataset and the CC universe of small molecules, as poor overlaps between both sets may eventually result in unreliable type III signatures. Additionally, we calculate the chemical signatures (A1-5) for all those compounds that are not within the CC universe (\textit{complete\_universe=’full’}). For further information about the generation of type III signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. The code below corresponds to the case example from Task 4 (M1.001) and it needs to be adapted to every particular exercise. For additional examples, please see our \href{https://gitlabsbnb.irbbarcelona.org/packages/protocols}{Gitlab repository}. \\
+
+\begin{lstlisting}
+dataset = 'M1.001'
+sign3 = cc_local.signature(dataset, 'sign3')
+sign3.clear_all()
+
+sign2_list = list()
+for ds in cc_local.coordinates:
+    ds += '.001'
+    sign2_list.append(cc_local.get_signature('sign2', 'full', ds))
+
+sign2_list.append(cc_local.get_signature('sign2','full', dataset))
+print(len(sign2_list))  # 26
+
+sign1_self = cc_local.signature(dataset, 'sign1')
+sign2_self = cc_local.signature(dataset, 'sign2')
+
+# Specify CC_config file
+os.environ['CC_CONFIG'] = '../cc_code/chemical_checker/setup/cc_config.json'
+
+# Fit sign3 in the HPC machine
+kwargs = {"cpu": 32, "mem_by_core": 1, "wait": True}
+sign3.fit_hpc(sign2_list, sign2_self, sign1_self, sign2_universe=None, complete_universe="full", sign2_coverage=None, hpc_args=kwargs)
+
+
+### CHECK OVERLAP ###
+cc_universe = []
+for dat in cc_local.datasets:
+    if dat != dataset and dat.endswith('001'):
+        cc_universe.extend(cc_local.get_signature('sign0', 'full', dat).keys)
+cc_universe = set(cc_universe)
+
+sign2 = cc_local.signature(dataset, 'sign2')
+m1_molecules = set(sign2.keys)
+
+print("Number of molecules in the CC universe: " + str(len(cc_universe)))
+# 1009293
+print("Number of molecules in M1 sign2: " + str(len(m1_molecules)))
+# 200
+print("Intersection CC & M1: " + str(len(cc_universe.intersection(m1_molecules))))
+# 188
+\end{lstlisting}
+
+
+\paragraph{10. Generating diagnosis plots} \leavevmode
+
+Finally, to visualize the flow of the data along the integration pipeline, we can generate diagnosis plots for all the newly obtained signatures (0, 1, 2 and 3) with the code provided below (replacing X by 0, 1, 2 or 3, depending on the signature type under analysis). For further information about the generation and interpretation of diagnosis plots, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}). \\
+
+\begin{lstlisting}
+signX = cc_local.signature(dataset, 'signX')
+diagX = sign.diagnosis(ref_cctype='sign0')
+diagX.canvas(size='small', savefig=True, savefig_kwargs={'dpi': 300})
 \end{lstlisting}
