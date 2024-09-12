@@ -1,17 +1,129 @@
 \subsection{Methods}
+\label{Protocols_Methods}
 
+\hl{The implemented pipeline consists of ... distinct steps to process, harmonize and integrate bioactivity data into the CC universe of small molecule signatures. Steps 1-3 are preliminary. Steps 4-X are main.}
 
-Bla bla bla
+\paragraph{1. Installing the Chemical Checker} \leavevmode
 
-
-\phantomsection
-\subsubsection{Main Protocol}
+The installation of the CC in a local computer is carried out following the instructions provided in: \\
 
 \begin{lstlisting}
-# This is a sample Python code
-def hello_world():
-    print("Hello, World!")
-
-hello_world()
+https://gitlabsbnb.irbbarcelona.org/packages/chemical_checker/-/tree/master
 \end{lstlisting}
 
+In short, we need to i) install Singularity (version>3.6), ii) clone the CC repository to a local directory and iii) run the setup script (\textit{sudo} permissions are needed).
+
+i) Install Singularity: \\
+
+\begin{lstlisting}
+$ sudo apt-get update && sudo apt-get install -y \
+     build-essential \
+     uuid-dev \
+     libgpgme-dev \
+     squashfs-tools \
+     libseccomp-dev \
+     wget \
+     pkg-config \
+     git \
+     cryptsetup-bin\
+     golang-go
+
+ $ export VERSION=3.8.0 && \
+     wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
+     tar -xzf singularity-ce-${VERSION}.tar.gz && \
+     cd singularity-ce-${VERSION}
+
+ $ ./mconfig && \
+     make -C ./builddir && \
+     sudo make -C ./builddir install
+\end{lstlisting}
+
+ii) Cloning the CC repository to a local directory: \\
+
+\begin{lstlisting}
+cd ~ && mkdir -p cc && cd cc
+git clone http://gitlabsbnb.irbbarcelona.org/packages/chemical_checker.git
+\end{lstlisting}
+
+iii) Running the setup script:  \\
+
+\begin{lstlisting}
+cd chemical_checker && sh setup/setup_chemicalchecker.sh
+\end{lstlisting}
+
+
+\paragraph{2. Gathering bioactivity data} \leavevmode
+
+To calculate type III signatures for any compound set of interest, it is necessary to collect all preexisting type II signatures (from other CC spaces) in a custom directory (from now on called \textit{custom\_path}). Such data can be directly downloaded from \href{https://chemicalchecker.com/downloads/signature2}{https://chemicalchecker.com/downloads/signature2}. For further details on the generation of type III signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}.
+
+
+\paragraph{3. Running a Jupyter Notebook with the CC image} \leavevmode
+
+We run a Jupyter Notebook within the CC image by executing the following command (which is an alias to run the \textit{setup/run\_chemicalchecker.sh} file from the cloned CC repository): \\
+
+\begin{lstlisting}
+chemcheck
+\end{lstlisting}
+
+Once the Jupyter Notebook is up and running, it is essential to import the CC package itself as well as all necessary external libraries to run the analyses (e.g. numpy). In addition, we can also specify the level of log outputs printed along the procedure. \\
+
+\begin{lstlisting}
+from chemicalchecker import ChemicalChecker
+ChemicalChecker.set_verbosity('DEBUG') # CRITICAL, ERROR, WARN, INFO or DEBUG
+\end{lstlisting}
+
+
+\paragraph{4. Creating a CC instance} \leavevmode
+
+A new CC instance is created with the directory chosen to allocate the results (\textit{local\_cc\_dir}). Additionally, we also need to specify the location of existing type II signatures (\textit{custom\_path}). \\
+
+\begin{lstlisting}
+local_cc_dir = './local_CC'
+cc_local = ChemicalChecker(local_cc_dir, custom_data_path=custom_path)
+\end{lstlisting}
+
+\paragraph{5. Loading raw data} \leavevmode
+
+To start the signaturization process, we first need to load a preprocessed version of the raw bioactivity data. Depending on the format of the data, the loading process may differ significantly. In the provided examples (Tasks 1-4), we have included cases in which the data is located in a CSV file and in a H5 file. Essentially, the starting data must consist in a well-defined bioactivity matrix (e.g. a pandas dataframe) containing N compounds (rows, indices) and M biological features (columns). 
+
+\paragraph{6. Generating type 0 signatures} \leavevmode
+
+Once the bioactivity data is loaded, we can generate type 0 signatures with the following code block. It is important to mention that we first need to define a \textit{dataset} name in a specific format specifying the CC space the data will be dumped in (e.g. B1.002, please see the \hyperref[Building_NEW_CC_BIOACTIVITY_SPACES]{Building new Chemical Checker bioactivity spaces} section). For further information about the generation of type 0 signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\ \\
+
+\begin{lstlisting}
+dataset = 'B1.002' # e.g. B1.002, D1.002, D6.001, M1.001
+sign0 = cc_local.signature(dataset,'sign0')
+sign0.clear_all()
+sign0.fit(X=df.values, keys=list(df.index), features=list(df.columns))
+\end{lstlisting}
+
+
+\paragraph{7. Generating type I signatures} \leavevmode
+
+After obtaining type 0 signatures, we proceed to the generation of type I signatures. The code is straightforward and analogous to the previous step. Additionally, we also need to precompute compound nearest neighbors at type I signature level. For further information about the generation of type I signatures and the calculation of neighbors, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
+
+\begin{lstlisting}
+# Type I signatures
+sign0 = cc_local.signature(dataset, 'sign0')
+sign1 = cc_local.signature(dataset, 'sign1')
+sign1.clear_all()
+sign1.fit(sign0)
+
+# Neighbors
+sign1 = cc_local.signature(dataset, 'sign1')
+neig1 = cc_local.get_signature("neig1", "full", dataset)
+neig1.clear_all()
+neig1.fit(sign1)
+\end{lstlisting}
+
+\paragraph{7. Generating type II signatures} \leavevmode
+
+Once we have type I signatures and neighbors calculated for our compound set, we can proceed to the generation of type II signatures. As seen in previous steps, the code is straightforward and follows the same architecture as before. For further information about the generation of type II signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
+
+\begin{lstlisting}
+sign1 = cc_local.get_signature('sign1', 'full', dataset)
+neig1 = cc_local.get_signature('neig1', 'full', dataset)
+sign2 = cc_local.signature(dataset, 'sign2')
+sign2.clear_all()
+sign2.fit(sign1, neig1, oos_predictor=False)
+\end{lstlisting}

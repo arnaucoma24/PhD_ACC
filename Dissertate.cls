@@ -164,12 +164,15 @@
 \lstdefinestyle{pythonstyle}{
     language=Python,
     basicstyle=\ttfamily\scriptsize,
-    keywordstyle=\color[rgb]{0.2,0.5,0.5},  % Soft teal for keywords
+    % keywordstyle=\color[rgb]{0.2,0.5,0.5},  % Soft teal for keywords
     commentstyle=\color[rgb]{0.5,0.5,0.5},  % Gray for comments
-    stringstyle=\color[rgb]{1, 0.4, 0.4},   % Reddish-salmon for strings
+    % stringstyle=\color[rgb]{1, 0.4, 0.4},   % Reddish-salmon for strings
+    keywordstyle=\color[rgb]{0,0,1},
+    stringstyle=\color[rgb]{0.0000, 0.5215, 0.2235},
     showstringspaces=false,
-    frame=single,
     breaklines=true,
+    frame=single,
+    backgroundcolor=\color[rgb]{0.9,0.9,0.9},
     columns=fullflexible
 }
 
