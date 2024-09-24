@@ -102,7 +102,30 @@ As the number of available compounds and associated biological data continues to
 \subsection{Cheminformatics and the similarity principle}
 \label{Introduction_cheminformatics}
 
-Blending chemical knowledge, biological data and computer science in the context of drug discovery has been a cornerstone for the cheminformatics field since the advent of computation \cite{brown_2018, engel_2006}. Small molecules are usually depicted in the form of SMILES, a string-based molecular representation that, although ambiguous (i.e. a single molecule may be described with multiple SMILES), is very intuitive and has been broadly adopted in the field\cite{weing}.
+Blending chemical knowledge, biological data and computer science in the context of drug discovery has been a cornerstone for the cheminformatics field since the advent of computation \cite{brown_chemoinformatics_1998, engel_basic_2006}. Small molecules are usually depicted in the form of SMILES, a string-based molecular representation that, although ambiguous (i.e. a single molecule may be described with multiple SMILES), is very intuitive and has been broadly adopted in the field\cite{weininger_smiles_1988}. In addition, the International Chemical Identifier (InChI) and its hashed version, the InChIKey, provide a more standardized and unambiguous way to represent molecules, ensuring consistent identification across databases \cite{heller_inchi_2015}.
+
+Cheminformatics is founded on the small molecule similarity principle, which states that structurally similar compounds are likely to have similar properties (e.g. biological activities) \cite{johnson_concepts_1990}. The principle has long guided medicinal chemistry efforts, where it is used to predict and optimize the biological activity of new compounds. Paradoxically, medicinal chemists often seek slight structural changes that lead to optimal bioactivity and minimal toxicity for a given compound (e.g. activity cliffs). In fact, such changes in bioactivity may be attributable to subtle variations in the interactions with the corresponding binding partner (e.g. a protein) or to the inherent complexity of biological systems (e.g. the compound is not metabolically stable). 
+
+Historically, the biological testing of structurally related compounds has significantly contributed to the discovery of many drugs, such as Ehrlich’s arsphenamine (a chemical derivative of the highly toxic atoxyl) and Sir James Black’s propranolol (a structural analog of the carcinogenic pronethalol), both mentioned previously. A particularly relevant example is the case of benzodiazepines (Fig \ref{Introduction_Fig1}), a class of depressant drugs used to treat psychiatric conditions such as anxiety disorders and insomnia. Chlordiazepoxide (1960), the first marketed benzodiazepine, paved the way for the development of diazepam (1963), oxazepam (1965), lorazepam (1977) and alprazolam (1981), all of which share the core skeleton that includes a benzodiazepine ring system and are thus highly similar from a structural perspective\cite{wick, klotz}. Indeed, as noted by Black himself, “the most fruitful basis for the discovery of a new drug is to start with an old drug”\cite{pillaiyar, raju}.
+
+Although the quantitative evaluation of small molecule similarity is the holy grail of cheminformatics, other tasks involve the comprehensive visualization of the chemical space or the numerical correlation between chemical structures or molecular features and a property of interest (i.e. QSAR\cite{lenselink}). In any of those cases, small molecules need to be characterized in a format amenable to computational applications. 
+
+
+
+
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=\linewidth]{figures/Introduction/Benzodiazepines.png}
+  \caption{
+    \textbf{The small molecule similarity principle in the case of benzodiazepines.} 
+    Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla
+    \rule[0ex]{\textwidth}{0.5pt}
+  }
+  \label{Introduction_Fig1}
+\end{figure}
+
+
 
 
 
