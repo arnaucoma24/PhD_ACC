@@ -102,6 +102,17 @@ As the number of available compounds and associated biological data continues to
 \subsection{Cheminformatics and the similarity principle}
 \label{Introduction_cheminformatics}
 
+\begin{figure}[b!]
+  \centering
+  \includegraphics[width=\linewidth]{figures/Introduction/Benzodiazepines.png}
+  \caption{
+    \textbf{The small molecule similarity principle.} 
+    \hl{Chemical structures of benzodiazepines.}
+    \rule[0ex]{\textwidth}{0.5pt}
+  }
+  \label{Introduction_Fig1}
+\end{figure}
+
 Blending chemical knowledge, biological data and computer science in the context of drug discovery has been a cornerstone for the cheminformatics field since the advent of computation \cite{brown_chemoinformatics_1998, engel_basic_2006}. Small molecules are usually depicted in the form of SMILES, a string-based molecular representation that, although ambiguous (i.e. a single molecule may be described with multiple SMILES), is very intuitive and has been broadly adopted in the field\cite{weininger_smiles_1988}. In addition, the International Chemical Identifier (InChI) and its hashed version, the InChIKey, provide a more standardized and unambiguous way to represent molecules, ensuring consistent identification across databases \cite{heller_inchi_2015}.
 
 Cheminformatics is founded on the small molecule similarity principle, which states that structurally similar compounds are likely to have similar properties (e.g. biological activities) \cite{johnson_concepts_1990}. The principle has long guided medicinal chemistry efforts, where it is used to predict and optimize the biological activity of new compounds. Paradoxically, medicinal chemists often seek slight structural changes that lead to optimal bioactivity and minimal toxicity for a given compound (e.g. activity cliffs). In fact, such changes in bioactivity may be attributable to subtle variations in the interactions with the corresponding binding partner (e.g. a protein) or to the inherent complexity of biological systems (e.g. the compound is not metabolically stable). 
@@ -111,21 +122,31 @@ Historically, the biological testing of structurally related compounds has signi
 Although the quantitative evaluation of small molecule similarity is the holy grail of cheminformatics, other tasks involve the comprehensive visualization of the chemical space or the numerical correlation between chemical structures or molecular features and a property of interest (i.e. QSAR\cite{lenselink_beyond_2017}). In any of those cases, small molecules need to be characterized in a format amenable to computational applications. 
 
 
+\subsection{Small molecule chemical descriptors }
+\label{Introduction_chemicaldescriptors}
+
+In practice, representing chemical compounds in a meaningful way for cheminformatics-related tasks requires the selection of a small molecule numerical descriptor. Molecular descriptors allow for the mathematical treatment of chemical and structural features of molecules and facilitate their subsequent use in computational applications. 
+
+
+Various strategies exist to generate such descriptors (Fig \ref{Introduction_Fig2}). The simplest approaches account for global molecular properties (0D, e.g. molecular weight) or the presence of particular structural features (1D). Of particular interest are the broadly used extended-connectivity fingerprints (ECFPs \cite{rogers_extended-connectivity_2010}, encoding the circular environment of each atom up to a specific radius) and the molecular access system keys (MACCS Keys \cite{durant_reoptimization_2002}, accounting for the presence or absence of a specific set of pre-defined chemical groups), both being 1D small molecule fingerprints. Additionally, the molecular topology (2D, e.g. distance matrices between atoms) or the spatial information of the atoms (3D, e.g. cartesian coordinates) can be encapsulated by conveniently representing molecules as chemical graphs (atoms being nodes and bonds being edges) \cite{devinyak_3d-morse_2014}. Finally, further sophisticated methods capture environment-dependent properties, such as functional regions or intramolecular interactions (4D, e.g. energetically favorable binding sites or multiple MD-derived conformational states)\cite{pastor_grid-independent_2000, riniker_molecular_2017}. Although representing compounds with relatively complex frameworks (i.e. graphs) may provide a more natural depiction of molecules, simple 1D fingerprints offer numerous advantages, particularly in terms of computational efficiency, search speed, simplicity and interpretability \cite{rogers_extended-connectivity_2010}. In summary, these chemical descriptors are at the core of chemoinformatics and are still the first choice in most applications\cite{david_molecular_2020, cereto-massague_molecular_2015}.
+
+However, the last years have witnessed the expansion of a new generation of molecular descriptors. Such descriptors, deemed to be data-driven and based on deep learning approaches, are engineered on the basis of large-scale chemistry databases and are thus adaptable to a given task or region of the chemical space of small molecules\cite{sanchez-lengeling_inverse_2018}. In particular, graph and text-based autoencoders\cite{hinton_reducing_2006, baldi_autoencoders_2012} are able to embed the information provided by 2D molecule structures and SMILES strings, respectively, into a dense numerical vector belonging to a “latent space” \cite{jin_hierarchical_2019, gomez-bombarelli_automatic_2018, liu_constrained_2018, polykovskiy_molecular_2020}. Simple measures such as Euclidean distances within the latent space are able to capture chemical similarity and, when coupled to machine learning algorithms, these descriptors have shown state of-the-art performance in several biophysics and physiological benchmark datasets\cite{wu_moleculenet_2018}.
+
+
+
 
 
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=\linewidth]{figures/Introduction/Benzodiazepines.png}
+  \includegraphics[width=\linewidth]{figures/Introduction/figure1_COCB.png}
   \caption{
-    \textbf{The small molecule similarity principle in the case of benzodiazepines.} 
-    Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla
+    \textbf{Small molecule descriptors --encoding chemical molecules through their chemistry and bioactivity.} 
+     Classical small molecule descriptors may include global molecular properties (0D, e.g. molecular weight), the presence of specific structural features (1D, e.g. ECFPs), molecular topology (2D, e.g. graphs), molecular conformation (3D, e.g. atom cartesian coordinates) or environment-dependent properties (4D, e.g. interactions with the protein target). Data-driven descriptors may be purely chemical, usually through the use of autoencoders, or encapsulating bioactivity information such as protein binding, induced gene expression changes or clinical outcomes. 
     \rule[0ex]{\textwidth}{0.5pt}
   }
-  \label{Introduction_Fig1}
+  \label{Introduction_Fig2}
 \end{figure}
-
-
 
 
 
