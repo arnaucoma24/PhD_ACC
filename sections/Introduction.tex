@@ -106,18 +106,18 @@ Blending chemical knowledge, biological data and computer science in the context
 
 Cheminformatics is founded on the small molecule similarity principle, which states that structurally similar compounds are likely to have similar properties (e.g. biological activities) \cite{johnson_concepts_1990}. The principle has long guided medicinal chemistry efforts, where it is used to predict and optimize the biological activity of new compounds. Paradoxically, medicinal chemists often seek slight structural changes that lead to optimal bioactivity and minimal toxicity for a given compound (e.g. activity cliffs). In fact, such changes in bioactivity may be attributable to subtle variations in the interactions with the corresponding binding partner (e.g. a protein) or to the inherent complexity of biological systems (e.g. the compound is not metabolically stable). 
 
+Historically, the biological testing of structurally related compounds has significantly contributed to the discovery of many drugs, such as Ehrlich’s arsphenamine (a chemical derivative of the highly toxic atoxyl) and Sir James Black’s propranolol (a structural analog of the carcinogenic pronethalol), both mentioned previously. A particularly relevant example is the case of benzodiazepines (Fig \ref{Introduction_Fig1}), a class of depressant drugs used to treat psychiatric conditions such as anxiety disorders and insomnia. Chlordiazepoxide (1960), the first marketed benzodiazepine, paved the way for the development of diazepam (1963), oxazepam (1965), lorazepam (1977) and alprazolam (1981). The mentioned drugs have a common 1,4-benzodiazepine skeleton binding an aromatic ring and a chlorine atom, and are thus highly similar from a structural perspective\cite{wick_history_2013, costa_clinical_1984}. Indeed, as noted by Black himself, “the most fruitful basis for the discovery of a new drug is to start with an old drug”\cite{pillaiyar_medicinal_2020, raju_nobel_2000}.
+
 \begin{figure}[t!]
   \centering
   \includegraphics[width=\linewidth]{figures/Introduction/Benzodiazepines.png}
   \caption{
     \textbf{The small molecule similarity principle.} 
-    \hl{Chemical structures of benzodiazepines.}
-    \rule[0ex]{\textwidth}{0.5pt}
+    Chemical structures of chlordiazepoxide, diazepam, oxazepam, lorazepam and alprazolam, approved for medical use in 1960, 1963, 1964, 1977 and 1981, respectively. Yellow areas indicate shared scaffolds and substructures across them.
   }
+  \rule[0ex]{\textwidth}{0.5pt}
   \label{Introduction_Fig1}
 \end{figure}
-
-Historically, the biological testing of structurally related compounds has significantly contributed to the discovery of many drugs, such as Ehrlich’s arsphenamine (a chemical derivative of the highly toxic atoxyl) and Sir James Black’s propranolol (a structural analog of the carcinogenic pronethalol), both mentioned previously. A particularly relevant example is the case of benzodiazepines (Fig \ref{Introduction_Fig1}), a class of depressant drugs used to treat psychiatric conditions such as anxiety disorders and insomnia. Chlordiazepoxide (1960), the first marketed benzodiazepine, paved the way for the development of diazepam (1963), oxazepam (1965), lorazepam (1977) and alprazolam (1981), all of which share the core skeleton that includes a benzodiazepine ring system and are thus highly similar from a structural perspective\cite{wick_history_2013, costa_clinical_1984}. Indeed, as noted by Black himself, “the most fruitful basis for the discovery of a new drug is to start with an old drug”\cite{pillaiyar_medicinal_2020, raju_nobel_2000}.
 
 Although the quantitative evaluation of small molecule similarity is the holy grail of cheminformatics, other tasks involve the comprehensive visualization of the chemical space or the numerical correlation between chemical structures or molecular features and a property of interest (i.e. QSAR\cite{lenselink_beyond_2017}). In any of those cases, small molecules need to be characterized in a format amenable to computational applications. 
 
@@ -131,8 +131,9 @@ Although the quantitative evaluation of small molecule similarity is the holy gr
   \caption{
     \textbf{Small molecule descriptors --encoding chemical molecules through their chemistry and bioactivity.} 
      \hl{Classical small molecule descriptors may include global physicochemical properties (0D, e.g. molecular weight), the presence of specific structural features (1D, e.g. ECFPs), molecular topology (2D, e.g. graphs), molecular conformation (3D, e.g. atom cartesian coordinates) or environment-dependent properties (4D, e.g. interactions with the protein target). Data-driven descriptors may be purely chemical, usually through the use of autoencoders, or encapsulating bioactivity information such as protein binding, induced gene expression changes or clinical outcomes.} 
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-5mm}
   \label{Introduction_Fig2}
 \end{figure}
 
@@ -198,8 +199,9 @@ Computational text. MD, Docking (pose), MoA
   \caption{
     \textbf{Protein descriptors --encoding proteins through their sequence and structure.} 
      \hl{Classical protein descriptors may include the identity or the physicochemical properties of their amino acids, either individually (i.e. one-hot encoding) or using sliding windows to capture their short-range environment. To account for more distant amino-acid relationships, proteins can be encoded using techniques borrowed from natural language processing (i.e. word embeddings or attention models), where sequences are often treated as a set of constant-length overlapping fragments or k-mers. Whenever high-resolution models of target proteins are available, these can be used to derive structure-based descriptors. The classical ones consider the geometry and physicochemical properties of the binding pockets by calculating distances between pharmacophoric points and transforming them into high–dimensional profiles, accounting for the presence or absence of a given pharmacophoric geometry. More recently, computer vision and deep learning techniques have been adapted to embed structural properties of protein surfaces and specific binding pocket features.} 
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-5mm}
   \label{Introduction_Fig3}
 \end{figure}
 
@@ -226,9 +228,10 @@ Promise of structure-based descriptors given the success of AF2 in structure pre
   \includegraphics[width=\linewidth]{figures/Introduction/ThesisScheme.png}
   \caption{
     \textbf{Thesis contextualization.} 
-    \hl{TO DO. Bla Bla bla bla bla Bla bla bla bla Bla bla bla bla} 
-    \rule[0ex]{\textwidth}{0.5pt}
+    \hl{TO DO. Bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla} 
   }
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-5mm}
   \label{Introduction_Fig4}
 \end{figure}
 
