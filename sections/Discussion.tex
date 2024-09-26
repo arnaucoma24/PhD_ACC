@@ -1,4 +1,12 @@
 \chapter{Discussion}
 \label{discussion}
+\clearpage
 
-Discussion
+\pdfbookmark[0]{Small molecules}{sec:small-molecules}
+\subsubsection{Small molecules}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% PROTOCOLS %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Chemical descriptors are at the core of cheminformatics. Indeed, there are many strategies aimed at encapsulating the structure of drug-like compounds in a format amenable for computational applications. Extended connectivity fingerprints (ECFPs) represent the most popular approach to do so, due to their high interpretability, low computational cost and strong performance in various prediction tasks \cite{rogers_extended-connectivity_2010}. Other classical and popular representations include substructure-based fingerprints \cite{durant_reoptimization_2002}, Murcko scaffolds \cite{bemis_properties_1996} and, more recently, SMILES- and graph-based embeddings built upon transformer architectures \cite{shin_self-attention_2019, zhou_uni-mol_2022}. However, bioactivity descriptors offer an alternative (and arguably more clinically relevant) perspective to navigate the chemical space in the search for new bioactive compounds with desired pharmacological properties. The CC bioactivity signatures, in particular, have demonstrated superior performance over chemical descriptors in various predictive tasks and have been successfully applied to identify small molecules that reverse transcriptional signatures associated with Alzheimer’s disease in vivo \cite{pauls_identification_2021}, as well as compounds that target cancer-related proteins previously considered undruggable \cite{bertoni_bioactivity_2021}.
