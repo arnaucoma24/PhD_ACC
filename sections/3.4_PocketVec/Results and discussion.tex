@@ -55,9 +55,11 @@ PocketVec descriptors constitute an optimal framework to comprehensively charact
     \textbf{Generating PocketVec descriptors for all druggable pockets within human protein domains.} 
     \textbf{a)} Computational pipeline to gather all available structural data for human druggable pockets included within protein Pfam domains. Starting from the complete human proteome as per Uniprot, we first identified Pfam domains in experimentally determined structures (PDB) and AF2 predicted models. For PDB structures, we identified pockets in \textit{holo} domain structures based on the position of co-crystallized ligands (1,604 PDB-LIG pockets, red) and in \textit{apo} domain structures using pocket detection techniques (14,413 PDB-PD pockets, orange). We defined ligand-based pockets on AF2 structures (1,405 AF2-LIG pockets, purple) by directly superimposing the location of PDB-LIG pockets, and pockets were also predicted in AF2 models by means of pocket detection algorithms (32,202 AF2-PD pockets, blue).  For additional details about the pipeline, please consult the text and the \hyperref[PocketVec_Methods]{Methods} section.
     \textbf{b)} Benchmark of 3 distinct pocket detection strategies: Fpocket (black), P2rank (brown) and the combination of Fpocket and Prank (green). First, we removed bound ligands from reference PDB structures (PDB-LIG) and we then assessed the performance of the mentioned strategies to detect pockets in ligand-free structures. The plots below represent the evolution of Coverage (proportion of real pockets that are actually detected) and Precision (proportion of detected pockets that are actually real -have a crystallized ligand on PDB-LIG) in terms of the number of best-scoring detected pockets per domain that are considered (1, 2, 3, 5 and 10).
-    \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).\\
-    \rule[0ex]{\textwidth}{0.5pt}
+    \textbf{c)} UpSet plot representing the intersecting number of domains among pocket sets (1,279 domains in PDB-LIG, 7,403 domains in PDB-PD, 1,131 domains in AF2-LIG and 19,211 domains in AF2-PD).
   }
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-5mm}
+  
   \label{PocketVec_Fig2}
 \end{figure}
 
@@ -113,8 +115,10 @@ Once we had identified human druggable pockets with four different approaches, w
     \textbf{f)} Distributions (density, y-axis) of maximum Tanimoto Similarity among bound ligands (x-axis, bin width: 0.02) grouped by PocketVec distance ranges (0-0.10, 0.10-0.17 and 0.17-0.4). The number of pocket pairs per PocketVec distance range is specified in parenthesis.
     \textbf{g)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the maximum Tanimoto Similarity among bound ligands (0-0.5, 0.5-0.8, 0.8-1 and 1). The number of pocket pairs per maximum Tanimoto Similarity range is specified in parenthesis.
     \textbf{h)} Distributions (density, y-axis) of PocketVec cosine distances (x-axis) grouped by the number of shared ligands between pockets (0, 1, 2 and 3 or more). The number of pocket pairs per number of shared ligands is specified in parenthesis.
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
   \label{PocketVec_Fig3}
 \end{Figure_modified}
 
@@ -157,8 +161,10 @@ Overall, these results illustrate the capacity of PocketVec descriptors to captu
     \textbf{d)} PocketVec descriptors’ variability caused by protein flexibility and conformational changes among MD-derived structures. POCKET-MD represents the distances between same-pocket MD-derived PocketVec descriptors and all the other boxplots represent the distances between such MD-derived descriptors and each of the 4 sets already precomputed (i.e. PDB-LIG, PDB-PD, AF2-LIG, AF2-PD).
     \textbf{e)} Correlation between PocketVec cosine distance (x-axis) and all-atom (excluding hydrogens) RMSD for the full PDB structure and
     \textbf{f)} pocket residues only. The study involved 192 pockets (8 from PDB-LIG and 184 from PDB-PD) with MD-simulation data (3 frames per replica, 3 replicas). Both plots are colored by density (the redder the higher).
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
   \label{PocketVec_Fig4}
 \end{Figure_modified}
 
@@ -192,9 +198,11 @@ Additionally, we also ran an all-against-all pocket comparison within and across
     \textbf{Using PocketVec descriptors to assess proteome-wide pocket similarity: achieving otherwise unattainable insights.} 
     \textbf{a)} Correlation between PocketVec similarity (x-axis, defined as 1-PocketVec distance), structural similarity (y-axis, Cα RMSD) and sequence identity (color) among pockets located at the same Pfam domains (max. 10) in the AF2-PD pocket set. Pearson CC between PocketVec similarity and sequence identity: 0.55 (p-value\textasciitilde0). Pearson CC between PocketVec similarity and RMSD: -0.35 (p-value\textasciitilde0).
     \textbf{b)} Similar pockets found in dissimilar domains. Pockets were found in the CPSase\_L\_D2 ATP-binding domain (PF02786, top structure, wheat color) of the Carbamoyl-phosphate synthase (P31327, positions 1088-1291. PDB ID: 5DOU) and in the NDK domain (PF00334, bottom structure, pale green color) of the Nucleoside diphosphate kinase 3 (Q13232, positions 22-156. PDB ID: 1ZS6). Pockets (both in the PDB-LIG set) have a PocketVec distance of 0.14 (below the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains share a sequence identity of only 28\% and a poor structural similarity (TM-score=0.31, RMSD=4.3Å).
-    \textbf{c)} Dissimilar pockets found in similar domains. Pockets were found in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245, AF2 model, pink residues) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245, AF2 model, green residues). The former is used as the reference structure (gray cartoon). Pockets (both in the AF2-PD set) have a PocketVec distance of 0.21 (above the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains have a sequence identity of 93\% and also a very high level of structural similarity (TM-score=0.98 and RMSD=0.4Å). \\
-    \rule[0ex]{\textwidth}{0.5pt}
+    \textbf{c)} Dissimilar pockets found in similar domains. Pockets were found in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3B (Q9BS92, positions 146-245, AF2 model, pink residues) and in the NIPSNAP domain (PF07978) of the Protein NipSnap homolog 3A (Q9UFN0, positions 146-245, AF2 model, green residues). The former is used as the reference structure (gray cartoon). Pockets (both in the AF2-PD set) have a PocketVec distance of 0.21 (above the established threshold of 0.17, please see \hyperref[PocketVec_ResultsAndDiscussion_PocketVec_performance_on_the_ProSPECCTs_benchmark]{PocketVec performance on the ProSPECCTs benchmark sets}) although domains have a sequence identity of 93\% and also a very high level of structural similarity (TM-score=0.98 and RMSD=0.4Å).
   }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
   \label{PocketVec_Fig5}
 \end{Figure_modified}
 
@@ -231,8 +239,9 @@ Overall, these new results show that, indeed, there is a clear relationship betw
     \textbf{a, d)} Number of protein pairs (y-axis) at each PocketVec distance range (x-axis).
     \textbf{b, e)} Number of shared compounds for all pairs having a PocketVec distance in the specified distance range. Orange dots indicate the average value while green dots indicate the lower bound for the top 5\% of the pairs. Boxplots indicate median (middle line), 25th, 75th percentile (box), and maximum and minimum values (whiskers). 
     \textbf{c, f)} Evolution of Fisher test Odds Ratio (y-axis) for an increasing number of shared compounds (x-axis) using an increasing value of PocketVec distance cut-off (0.05, 0.10 and 0.17). Colored dots indicate pvalue <0.001, gray dots indicate pvalue <0.05 and white dots indicate pvalue >0.05.
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-5mm}
   \label{PocketVec_Fig6}
 \end{figure}
 
@@ -282,8 +291,10 @@ We then compared our results using PocketVec descriptors to more classical struc
     \textbf{d, j)} Pairwise kinase comparisons. Rows and columns correspond to alphabetically sorted kinases (by Uniprot ID). Upper triangular matrices: kinases are compared on the basis of their experimentally determined inhibition profiles. Each square represents the Jaccard similarity between the inhibition profiles of two targets: the higher the Jaccard similarity, the more similar the corresponding inhibition profiles. Lower triangular matrices: kinases are compared on the basis of their PocketVec descriptors (employing the minimum distance among all PocketVec descriptors in the Protein Kinase Domains). The color of each square indicates the minimum PocketVec distance between two targets: the lower the PocketVec distance (red), the more similar the kinases are at pocket level according to our descriptors.
     \textbf{e, k)} Relationship between structural similarity (x-axis, Max. TM-score) and PocketVec distances (y-axis) between pairs of protein kinases. Each point represents a kinase pair and is colored and sized in terms of the similarity between experimentally determined inhibition profiles.
     \textbf{f, l)} Relationship between sequence similarity (x-axis, Max. Seq. Id.) and PocketVec distances (y-axis) between pairs of protein kinases. Each point represents a kinase pair and is colored and sized in terms of the similarity between experimentally determined inhibition profiles.
-    \rule[0ex]{\textwidth}{0.25pt}
  }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
  \label{PocketVec_Fig7}
  \end{center}
 \end{Figure_modified}

@@ -24,8 +24,10 @@ To gather bioactivity data, we used the Chemical Checker (CC), which represents 
     \textbf{c)} Number of groups (y-axis, top) having the specified number of stereoisomers (x-axis). Proportion of these groups (y-axis, bottom) having the specified number of distinct binding profiles (i.e. \textasciitilde60\% of the groups of 2 isomers have a unique binding profile).
     \textbf{d)} Distributions of Jaccard distances (binding profiles) between pairs of compounds sharing 0, ≥1 targets and stereoisomer pairs. All distributions are significantly different from each other (Mann-Whitney p-value\textasciitilde0).
     \textbf{e)} Illustrative example of a stereoisomer group including 3 small molecules with their corresponding target binding profiles, using the annotation of type 0 signatures (i.e. 0: no binding; 1: weak binding and 2: strong binding).
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
   \label{Stereoisomers_Fig1}
 \end{Figure_modified}
 
@@ -56,7 +58,9 @@ To overcome the limitations of the original Signaturizers, we trained new deep-n
      \textbf{f)} Distribution of Signaturizer3D cosine distances between stereoisomer pairs.
      \textbf{g)} Recapitulation of B4 signature type III kNNs (x3 80/20 splits) using the original Signaturizer and the Signaturizer3D. Nearest neighbors are defined as those molecules with a B4 cosine distance to the evaluated compound in the 0.001 percentile of the distribution (p-value \textasciitilde10\textsuperscript{-5}).
      \textbf{h)} Recapitulation of B4 signature type 0 kNNs using the original Signaturizer and the Signaturizer3D. Nearest neighbors are defined as those molecules with a B4 cosine distance to the evaluated compound in the 0.1 percentile of the distribution (p-value \textasciitilde10\textsuperscript{-3}). To speed up the comparisons, positive (NN) and negative (non-NN) pairs were subsampled (10x2.5k compounds) from the CC B4 space.
-    \rule[0ex]{\textwidth}{0.5pt}
   }
+  \vspace{-5mm}
+  \rule[0ex]{\textwidth}{0.5pt}
+  \vspace{-9mm}
   \label{Stereoisomers_Fig2}
 \end{Figure_modified}
