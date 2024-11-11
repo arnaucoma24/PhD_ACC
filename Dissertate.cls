@@ -157,6 +157,7 @@
 \usepackage{caption}
 \usepackage{nomencl}
 \titlespacing*{\paragraph}{0pt}{0em}{0em}
+\usepackage{pdfpages}
 
 
 \usepackage{listings}
