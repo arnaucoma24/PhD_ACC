@@ -3,7 +3,7 @@
 
 The implemented pipeline consists of 10 distinct steps to process, harmonize and integrate bioactivity data into the CC universe of small molecule signatures. Steps 1-3 are preliminary and identical across all presented tasks. Steps 4-10 are generally common to all tasks but require slight fine-tuning to specify the location of the input data and the name of the new CC bioactivity space.
 
-\paragraph{1. Installing the Chemical Checker} \leavevmode
+\paragraph{1. Setting up the CC environment} \leavevmode
 
 The installation of the CC in a local computer is carried out following the instructions provided in: \\
 
@@ -11,7 +11,7 @@ The installation of the CC in a local computer is carried out following the inst
 https://gitlabsbnb.irbbarcelona.org/packages/chemical_checker/-/tree/master
 \end{lstlisting}
 
-In short, we need to i) install Singularity (version>3.6), ii) clone the CC repository to a local directory and iii) run the setup script (\textit{sudo} permissions are needed).
+In short, we need to i) install Singularity (version>3.6), ii) clone the CC repository to a local directory and iii) run the setup script (\textit{sudo} permissions are needed). After that, we need to iv) adapt the CC configuration file to fit the user’s CC environment and, finally, v) clone the CC protocols repository to implement the work described in this article.
 
 i) Install Singularity: \\
 
@@ -28,7 +28,7 @@ $ sudo apt-get update && sudo apt-get install -y \
      cryptsetup-bin\
      golang-go
 
- $ export VERSION=3.8.0 && \
+ $ export VERSION=3.8.0 && # adjust this as necessary \
      wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
      tar -xzf singularity-ce-${VERSION}.tar.gz && \
      cd singularity-ce-${VERSION}
@@ -38,10 +38,10 @@ $ sudo apt-get update && sudo apt-get install -y \
      sudo make -C ./builddir install
 \end{lstlisting}
 
-ii) Cloning the CC repository to a local directory: \\
+ii) Cloning the CC repository to a local directory named \textit{PATH\_TO\_CC}: \\
 
 \begin{lstlisting}
-cd ~ && mkdir -p cc && cd cc
+mkdir -p <PATH_TO_CC> && cd <PATH_TO_CC>
 git clone http://gitlabsbnb.irbbarcelona.org/packages/chemical_checker.git
 \end{lstlisting}
 
@@ -51,26 +51,47 @@ iii) Running the setup script:  \\
 cd chemical_checker && sh setup/setup_chemicalchecker.sh
 \end{lstlisting}
 
+iv) Manually editing the CC configuration file located at \textit{PATH\_TO\_CC/chemical\_checker/setup/cc\_config.json}, referred to as \textit{PATH\_TO\_CC\_CONFIG}. In this file, the user must specify the variables \textit{CC\_REPO}, \textit{CC\_TMP} and \textit{SINGULARITY\_IMAGE}.
+\begin{itemize}
+    \item \textit{SINGULARITY\_IMAGE} should point to the CC singularity image created when running the CC setup script (see \hyperref[Protocols_Methods]{Methods} 1.iii), usually located in \textit{\$HOME/chemical\_checker/cc.simg}, \textit{\$HOME} being the user’s home directory.
+    \item \textit{CC\_REPO} should point to the \textit{chemical\_checker} directory inside \textit{PATH\_TO\_CC} (i.e., \textit{PATH\_TO\_CC/chemical\_checker}, see \hyperref[Protocols_Methods]{Methods} 1.ii and 1.iii).
+    \item \textit{CC\_TMP} should point to a local directory, defined and created by the user, where CC outcome files will be stored. This directory is referred to as \textit{PATH\_TO\_CC\_TMP}.
+\end{itemize}
 
-\paragraph{2. Gathering bioactivity data} \leavevmode
-
-To calculate type III signatures for any compound set of interest, it is necessary to collect all preexisting type II signatures (from other CC spaces) in a custom directory (from now on called \textit{custom\_path}). Such data can be directly downloaded from \href{https://chemicalchecker.com/downloads/signature2}{https://chemicalchecker.com/downloads/signature2}. For further details on the generation of type III signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}.
-
-
-\paragraph{3. Running a Jupyter Notebook with the CC image} \leavevmode
-
-We run a Jupyter Notebook within the CC image by executing the following command (which is an alias to run the \textit{setup/run\_chemicalchecker.sh} file from the cloned CC repository): \\
+v) Cloning the CC protocols repository to a local directory referred to as \textit{PATH\_TO\_CC\_PROTOCOLS}. This repository includes all the notebooks necessary to implement the analyses presented in this manuscript. \\
 
 \begin{lstlisting}
-chemcheck
+mkdir -p <PATH_TO_CC_PROTOCOLS> && cd <PATH_TO_CC_PROTOCOLS>
+git clone http://gitlabsbnb.irbbarcelona.org/packages/protocols.git
 \end{lstlisting}
 
-Once the Jupyter Notebook is up and running, it is essential to import the CC package itself as well as all necessary external libraries to run the analyses (e.g. numpy). In addition, we can also specify the level of log outputs printed along the procedure. \\
+In brief, the repository contains four Python notebooks corresponding to the four tasks implemented herein, along with the raw bioactivity data required to build the new CC spaces. The following points in this section provide an overview of the individual steps needed to generate new CC spaces and signatures.
+
+% \paragraph{2. Gathering bioactivity data} \leavevmode
+
+% To calculate type III signatures for any compound set of interest, it is necessary to collect all preexisting type II signatures (from other CC spaces) in a custom directory (from now on called \textit{custom\_path}). Such data can be directly downloaded from \href{https://chemicalchecker.com/downloads/signature2}{https://chemicalchecker.com/downloads/signature2}. For further details on the generation of type III signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}.
+
+
+\paragraph{2. Running a Jupyter Notebook with the CC image} \leavevmode
+
+We run a Jupyter Notebook in the CC protocols directory within the CC image by executing the following command (which is an alias to run the \textit{setup/run\_chemicalchecker.sh} file from the cloned CC repository): \\
+
+\begin{lstlisting}
+source ~/.bashrc
+cd <PATH_TO_CC_PROTOCOLS>
+chemcheck -d <PATH_TO_CC>/chemical_checker/package -c <PATH_TO_CC_CONFIG>
+\end{lstlisting}
+
+All notebooks needed to build the four spaces described in this manuscript are found in \textit{PATH\_TO\_CC\_PROTOCOLS/protocols/notebooks}.
+
+Once the Jupyter Notebook is up and running, it is essential to import the CC package itself as well as all necessary external libraries to run the analyses (e.g. numpy). Before that, we also need to point the environment variable \textit{CC\_CONFIG} to the local CC configuration file (see \hyperref[Procotols_Methods]{Methods} 1.iv). In addition and, after importing the CC package, we can specify the level of log outputs printed along the procedure. This piece of code is already included in all the exemplary notebooks. \\
 
 \begin{lstlisting}
 from chemicalchecker import ChemicalChecker
 ChemicalChecker.set_verbosity('DEBUG') # CRITICAL, ERROR, WARN, INFO or DEBUG
 \end{lstlisting}
+
+
 
 
 \paragraph{4. Creating a CC instance} \leavevmode
