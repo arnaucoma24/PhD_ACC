@@ -84,36 +84,76 @@ chemcheck -d <PATH_TO_CC>/chemical_checker/package -c <PATH_TO_CC_CONFIG>
 
 All notebooks needed to build the four spaces described in this manuscript are found in \textit{PATH\_TO\_CC\_PROTOCOLS/protocols/notebooks}.
 
-Once the Jupyter Notebook is up and running, it is essential to import the CC package itself as well as all necessary external libraries to run the analyses (e.g. numpy). Before that, we also need to point the environment variable \textit{CC\_CONFIG} to the local CC configuration file (see \hyperref[Procotols_Methods]{Methods} 1.iv). In addition and, after importing the CC package, we can specify the level of log outputs printed along the procedure. This piece of code is already included in all the exemplary notebooks. \\
+Once the Jupyter Notebook is up and running, it is essential to import the CC package itself as well as all necessary external libraries to run the analyses (e.g. numpy). Before that, we also need to point the environment variable \textit{CC\_CONFIG} to the local CC configuration file (see \hyperref[Protocols_Methods]{Methods} 1.iv). In addition and, after importing the CC package, we can specify the level of log outputs printed along the procedure. This piece of code is already included in all the exemplary notebooks. \\
 
 \begin{lstlisting}
+os.environ['CC_CONFIG'] = '/aloy/home/acomajuncosa/cc_config.json'  # Modify path at will
 from chemicalchecker import ChemicalChecker
 ChemicalChecker.set_verbosity('DEBUG') # CRITICAL, ERROR, WARN, INFO or DEBUG
 \end{lstlisting}
 
+\paragraph{3. Gathering CC data} \leavevmode
 
+To successfully implement all CC functionalities illustrated in this work, the user needs to gather the CC bioactivity data from our web servers (e.g. type II signatures, see \hyperref[Protocols_Methods]{Methods} 9). To illustrate the downloading process, we provide exemplary code that programmatically downloads the CC signatures, although the user can download individual files containing bioactivity signatures manually (\textit{https://chemicalchecker.org/downloads/signatureX}, X being 0, 1, 2 or 3). In brief, data are first downloaded in a compressed tar.gz format and then uncompressed in the directory \textit{PATH\_TO\_DATA}, as shown in the notebook Download\_Data.ipynb included in the CC protocols repository (see code below). Since the CC is subject to yearly-carried updates, the size of the downloaded files may increase, as does the amount of publicly released bioactivity data. As of October 2024, the overall process takes 15 minutes to download and 30 minutes to decompress, requiring around 65 GB of free disk space and a stable wired internet connection (e.g Ethernet). For further details on what specific CC data are needed to implement each CC functionality, please see the \hyperref[Supplementary_Protocols_DownloadingData]{Supplementary Information}.  \\
 
+\begin{lstlisting}
+import tarfile
+import wget
+import os
+
+# Modify PATH at will
+PATH_TO_OUTPUT = "/aloy/home/acomajuncosa/CC_DATA"
+
+# Create path
+os.makedirs(PATH_TO_OUTPUT, exist_ok=True)
+
+# Download data
+def download_data(PATH_TO_OUTPUT):
+    os.chdir(PATH_TO_OUTPUT)
+    wget.download("https://chemicalchecker.com/api/db/getFile/root/sign_links.tar.gz/", out=PATH_TO_OUTPUT )
+
+download_data(PATH_TO_OUTPUT)
+
+# Uncompress data
+def decompress_data(PATH_TO_FILE, PATH_TO_DATA):
+    os.makedirs(PATH_TO_DATA, exist_ok=True)
+    with tarfile.open(PATH_TO_FILE, "r:gz") as tar:
+        tar.extractall(path=PATH_TO_DATA)
+
+# Modify PATHS at will
+PATH_TO_FILE = "/aloy/home/acomajuncosa/CC_DATA/sign_links.tar.gz"
+PATH_TO_DATA = "/aloy/home/acomajuncosa/CC_DATA/DATA"
+decompress_data(PATH_TO_FILE, PATH_TO_DATA)
+\end{lstlisting}
 
 \paragraph{4. Creating a CC instance} \leavevmode
 
-A new CC instance is created with the directory chosen to allocate the results (\textit{local\_cc\_dir}). Additionally, we also need to specify the location of existing type II signatures (\textit{custom\_path}). \\
+A new CC instance is created with the directory chosen to allocate the results (\textit{local\_cc\_dir}). Additionally, we also need to specify the location of existing CC data (\textit{PATH\_TO\_DATA}). \\
 
 \begin{lstlisting}
-local_cc_dir = './local_CC'
-cc_local = ChemicalChecker(local_cc_dir, custom_data_path=custom_path)
+local_cc_dir = '../local_CC_M1'  # Modify at will
+PATH_TO_DATA = "/aloy/home/acomajuncosa/CC_DATA/DATA/"  # Modify at will
+cc_local = ChemicalChecker(local_cc_dir, dbconnect=False, custom_data_path=PATH_TO_DATA)
 \end{lstlisting}
+
+The typical CC folder architecture will be created inside \textit{local\_cc\_dir}. The full directory will contain the computed signatures (from 0 to III) for the corresponding small molecules, while the reference set will include a non-redundant subset of the data, computed using the distance matrix among all compounds.
 
 \paragraph{5. Loading raw data} \leavevmode
 
-To start the signaturization process, we first need to load a preprocessed version of the raw bioactivity data. Depending on the format of the data, the loading process may differ significantly. In the provided examples (Tasks 1-4), we have included cases in which the data is located in a CSV file and in a H5 file. Essentially, the starting data must consist in a well-defined bioactivity matrix (e.g. a pandas dataframe) containing N compounds (rows, indices) and M biological features (columns). 
+To start the signaturization process, we first need to load a preprocessed version of the raw bioactivity data. Depending on the format of the data, the loading process may differ significantly. In the provided examples (Tasks 1-4), we have included cases in which the data is located in a CSV file and in a H5 file (see the code below for loading the input csv data file for the new M1.001 space).. Essentially, the starting data must consist in a well-defined bioactivity matrix (e.g. a pandas dataframe) containing N compounds (rows, indices) and M biological features (columns). Note that the code needs to be adapted in case of using user-defined data. For all the examples presented in this manuscript, we also provide the code to download the data from our online repository and store it in the corresponding data directory (not shown here) to be then loaded (shown below). \\
+
+\begin{lstlisting}
+inputFile="../data/M1/microbiota_raw.csv"  # Modify at will
+df=pd.read_csv(inputFile,index_col=0)
+\end{lstlisting}
 
 \paragraph{6. Generating type 0 signatures} \leavevmode
 
-Once the bioactivity data is loaded, we can generate type 0 signatures with the following code block. It is important to mention that we first need to define a \textit{dataset} name in a specific format specifying the CC space the data will be dumped in (e.g. B1.002, please see the \hyperref[Building_NEW_CC_BIOACTIVITY_SPACES]{Building new Chemical Checker bioactivity spaces} section). For further information about the generation of type 0 signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\ \\
+Once the bioactivity data is loaded, we can generate type 0 signatures with the following code block. It is important to mention that we first need to define a \textit{dataset} name in a particular format specifying the CC space the data will be dumped in (e.g. M1.001, please see the \hyperref[Building_NEW_CC_BIOACTIVITY_SPACES]{Building new Chemical Checker bioactivity spaces} section). For further information about the generation of type 0 signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
 
 \begin{lstlisting}
-dataset = 'B1.002' # e.g. B1.002, D1.002, D6.001, M1.001
-sign0 = cc_local.signature(dataset,'sign0')
+dataset = 'M1.001'  # e.g. B1.002, D1.002, D6.001, M1.001
+sign0 = cc_local.signature(dataset, 'sign0')
 sign0.clear_all()
 sign0.fit(X=df.values, keys=list(df.index), features=list(df.columns))
 \end{lstlisting}
@@ -124,13 +164,11 @@ sign0.fit(X=df.values, keys=list(df.index), features=list(df.columns))
 After obtaining type 0 signatures, we proceed to the generation of type I signatures. The code is straightforward and analogous to the previous step. Additionally, we also need to precompute compound nearest neighbors at type I signature level. For further information about the generation of type I signatures and the calculation of neighbors, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
 
 \begin{lstlisting}
-# Type I signatures
 sign0 = cc_local.signature(dataset, 'sign0')
 sign1 = cc_local.signature(dataset, 'sign1')
 sign1.clear_all()
 sign1.fit(sign0)
 
-# Neighbors
 sign1 = cc_local.signature(dataset, 'sign1')
 neig1 = cc_local.get_signature("neig1", "full", dataset)
 neig1.clear_all()
@@ -152,48 +190,71 @@ sign2.fit(sign1, neig1, oos_predictor=False)
 
 \paragraph{9. Generating type III signatures} \leavevmode
 
-The last step in the signaturization process is the calculation of type III signatures. We first collect all type II signatures from the existing CC spaces along with type I and type II signatures for the extended or newly created space. Since the calculation of type III signatures is computationally expensive, we run it on an HPC cluster to enable CPU parallelization. Indeed, users may adapt the function \textit{fit\_hpc} with the specific parameters and configuration of their HPC cluster. Additionally, when creating a new CC space, it is important to check the overlap between the input dataset and the CC universe of small molecules, as poor overlaps between both sets may eventually result in unreliable type III signatures. Additionally, we calculate the chemical signatures (A1-5) for all those compounds that are not within the CC universe (\textit{complete\_universe=’full’}). For further information about the generation of type III signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. The code below corresponds to the case example from Task 4 (M1.001) and it needs to be adapted to every particular exercise. For additional examples, please see our \href{https://gitlabsbnb.irbbarcelona.org/packages/protocols}{Gitlab repository}. \\
+The last step in the signaturization process is the calculation of type III signatures. We first collect all type II signatures from the existing CC spaces along with type I and type II signatures for the extended or newly created space. Since the calculation of type III signatures is computationally expensive, we run it on an HPC cluster to enable CPU parallelization or GPU computing. Indeed, we encourage users to run the generation of type III signatures in their own HPC cluster. Otherwise, it can be run locally in the same manner that previous steps, although the overall calculation may take longer to complete. Additionally, when creating a new CC space, it is important to check the overlap between the input dataset and the CC universe of small molecules, as poor overlaps between both sets may eventually result in unreliable type III signatures. Furthermore, chemical signatures (A1, A3, A4 and A5) are automatically calculated for all those compounds that are not included within the CC universe (\textit{complete\_universe='fast'}). If the user also wants to include A2 signatures, a particularly slow process due to the generation of 3D conformers, the \textit{complete\_universe} parameter needs to be set to \textit{'full'}. Finally, we encourage the user to provide the corresponding mappings between the input InChIKeys and the molecule InChIs in a Python dictionary. Otherwise, the pipeline will query online repositories (e.g. PubChem) to derive the mappings, which may significantly slow down the entire process. The code below corresponds to the case example from Task 4 (M1.001) and it needs to be adapted to every particular exercise. For additional examples, please see our \href{https://gitlabsbnb.irbbarcelona.org/packages/protocols}{Gitlab repository}. \\
 
 \begin{lstlisting}
+# CHECK OVERLAP
+
+# Dataset Name
 dataset = 'M1.001'
+
+# Get CC universe
+cc_universe = []
+for dat in cc_local.datasets:
+    if dat != dataset and dat.endswith('001'):
+        cc_universe.extend(cc_local.get_signature('sign2', 'full', dat).keys)
+cc_universe = set(cc_universe)
+
+# Get sign2
+sign2 = cc_local.signature(dataset, 'sign2')
+
+# Get M1 molecules
+m1_molecules = set(sign2.keys)
+
+print("Number of molecules in the CC universe: " + str(len(cc_universe))) # 1009293
+print("Number of molecules in M1 sign2: " + str(len(m1_molecules))) # 200
+print("Intersection CC & M1: " + str(len(cc_universe.intersection(m1_molecules)))) # 188
+
+# GET DATA
+
+# Instantiation of sign3
 sign3 = cc_local.signature(dataset, 'sign3')
 sign3.clear_all()
 
+# Create a list of sign2 to feed sign3 -- using the 25 CC spaces & M1
 sign2_list = list()
+
+# For each CC space
 for ds in cc_local.coordinates:
-    ds += '.001'
-    sign2_list.append(cc_local.get_signature('sign2', 'full', ds))
+    ds += '.001'
+    sign2_list.append(cc_local.get_signature('sign2', 'full', ds))
 
+# Append the new M1 space
 sign2_list.append(cc_local.get_signature('sign2','full', dataset))
-print(len(sign2_list))  # 26
 
+# In total, we now have 26 spaces
+print(len(sign2_list)) # 26
+
+# Get M1 sign1
 sign1_self = cc_local.signature(dataset, 'sign1')
+
+# Get M1 sign2
 sign2_self = cc_local.signature(dataset, 'sign2')
 
-# Specify CC_config file
-os.environ['CC_CONFIG'] = '../cc_code/chemical_checker/setup/cc_config.json'
+# FIT SIGN3
 
-# Fit sign3 in the HPC machine
-kwargs = {"cpu": 32, "mem_by_core": 1, "wait": True}
-sign3.fit_hpc(sign2_list, sign2_self, sign1_self, sign2_universe=None, complete_universe="full", sign2_coverage=None, hpc_args=kwargs)
+mapp = None
+""" 
+# Alternatively, you can provide your in-house python dictionary to map InchiKey's to InChI's (see example below)
+mapp = { 
+'LPXQRXLUHJKZIE-UHFFFAOYSA-N': 'InChI=1S/C4H4N6O/c5-4-6-2-1(3(11)7-4)8-10-9-2/h(H4,5,6,7,8,9,10,11)',
+'BZKPWHYZMXOIDC-UHFFFAOYSA-N': 'InChI=1S/C4H6N4O3S2/c1-2(9)6-3-7-8-4(12-3)13(5,10)11/h1H3,(H2,5,10,11)(H,6,7,9)',
+'XZWYZXLIPXDOLR-UHFFFAOYSA-N': 'InChI=1S/C4H11N5/c1-9(2)4(7)8-3(5)6/h1-2H3,(H5,5,6,7,8)'
+} 
+"""
 
-
-### CHECK OVERLAP ###
-cc_universe = []
-for dat in cc_local.datasets:
-    if dat != dataset and dat.endswith('001'):
-        cc_universe.extend(cc_local.get_signature('sign0', 'full', dat).keys)
-cc_universe = set(cc_universe)
-
-sign2 = cc_local.signature(dataset, 'sign2')
-m1_molecules = set(sign2.keys)
-
-print("Number of molecules in the CC universe: " + str(len(cc_universe)))
-# 1009293
-print("Number of molecules in M1 sign2: " + str(len(m1_molecules)))
-# 200
-print("Intersection CC & M1: " + str(len(cc_universe.intersection(m1_molecules))))
-# 188
+# CAUTION: COMPUTATIONALLY DEMANDING STEP - Consider running it in an HPC cluster
+sign3.fit(sign2_list, sign2_self, sign1_self, sign2_universe=None, complete_universe="fast", sign2_coverage=None, dbconnect=False, mapping_dict=mapp)
 \end{lstlisting}
 
 

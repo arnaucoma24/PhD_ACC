@@ -179,3 +179,33 @@ The full version of the diagnosis plots provided by the CC comprise additional a
     \item[\textbullet]ROC across CC: Recapitulation of the nearest neighbors of all CC spaces (x-axis, type 0 signatures). This recapitulation is quantified by AUROC (Area Under the Receiver Operating Characteristic) values (y-axis, sorted in descending order). Numbers (ranging from 1 to 5) correspond to each space per level.
 \end{enumerate}
 
+
+\subsection{Downloading the CC bioactivity data}
+\label{Supplementary_Protocols_DownloadingData}
+
+To implement all CC functionalities illustrated in this work, we recommend gathering the CC bioactivity data from our web servers using code provided (see \hyperref[Protocols_Methods]{Methods} 3). Since the CC undergoes annual updates, the size of the downloaded files may increase over time, along with the amount of publicly released bioactivity data. To partially overcome long download times or the need for extensive local storage, users may select specific files to download depending on the CC functionality they wish to use. In the following points, we provide a detailed overview of which CC functionalities are related to specific downloadable files, helping users decide what to download.
+
+\phantomsection
+\subsubsection{Protocols Essential Functionalities}
+\begin{enumerate}
+    \item \textbf{Full Type 0 Signatures for Chemical Spaces (A1-5)}: Required for the complete universe functionality. 
+    \item \textbf{Reference Type I Signatures for Chemical Spaces (A1-5)}: Required for the complete universe functionality.
+    \item \textbf{Reference Type I Models for Chemical Spaces (A1-5)}: Required for the complete universe functionality.
+    \item \textbf{Reference Type II Signatures for Chemical Spaces (A1-5)}: Required for the complete universe functionality.
+    \item \textbf{Reference Type II Models for Chemical Spaces (A1-5)}: Required for the complete universe functionality.
+    \item \textbf{Full Type II Signatures}: Required for generating Type III signatures in a newly created CC space.
+    \item \textbf{Full Type III Signatures}: Required for creating medium diagnosis plots for newly generated Type III signatures
+    \item \textbf{Metadata}: Required for the generation of medium diagnosis plots.
+    
+\end{enumerate}
+
+\subsubsection{Additional signatures}
+
+\textbf{Full Type 0, I or II signatures} are necessary for generating medium diagnosis plots for newly created Type 0, I or II signatures. For this protocol, small diagnosis plots are provided for these signature types. 
+
+If users want to evaluate the recapitulation of the raw CC bioactivity data (i.e. type 0 signatures) by means of generated signatures (e.g. type III signatures of a newly created space), they will need to download Full type 0 signatures for all CC spaces (+20GB) and adjust the diagnosis plot code accordingly (i.e. \textit{ref\_cctype=’sign0’}).
+
+\subsubsection{Reduced Data Version for users}
+
+For users not interested in the complete universe functionality, only the \textbf{Full Type II signatures} (for creating Type III signatures) and the \textbf{Full Type III signatures }(for diagnosis) are necessary. 
+
