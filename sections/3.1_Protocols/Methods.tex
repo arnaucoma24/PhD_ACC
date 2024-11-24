@@ -51,7 +51,7 @@ iii) Running the setup script:  \\
 cd chemical_checker && sh setup/setup_chemicalchecker.sh
 \end{lstlisting}
 
-iv) Manually editing the CC configuration file located at \textit{PATH\_TO\_CC/chemical\_checker/setup/cc\_config.json}, referred to as \textit{PATH\_TO\_CC\_CONFIG}. In this file, the user must specify the variables \textit{CC\_REPO}, \textit{CC\_TMP} and \textit{SINGULARITY\_IMAGE}.
+iv) Manually editing the CC configuration file located at \textit{PATH\_TO\_CC/chemical\_checker/setup/cc\_config.json}, referred to as \textit{PATH\_TO\_CC\_CONFIG}. In this file, the user must specify the variables \textit{SINGULARITY\_IMAGE}, \textit{CC\_REPO} and \textit{CC\_TMP}.
 \begin{itemize}
     \item \textit{SINGULARITY\_IMAGE} should point to the CC singularity image created when running the CC setup script (see \hyperref[Protocols_Methods]{Methods} 1.iii), usually located in \textit{\$HOME/chemical\_checker/cc.simg}, \textit{\$HOME} being the user’s home directory.
     \item \textit{CC\_REPO} should point to the \textit{chemical\_checker} directory inside \textit{PATH\_TO\_CC} (i.e., \textit{PATH\_TO\_CC/chemical\_checker}, see \hyperref[Protocols_Methods]{Methods} 1.ii and 1.iii).
@@ -65,7 +65,7 @@ mkdir -p <PATH_TO_CC_PROTOCOLS> && cd <PATH_TO_CC_PROTOCOLS>
 git clone http://gitlabsbnb.irbbarcelona.org/packages/protocols.git
 \end{lstlisting}
 
-In brief, the repository contains four Python notebooks corresponding to the four tasks implemented herein, along with the raw bioactivity data required to build the new CC spaces. The following points in this section provide an overview of the individual steps needed to generate new CC spaces and signatures.
+In brief, the repository contains four Python notebooks corresponding to the four tasks implemented herein, along with the links to the raw bioactivity data required to build the new CC spaces, located in Zenodo repositories. The following points in this section provide an overview of the individual steps needed to generate new CC spaces and signatures.
 
 % \paragraph{2. Gathering bioactivity data} \leavevmode
 
@@ -74,7 +74,7 @@ In brief, the repository contains four Python notebooks corresponding to the fou
 
 \paragraph{2. Running a Jupyter Notebook with the CC image} \leavevmode
 
-We run a Jupyter Notebook in the CC protocols directory within the CC image by executing the following command (which is an alias to run the \textit{setup/run\_chemicalchecker.sh} file from the cloned CC repository): \\
+We run a Jupyter Notebook in the CC protocols directory within the previously built CC image by executing the following command (which is an alias to run the \textit{setup/run\_chemicalchecker.sh} file from the cloned CC repository): \\
 
 \begin{lstlisting}
 source ~/.bashrc
@@ -94,7 +94,7 @@ ChemicalChecker.set_verbosity('DEBUG') # CRITICAL, ERROR, WARN, INFO or DEBUG
 
 \paragraph{3. Gathering CC data} \leavevmode
 
-To successfully implement all CC functionalities illustrated in this work, the user needs to gather the CC bioactivity data from our web servers (e.g. type II signatures, see \hyperref[Protocols_Methods]{Methods} 9). To illustrate the downloading process, we provide exemplary code that programmatically downloads the CC signatures, although the user can download individual files containing bioactivity signatures manually (\textit{https://chemicalchecker.org/downloads/signatureX}, X being 0, 1, 2 or 3). In brief, data are first downloaded in a compressed tar.gz format and then uncompressed in the directory \textit{PATH\_TO\_DATA}, as shown in the notebook Download\_Data.ipynb included in the CC protocols repository (see code below). Since the CC is subject to yearly-carried updates, the size of the downloaded files may increase, as does the amount of publicly released bioactivity data. As of October 2024, the overall process takes 15 minutes to download and 30 minutes to decompress, requiring around 65 GB of free disk space and a stable wired internet connection (e.g Ethernet). For further details on what specific CC data are needed to implement each CC functionality, please see the \hyperref[Supplementary_Protocols_DownloadingData]{Supplementary Information}.  \\
+To successfully implement all CC functionalities illustrated in this work, the user needs to gather the CC bioactivity data from our web servers (e.g. type II signatures, see \hyperref[Protocols_Methods]{Methods} 9). To illustrate the downloading process, we provide exemplary code that programmatically downloads the CC signatures, although the user can download individual files containing bioactivity signatures manually (\textit{https://chemicalchecker.org/downloads/signatureX}, X being 0, 1, 2 or 3). In brief, data are first downloaded in a compressed tar.gz format and then uncompressed in the directory \textit{PATH\_TO\_DATA}, as shown in the notebook Download\_Data.ipynb included in the CC protocols repository (see code below). Since the CC is subject to yearly-carried updates, the size of the downloaded files may increase, as does the amount of publicly released bioactivity data. As of October 2024, the overall process takes 15 minutes to download and 30 minutes to decompress, requiring around 65 GB of free disk space and a stable wired internet connection (e.g. Ethernet). For further details on what specific CC data are needed to implement each CC functionality, please see the \hyperref[Supplementary_Protocols_DownloadingData]{Supplementary Information}.  \\
 
 \begin{lstlisting}
 import tarfile
@@ -136,20 +136,21 @@ PATH_TO_DATA = "/aloy/home/acomajuncosa/CC_DATA/DATA/"  # Modify at will
 cc_local = ChemicalChecker(local_cc_dir, dbconnect=False, custom_data_path=PATH_TO_DATA)
 \end{lstlisting}
 
-The typical CC folder architecture will be created inside \textit{local\_cc\_dir}. The full directory will contain the computed signatures (from 0 to III) for the corresponding small molecules, while the reference set will include a non-redundant subset of the data, computed using the distance matrix among all compounds.
+The typical CC folder architecture will be created inside \textit{local\_cc\_dir}. The \textit{full} directory will contain the computed signatures (from 0 to III) for the corresponding small molecules, while the \textit{reference} set will include a non-redundant subset of the data, computed using the distance matrix among all compounds.
 
 \paragraph{5. Loading raw data} \leavevmode
 
-To start the signaturization process, we first need to load a preprocessed version of the raw bioactivity data. Depending on the format of the data, the loading process may differ significantly. In the provided examples (Tasks 1-4), we have included cases in which the data is located in a CSV file and in a H5 file (see the code below for loading the input csv data file for the new M1.001 space).. Essentially, the starting data must consist in a well-defined bioactivity matrix (e.g. a pandas dataframe) containing N compounds (rows, indices) and M biological features (columns). Note that the code needs to be adapted in case of using user-defined data. For all the examples presented in this manuscript, we also provide the code to download the data from our online repository and store it in the corresponding data directory (not shown here) to be then loaded (shown below). \\
+To start the signaturization process, we first need to load a preprocessed version of the raw bioactivity data. Depending on the format of the data, the loading process may differ significantly. In the provided examples (Tasks 1-4), we have included cases in which the data is located in a CSV file and in a H5 file (see the code below for loading the input CSV data file for the new M1.001 space). Essentially, the starting data must consist in a well-defined bioactivity matrix (e.g. a pandas dataframe) containing N compounds (rows, indices) and M biological features (columns). Note that the code needs to be adapted in case of using user-defined data. For all the examples presented in this manuscript, we also provide the code to download the data from our online repository and store it in the corresponding data directory (not shown here) to be then loaded (shown below). \\ 
 
 \begin{lstlisting}
 inputFile="../data/M1/microbiota_raw.csv"  # Modify at will
 df=pd.read_csv(inputFile,index_col=0)
-\end{lstlisting}
+\end{lstlisting} 
+
 
 \paragraph{6. Generating type 0 signatures} \leavevmode
 
-Once the bioactivity data is loaded, we can generate type 0 signatures with the following code block. It is important to mention that we first need to define a \textit{dataset} name in a particular format specifying the CC space the data will be dumped in (e.g. M1.001, please see the \hyperref[Building_NEW_CC_BIOACTIVITY_SPACES]{Building new Chemical Checker bioactivity spaces} section). For further information about the generation of type 0 signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
+Once the bioactivity data are loaded, we can generate type 0 signatures with the following code block. It is important to mention that we first need to define a \textit{dataset} name in a particular format specifying the CC space the data will be dumped in (e.g. M1.001, please see the \hyperref[Building_NEW_CC_BIOACTIVITY_SPACES]{Building new Chemical Checker bioactivity spaces} section). For further information about the generation of type 0 signatures, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}. \\
 
 \begin{lstlisting}
 dataset = 'M1.001'  # e.g. B1.002, D1.002, D6.001, M1.001
@@ -260,7 +261,7 @@ sign3.fit(sign2_list, sign2_self, sign1_self, sign2_universe=None, complete_univ
 
 \paragraph{10. Generating diagnosis plots} \leavevmode
 
-Finally, to visualize the flow of the data along the integration pipeline, we can generate diagnosis plots for all the newly obtained signatures (0, 1, 2 and 3) with the code provided below (replacing X by 0, 1, 2 or 3, depending on the signature type under analysis). For further information about the generation and interpretation of diagnosis plots, please see \hyperref[Overview of the Chemical Checker data integration pipeline]{Overview of the Chemical Checker data integration pipeline}). \\
+Finally, to visualize the flow of the data along the integration pipeline, we can generate diagnosis plots for all the newly obtained signatures (0, I, II and III) with the code provided below (replacing X by 0, 1, 2 or 3, depending on the signature type under analysis). For further information about the generation and interpretation of diagnosis plots, please see the \hyperref[Protocols_SupplementaryInformation]{Supplementary Information}. \\
 
 \begin{lstlisting}
 signX = cc_local.signature(dataset, 'signX')
