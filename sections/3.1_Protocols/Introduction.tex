@@ -41,7 +41,7 @@ The main input for the CC integration pipeline is a bioactivity data matrix enco
 
 \paragraph{-- Type 0 signatures --} \leavevmode
 
-The very first step in the CC processing framework is to produce a sufficiently-curated and sanitized version of the raw bioactivity data (Fig \ref{Protocols_Fig1}b). To achieve this, features (columns) that are extremely sparse (i.e. occurring in few rows) or too prevalent (i.e. occurring in almost all rows) are removed from the matrix and those compounds (rows) showing no feature occurrences are discarded. In addition, not-available (NA) and infinite values are processed (median-imputed and max/min values, respectively) and low-Shannon entropy features are trimmed if the maximum number of allowed features is surpassed. Overall, type 0 signatures represent explicit knowledge, allowing direct interpretation while having variable dimensionality. 
+The very first step in the CC processing framework is to produce a sufficiently-curated and sanitized version of the raw bioactivity data (Fig \ref{Protocols_Fig1}b). To achieve this, features (columns) that are extremely sparse (i.e. occurring in few rows) or too prevalent (i.e. occurring in almost all rows) are removed from the matrix and those compounds (rows) showing no feature occurrences are discarded. In addition, not-available (NaN) and infinite values are processed (median-imputed and max/min values, respectively) and low-Shannon entropy features are trimmed if the maximum number of allowed features is surpassed. Overall, type 0 signatures represent explicit knowledge, allowing direct interpretation while having variable dimensionality. 
 
 \paragraph{-- Type I signatures --} \leavevmode
 
