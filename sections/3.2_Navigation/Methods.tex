@@ -1,6 +1,14 @@
 \subsection{Methods}
 \label{Navigation_Methods}
+\phantomsection
 
 
-Bla bla bla
 
+\subsubsection{Filtering the ChemDiv database}
+
+ChemDiv compounds were obtained from \hyperlink{https://www.chemdiv.com/}{https://www.chemdiv.com/} in SDF format in March 2023. A total of 1,521,567 compounds were first sanitized using the standardiser package (\hyperlink{https://github.com/flatkinson/standardiser/tree/master}{https://github.com/flatkinson/standardiser/tree/master}; removal of solvent and salt molecules, charge neutralization and application of tautomeric rules) and processed with RDKit (\hyperlink{https://www.rdkit.org/}{https://www.rdkit.org/}). Compounds were filtered based on the following criteria (Fig \ref{Navigation_FigS2}): absence of PAINS\cite{baell_chemistry_2014} (Pan-assay interference compounds), molecular weight under 450 Da, a topological polar surface area (tPSA) between 50 and 130 Å², an alogP lower or equal than 4.5 and no more than 9 hydrogen bond acceptors, 5 hydrogen bond donors, 11 rotatable bonds, and 4 aromatic rings. Additionally, compounds already included in the IRB library from other sources were discarded. After filtering, 559,098 compounds were retained.
+
+
+\subsubsection{Clustering the ChemDiv database}
+
+The 559,098 compounds resulting from the filtering process were signaturized with the concatenated CC signatures A1, A2, A3 and A4 (512-length, i.e. 4x128). Distributions of applicability values for all signatures are depicted in Fig \ref{Navigation_Fig1}a, b, d and e. Numerical descriptors were then clustered with Sklearn’s K-means algorithm \cite{pedregosa_scikit-learn_nodate}, using a random initialization, setting the euclidean distance as evaluation metric and fixing the number of clusters to 35,000. 
