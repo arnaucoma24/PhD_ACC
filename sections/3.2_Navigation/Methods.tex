@@ -11,4 +11,16 @@ ChemDiv compounds were obtained from \hyperlink{https://www.chemdiv.com/}{https:
 
 \subsubsection{Clustering the ChemDiv database}
 
-The 559,098 compounds resulting from the filtering process were signaturized with the concatenated CC signatures A1, A2, A3 and A4 (512-length, i.e. 4x128). Distributions of applicability values for all signatures are depicted in Fig \ref{Navigation_Fig1}a, b, d and e. Numerical descriptors were then clustered with Sklearn’s K-means algorithm \cite{pedregosa_scikit-learn_nodate}, using a random initialization, setting the euclidean distance as evaluation metric and fixing the number of clusters to 35,000. 
+The 559,098 compounds resulting from the filtering process were signaturized with the concatenated CC signatures A1, A2, A3 and A4 (512-length, i.e. 4x128). Distributions of applicability values for all signatures are depicted in Fig \ref{Navigation_Fig1}a, b, d and e. Numerical descriptors were then clustered with Sklearn’s K-means algorithm \cite{pedregosa_scikit-learn_2011}, using a random initialization, setting the euclidean distance as evaluation metric and fixing the number of clusters to 35,000. 
+
+\subsubsection{Qualitative visualization of the Chemical Space}
+
+1,751, 6,355, 6,502, 5,000 (sampled from 47,489), 6,698 and 5,000 (sampled from 1,009,292) compounds from Medina, MetaboLights, CMAUP, the proprietary IRB Library, RepoHub and the Chemical Checker database, respectively, were standardized using the standardiser package \hyperlink{https://github.com/flatkinson/standardiser/tree/master}{https://github.com/flatkinson/standardiser/tree/master} and characterized with inferred CC signatures (using the signaturizers \cite{bertoni_bioactivity_2021}), including both chemical descriptors (A1, A2, A3, A5 and A5) and bioactivity signatures (B4). The final number of characterized compounds were 1,697, 6,355, 6,502, 5,000, 6,583 and 4,915 for the mentioned sets, respectively. \hl{Applicabilities - SX}
+
+All signatures (31,052) were transformed using the Sklearn’s \cite{pedregosa_scikit-learn_2011} tSNE algorithm (default parameters, PCA initialization with cosine distance as evaluation metric) and compressed to two dimensions.
+
+\subsubsection{Unraveling the potential of bioactivity signatures}
+
+Protein-ligand bioactivity data was obtained from the CC database (v.2024, encompassing 836,564 compounds against 5,052 targets). All compounds were first characterized with the inferred CC signatures (using the signaturizers \cite{bertoni_bioactivity_2021}), including both chemical (A1) and bioactivity (B4) descriptors, accounting for structural features (i.e. ECFPs) and protein binding profiles, respectively. All signatures were then compressed using the Sklearn’s \cite{pedregosa_scikit-learn_2011} tSNE algorithm (default parameters, random initialization with cosine distance as evaluation metric). Cosine distances between signatures were calculated using Sklearn’s pairwise distance function. 
+
+To assign a chemical diversity value to each active compound, we studied the chemical similarity against the other active compounds having similar bioactivity signatures. In short, for each molecule, we first selected the top-10 NNs in terms of bioactivity signatures (i.e. the 10 compounds having the most similar B4 signatures to the reference one) and calculated Tanimoto similarities among all of them. Then, we calculated the chemical diversity value as 1 minus the maximum reported Tanimoto similarity among NNs. 
