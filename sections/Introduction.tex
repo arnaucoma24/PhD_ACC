@@ -34,6 +34,15 @@
 \par\addvspace{12pt plus2pt}%
 }%
 
+\newenvironment{Figure_modified_TOP}{%
+  \par\addvspace{12pt plus2pt}%
+  \def\@captype{figure}%
+  \begin{figure}[t!]% Enforces top placement and prioritizes it
+}{%
+  \end{figure}%
+  \par\addvspace{12pt plus2pt}%
+}
+
 % Custom caption setup to ensure it integrates with the caption package and maintains the text size across all parts
 \long\def\@makecaption#1#2{%
   \vskip\abovecaptionskip
@@ -231,6 +240,7 @@ The thesis is organized in four different chapters and summarized in Fig \ref{In
 \begin{Figure_modified}
   \centering
   \includegraphics[width=\linewidth]{figures/Introduction/ThesisScheme_v3.png}
+  \vspace{-15mm}
   \caption{
     \textbf{Thesis contextualization.} 
     The realm of Science covers a broad spectrum: from tiny atomic details to the vast expanses of galaxies. In between, interactions among small molecules and macromolecules take place and form the basis of complex systems that may eventually culminate in life. This thesis is focused on the numerical characterization of small molecules and proteins (druggable pockets), a common approach in the field of Cheminformatics and Structure-based Drug Discovery. In the first chapter (3.1), we use a predefined computational framework (the Chemical Checker) to process, harmonize and integrate publicly available bioactivity data, resulting in novel bioactivity signatures. In the second chapter (3.2), we cluster the chemical space of small molecules and explore it in a biologically relevant manner, showcasing how bioactivity signatures may anticipate relationships between compounds that can not be predicted from their chemical structures alone. Next (chapter 3.3), we evaluate the link between stereoisomerism and bioactivity and train a new generation of signaturizers that provide stereochemically-aware bioactivity signatures. Finally, in the last chapter (3.4) we present a novel methodology to generate numerical descriptors for protein druggable pockets and show its ability to capture similarities at pocket level between human protein domains.
