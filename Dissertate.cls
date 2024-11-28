@@ -33,7 +33,8 @@
 \def\pdTwoYear#1{\gdef\@pdTwoYear{#1}}
 
 \RequirePackage{color}
-\usepackage{hyperref}
+% \usepackage{hyperref}
+\usepackage[hypertexnames=false]{hyperref}
 \RequirePackage[tiny, md, sc]{titlesec}
 \setlength{\headheight}{15pt}
 % \pagestyle{plain}
