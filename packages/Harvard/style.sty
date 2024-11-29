@@ -26,6 +26,7 @@
 \renewcommand{\frontmatter}{
 	\input{frontmatter/personalize}
 	\maketitle
+        \maketitleNEW  
 	\copyrightpage
 	\abstractpage
 	\tableofcontents
@@ -51,6 +52,46 @@
 	\@university\\ \@universitycity, \@universitystate\\
 	\@degreemonth\ \@degreeyear}
 	\end{center} \vspace*{\fill}
+}
+
+\newcommand{\maketitleNEW}{
+	\thispagestyle{empty}
+	% \vspace*{\fill}
+	\begin{center}
+		% Title with custom line spacing
+		{\Huge 
+            \setstretch{1.0} % Adjust the line spacing for the title
+            \textcolor{SchoolColor}{Numerical characterization of \\ small molecules and protein \\ druggable pockets} \par}
+		\vspace{0.5cm} % Adjust spacing below the title
+		
+		% Subtitle and details
+		{\normalsize \textsc{Memòria presentada per Arnau Comajuncosa Creus \\ 
+		per optar al Grau de Doctor per la \\ 
+		Universitat Autònoma de Barcelona} \par}
+		\vspace{2.5cm} % Adjust spacing before affiliation
+		
+		% Affiliation and program details
+		{\normalsize \textsc{Structural Bioinformatics and Network Biology Lab \\ 
+		Institute for Research in Biomedicine (IRB Barcelona)} \par}
+		% \vspace{1cm} % Adjust spacing before program details
+		
+		{\normalsize \textsc{Programa de Doctorat en Química (2020-2024) \\ 
+		Universitat Autònoma de Barcelona (UAB)} \par}
+		% \vspace{1cm} % Adjust spacing before the date
+		
+		% Date
+		{\normalsize \textsc{Desembre 2024} \par}
+		% \vspace{2cm} % Adjust spacing before logos
+	\end{center}
+
+	% Images at the bottom of the page
+	\vspace*{\fill}
+	\begin{center}
+		\begin{tabular}{c@{\hspace{3cm}}c}
+			\includegraphics[width=3cm]{figures/Introduction/ThesisScheme_v3.png} & 
+			\includegraphics[width=3cm]{figures/Introduction/ThesisScheme_v3.png} \\
+		\end{tabular}
+	\end{center}
 }
 
 \newcommand{\copyrightpage}{
