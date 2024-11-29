@@ -24,24 +24,6 @@
 \par\addvspace{12pt plus2pt}%
 }%
 
-% Define a new Figure environment with top-of-page float placement
-\newenvironment{Figure_modified2}{%
-\par\addvspace{12pt plus2pt}%
-\def\@captype{figure}%
-\renewcommand{\@dblfloatplacement}{ht}%
-\renewcommand{\@floatplacement}{ht}%
-}{%
-\par\addvspace{12pt plus2pt}%
-}%
-
-\newenvironment{Figure_modified_TOP}{%
-  \par\addvspace{12pt plus2pt}%
-  \def\@captype{figure}%
-  \begin{figure}[t!]% Enforces top placement and prioritizes it
-}{%
-  \end{figure}%
-  \par\addvspace{12pt plus2pt}%
-}
 
 % Custom caption setup to ensure it integrates with the caption package and maintains the text size across all parts
 \long\def\@makecaption#1#2{%
