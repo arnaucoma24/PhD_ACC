@@ -23,7 +23,7 @@
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/PocketVec/Supplementary/FigS1.png}
-  \caption{Similar proteins bind similar active compounds. For each protein family (e.g. Cytochrome P450, GPCR, etc.) we compared all active compounds between protein pairs from the same family (Same) and from different families (Different). Compounds were compared on the basis of their Tanimoto Similarities (y-axis, ECFP4 with 2048 bits using RDKit – \href{https://rdkit.org}{https://rdkit.org}) and only the TOP-N (x-axis: 10, 50, 100, 250, 1000) highest similarities were considered per each family. All distributions of Same and Different categories are significantly different (Mann-Whitney U test, pvalue <0.05, alternative greater using SciPy\cite{virtanen_scipy_2020}) except Miscellaneous (10, 50, 100, 250, 1000) and Other Enzymes (10, 50, 100, 250, 1000). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values. The number of proteins within each family is specified in the title in parenthesis. Data was downloaded from \href{http://dude.docking.org}{http://dude.docking.org} in January 2023.}
+  \caption{Similar proteins bind similar active compounds. For each protein family (e.g. Cytochrome P450, GPCR, etc.) we compared all active compounds between protein pairs from the same family (Same) and from different families (Different). Compounds were compared on the basis of their Tanimoto Similarities (y-axis, ECFP4 with 2048 bits and a radius of 2 using RDKit – \href{https://rdkit.org}{https://rdkit.org}) and only the TOP-N (x-axis: 10, 50, 100, 250, 1000) highest similarities were considered per each family. All distributions of Same and Different categories are significantly different (Mann-Whitney U test, pvalue <0.05, alternative greater using SciPy\cite{virtanen_scipy_2020}) except Miscellaneous (10, 50, 100, 250, 1000) and Other Enzymes (10, 50, 100, 250, 1000). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values. The number of proteins within each family is specified in the title in parenthesis. Data was downloaded from \href{http://dude.docking.org}{http://dude.docking.org} in January 2023.}
   \label{PocketVec_FigS1}
 \end{figure}
 
@@ -42,7 +42,7 @@
   \centering
   \includegraphics[width=0.75\linewidth]{figures/PocketVec/Supplementary/FigS3.png}
   \caption{
-  ProSPECCTs overview. Each bar represents a ProSPECCT dataset (x-axis) and indicates the number of protein-ligand binding site pairs (y-axis) together with the proportion of similar pocket pairs within each dataset (color tone). Please, see the \hyperref[PocketVec_Methods]{Methods}) section for a detailed description of each dataset.
+  ProSPECCTs overview. Each bar represents a ProSPECCT dataset (x-axis) and indicates the number of protein-ligand binding site pairs (y-axis) together with the proportion of similar pocket pairs within each dataset (color tone). Please, see the \hyperref[PocketVec_Methods]{Methods} section for a detailed description of each dataset.
   }
   \label{PocketVec_FigS3}
 \end{figure}
@@ -71,7 +71,7 @@
   \centering
   \includegraphics[width=0.55\linewidth]{figures/PocketVec/Supplementary/FigS6.png}
   \caption{
-  Ranking diversity differences. For each docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments) ProSPECCTs pockets were considered all at once (3,335 pockets) and the standard deviation (in terms of rankings) was calculated for each tested compound. For both docking strategies standard deviation distributions between LLM and fragments are statistically different (Mann-Whitney U test, p<10\textsuperscript{-70} in both cases). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values.
+  Ranking diversity differences. For each docking method (rDock and SMINA) and compound collection (1,000 LLM and 667 fragments) ProSPECCTs pockets were considered all at once (3,335 pockets) and the standard deviation (in terms of rankings, normalized by the maximum ranking) was calculated for each tested compound. For both docking strategies standard deviation distributions between LLM and fragments are statistically different (Mann-Whitney U test, p<10\textsuperscript{-70} in both cases). Box plots indicate median (middle line), 25th, 75th percentile (box), and max and min value within the 1.5*25th and 1.5*75th percentile range (whiskers). Black dots represent mean values.
   }
   \label{PocketVec_FigS6}
 \end{figure}
