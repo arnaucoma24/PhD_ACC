@@ -189,14 +189,10 @@ FUNCTION {format.names}
   numnames 'namesleft :=
     { namesleft #0 > }
     { s nameptr "{ff~}{vv~}{ll}{, jj}" format.name$ 't :=
-      nameptr #3 =
-        { "et~al." 't := #0 'namesleft := }
-        'skip$
-      if$
       nameptr #1 >
         { namesleft #1 >
             { ", " * t * }
-            { numnames #3 >
+            { numnames #2 >
                 { "," * }
                 'skip$
               if$
@@ -214,7 +210,6 @@ FUNCTION {format.names}
     }
   while$
 }
-
 
 FUNCTION {format.authors}
 { author empty$
