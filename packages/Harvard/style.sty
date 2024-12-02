@@ -135,26 +135,28 @@
 \newcommand{\acknowledgments}{
 	% \chapter*{Acknowledgments}
         \chapter*{\vspace{-2cm}Agraïments}
+        % \pagenumbering{roman}
 	\noindent
 	\input{frontmatter/thanks}
 	\vspace*{\fill} \newpage
 	% \setcounter{page}{1}
-	\pagenumbering{roman}
 }
 
 
 \newcommand{\contributors}{
- 	\setcounter{page}{3}
+        \newpage
+        \thispagestyle{plain}
+ 	% \setcounter{page}{3}
 	% \chapter*{Statement of Contributors}
         \chapter*{\vspace{-2cm}Statement of Contributors}
+        % \pagenumbering{roman}
 	\noindent
-	% \pagenumbering{roman}
 	\input{frontmatter/contributors}
 	\vspace*{\fill} \newpage
 }
 
 \newcommand{\abbreviations}{
- 	\setcounter{page}{4}
+ 	% \setcounter{page}{4}
 	% \chapter*{Abbreviations}
         \chapter*{\vspace{-2cm}Abbreviations}
 	\noindent
