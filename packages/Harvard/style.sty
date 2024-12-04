@@ -144,16 +144,17 @@
 
 \newcommand{\abstractpage}{
 	\newpage
-	\pagenumbering{roman}
-	\setcounter{page}{5}
+	% \pagenumbering{roman}
+	% \setcounter{page}{5}
 	\pagestyle{fancy}
 	% \lhead{Thesis advisor: Professor \@advisor} \rhead{\@author}
 	\renewcommand{\headrulewidth}{0.0pt}
 	% \vspace*{35pt}
 	\begin{center}
 	\Large \textcolor{SchoolColor}{\@title} \normalsize \\
-	\vspace*{20pt}
+	\vspace*{15pt}
 	\scshape Abstract \rm
+        \vspace*{-3pt}
 	\end{center}
 	\input{frontmatter/abstract}
 	\vspace*{\fill}
