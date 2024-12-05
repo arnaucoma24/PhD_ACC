@@ -12,6 +12,7 @@
 
 % HEADER %
 % \fancyhead[HR]{aaaaaaaaaaaaaaaaaa}
+\pagestyle{plain}
 
 \begin{document}
 \sloppy
@@ -75,11 +76,10 @@
 % \dedicationpage
 
 \clearpage
-\pagenumbering{roman}
-
+\pagenumbering{arabic}
 \acknowledgments
-\clearpage
 
+\setcounter{page}{10}
 \contributors
 \clearpage
 
@@ -88,6 +88,9 @@
 % \thispagestyle{empty}
 \abstractpage
 \tableofcontents
+\clearpage
+\thispagestyle{empty}
+\mbox{}
 %\authorlist
 % \listoffigures
 \mainmatter  % switch to arabic numbering
