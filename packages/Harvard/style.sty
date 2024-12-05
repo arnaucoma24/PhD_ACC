@@ -162,6 +162,26 @@
 	\cfoot{\thepage}
 }
 
+\newcommand{\abstractpageCAT}{
+	\newpage
+	% \pagenumbering{roman}
+	% \setcounter{page}{5}
+	\pagestyle{fancy}
+	% \lhead{Thesis advisor: Professor \@advisor} \rhead{\@author}
+	\renewcommand{\headrulewidth}{0.0pt}
+	% \vspace*{35pt}
+	\begin{center}
+	\Large \textcolor{SchoolColor}{Desenvolupament de descriptors vectorials per caracteritzar molècules petites i cavitats farmacològicament aprofitables de proteïnes} \normalsize \\
+	\vspace*{15pt}
+	\scshape Resum \rm
+        \vspace*{-3pt}
+	\end{center}
+	\input{frontmatter/resum}
+	\vspace*{\fill}
+	\newpage \lhead{} \rhead{}
+	\cfoot{\thepage}
+}
+
 \newcommand{\dedicationpage}{
 	\newpage \thispagestyle{fancy} \vspace*{\fill}
 	\scshape \noindent \input{frontmatter/dedication} \pagenumbering{roman}
@@ -181,7 +201,6 @@
 \newcommand{\contributors}{
         % \thispagestyle{plain}
 	% \chapter*{Statement of Contributors}
-        \setcounter{page}{10}
         \chapter*{\vspace{-2cm}Statement of Contributors}
         % \pagenumbering{roman}
 	\noindent
