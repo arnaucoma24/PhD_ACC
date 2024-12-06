@@ -72,12 +72,25 @@
 \input{frontmatter/personalize}
 %\maketitle
 \maketitleNEW
-\clearpage
-\thispagestyle{empty}
-\copyrightpage
-% \dedicationpage
 
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\copyrightpage
 \clearpage
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\input{frontmatter/dedication}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \pagenumbering{roman}
 \acknowledgments
 \clearpage
@@ -114,6 +127,8 @@
 \include{sections/Contributions}
 
 % \singlespacing
+\newpage
+\include{frontmatter/dedication2}
 
 % the back matter
 \clearpage
@@ -121,8 +136,6 @@
 % Si es ralla, posar aquesta linia just despres de begin document
 \addcontentsline{toc}{chapter}{References}
 \bibliography{references}
-
-
 
 \begin{appendices}
     \include{sections/Appendix}

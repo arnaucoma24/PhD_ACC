@@ -182,15 +182,17 @@
 	\cfoot{\thepage}
 }
 
-\newcommand{\dedicationpage}{
-	\newpage \thispagestyle{fancy} \vspace*{\fill}
-	\scshape \noindent \input{frontmatter/dedication} \pagenumbering{roman}
-	\vspace*{\fill} \newpage \rm
-}
+% \newcommand{\dedicationpage}{
+% 	\noindent
+%         \scshape
+%         \input{frontmatter/dedication}
+% 	\vspace*{\fill} \newpage 
+% }
 
 \newcommand{\acknowledgments}{
 	% \chapter*{Acknowledgments}    
         \chapter*{\vspace{-2cm}Agraïments}
+        \setcounter{page}{1}
         % \pagenumbering{roman}
 	\noindent
 	\input{frontmatter/thanks}
