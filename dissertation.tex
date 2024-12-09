@@ -10,6 +10,7 @@
 % \bibliographystyle{unsrt}
 \bibliographystyle{PDFs/unsrt_arnau}
 
+
 % HEADER %
 % \fancyhead[HR]{aaaaaaaaaaaaaaaaaa}
 \pagestyle{plain}
@@ -116,6 +117,13 @@
 
 
 % \doublespacing
+\thispagestyle{fancy}
+\fancyhead[RO]{\small\nouppercase{\leftmark}} % Chapter titles as headers
+% \fancyhead[RO]{\nouppercase{Header}}
+\fancyhead[LO]{\rule{\textwidth}{0.2pt}\vspace{-10pt}} % Line after the header
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\setlength{\headheight}{15pt} % Ensure enough space for the header
+
 
 % include each chapter...
 \setcounter{chapter}{0}  % start chapter numbering at 0
@@ -126,6 +134,7 @@
 \include{sections/ConcludingRemarks}
 \include{sections/Contributions}
 
+\thispagestyle{plain}
 % \singlespacing
 \newpage
 \include{frontmatter/dedication2}
@@ -141,9 +150,23 @@
     \include{sections/Appendix}
 \end{appendices}
 
+
 % % Include PDFs
 \includepdf[pages=-]{PDFs/COCB.pdf}
 \includepdf[pages=-]{PDFs/sign3D.pdf}
 \includepdf[pages=-]{PDFs/PocketVec.pdf}
+
+\newpage
+\include{frontmatter/dedication3}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 \end{document}
