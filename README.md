@@ -15,7 +15,7 @@ Here is a brief description of the repository's structure:
   - `Objectives.tex`
   - `Contributions.tex`
   - `Chapters.tex` (main chapters of the thesis, elaborating on key research topics):
-  - **Chapter 3.4 -- Comprehensive detection and characterization of human druggable pockets through novel binding site descriptors**: This chapter details the work published in *Nature Communications*. It is organized into the following sections, in order of appearance:
+  - **Chapter 3.4 -- Comprehensive detection and characterization of human druggable pockets through novel binding site descriptors**:
     - **Abstract**: Provides a concise summary of the PocketVec methodology.
     - **Introduction**: Sets the context and highlights the significance of the methodology.
     - **Method Development and Implementation**: Explores the specifics of developing and implementing PocketVec.
@@ -64,7 +64,7 @@ Happy compiling!
 ---
 
 ## Disclaimer
-This README file was written with the assistance of ChatGPT-4.0 and supervised by me, Arnau. :)
+This README file was written by ChatGPT-4.0 and supervised by me, Arnau. :)
 
 ---
 
