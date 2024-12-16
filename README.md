@@ -14,15 +14,15 @@ Here is a brief description of the repository's structure:
   - `Introduction.tex`
   - `Objectives.tex`
   - `Contributions.tex`
-  - `Chapters.tex` (main chapters of the thesis, elaborating on key research topics):
+  - `Chapters.tex` (main chapters of the thesis, elaborating on key research topics). AS an illustrative example:
   - **Chapter 3.4 -- Comprehensive detection and characterization of human druggable pockets through novel binding site descriptors**:
-    - **Abstract**: Provides a concise summary of the PocketVec methodology.
-    - **Introduction**: Sets the context and highlights the significance of the methodology.
-    - **Method Development and Implementation**: Explores the specifics of developing and implementing PocketVec.
-    - **Results and Discussion**: Discusses the findings and their implications.
-    - **Code Availability**: Provides information about accessing the codebase for reproducibility.
-    - **Concluding Remarks**: Summarizes the outcomes and proposes future directions.
-    - **Methods**: Details the techniques and computational framework used.
+    - **Abstract**
+    - **Introduction**
+    - **Method Development and Implementation**
+    - **Results and Discussion**
+    - **Code Availability**
+    - **Concluding Remarks**
+    - **Methods**
   - `Discussion.tex`
   - `ConcludingRemarks.tex`
   - `Appendix.tex`
