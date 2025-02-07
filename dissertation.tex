@@ -144,10 +144,27 @@
 % include each chapter...
 \setcounter{chapter}{0}  % start chapter numbering at 0
 \include{sections/Introduction}
+
+\newpage
+\thispagestyle{plain}
+\mbox{}
+
 \include{sections/Objectives}
 \include{sections/Chapters}
+
+\newpage
+\thispagestyle{plain}
+\mbox{}
+\newpage
+
 \include{sections/Discussion}
 \include{sections/ConcludingRemarks}
+
+\newpage
+\thispagestyle{plain}
+\mbox{}
+\newpage
+
 \include{sections/Contributions}
 
 \thispagestyle{plain}
@@ -159,8 +176,19 @@
 \clearpage
 % \renewcommand*{\bibfont}{\tiny}
 % Si es ralla, posar aquesta linia just despres de begin document
+
+\newpage
+\thispagestyle{plain}
+\mbox{}
+\newpage
+
 \addcontentsline{toc}{chapter}{References}
 \bibliography{references}
+
+\newpage
+\thispagestyle{plain}
+\mbox{}
+\newpage
 
 \begin{appendices}
     \include{sections/Appendix}
