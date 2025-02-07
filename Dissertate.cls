@@ -160,7 +160,7 @@
 \titlespacing*{\paragraph}{0pt}{0em}{0em}
 \usepackage{pdfpages}
 
-
+\usepackage{nextpage} 
 \usepackage{listings}
 
 % Define Python language settings with subdued colors
