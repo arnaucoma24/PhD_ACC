@@ -1,7 +1,7 @@
 # PhD Thesis: Project Overview and Usage Guide
 
 ## Overview
-This repository contains all the necessary files for compiling my PhD thesis, titled **Development of vectorial descriptors to characterize small molecules and protein druggable pockets**. The document is prepared in LaTeX using the `Dissertate.cls` class file, ensuring compliance with institutional formatting guidelines.
+This repository contains all the necessary files for compiling my PhD thesis, titled **Development of vectorial descriptors to characterize small molecules and protein druggable pockets**. The document is prepared in LaTeX using the `Dissertate.cls` class file, ensuring compliance with institutional formatting guidelines. The final thesis in PDF format can be downloaded [here](https://www.tdx.cat/bitstream/handle/10803/694100/acc1de1.pdf?sequence=1&isAllowed=y).
 
 ## Repository Structure
 
